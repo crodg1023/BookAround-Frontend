@@ -1,0 +1,42 @@
+<div class="relative inline-block text-left">
+  <div>
+    <button
+      class="inline-flex items-center justify-center gap-2 px-2 py-4 rounded-[40px] w-20 h-10 p6-border p6-text p3-hover ease-in duration-300"
+      (click)="toggleMenu()"
+    >
+      <p class="text-2xl"><i class="fa-solid fa-bars"></i></p>
+      <p class="text-2xl"><i class="fa-solid fa-user"></i></p>
+    </button>
+  </div>
+
+  @if (isVisible) {
+  <div
+    class="absolute right-0 z-10 w-60 bg-white py-4 px-4 rounded-b-2xl shadow-2xl"
+    [ngClass]="{
+      'transtion ease-out duration-100 transform opacity-100 scale-100': isOpen,
+      'transition ease-in duration-75 transform opacity-0 scale-95': !isOpen
+    }"
+  >
+    <ul>
+      <li
+        class="w-full py-2 px-4 text-center text-lg font-bold p3-text p7-hover ease-in duration-300 cursor-pointer"
+      >
+        <button (click)="onLoginClick()" class="w-full">Inicia sesión</button>
+      </li>
+      <li
+        class="w-full py-2 px-4 text-center text-lg font-bold p3-text p7-hover ease-in duration-300 cursor-pointer"
+      >
+        <button (click)="onClientRegisterClick()" class="w-full">Regístrate</button>
+      </li>
+      <li>
+        <div class="w-full h-1 rounded-2xl p6-bg"></div>
+      </li>
+      <li
+        class="w-full py-2 px-4 text-center text-lg font-bold p5-text cursor-pointer p2-hover ease-in duration-300"
+      >
+        <button (click)="onBusinessRegisterClick()" class="w-full">Inscribe tu negocio</button>
+      </li>
+    </ul>
+  </div>
+  }
+</div>

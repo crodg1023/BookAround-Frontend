@@ -1,0 +1,25 @@
+<app-modal [title]="title" [buttonText]="buttonText" [buttonAction]="modalButtonAction" modalType="login">
+  <form action="" class="flex flex-col gap-4">
+    <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+      <i class="fa-regular fa-envelope text-2xl p6-text"></i>
+      <div class="w-full flex flex-col">
+        <label class="p3-text text-lg font-bold">Correo electrónico</label>
+        <input type="text" placeholder="Tu correo electrónico" class="w-full p6-text text-lg font-bold focus:outline-none">
+      </div>
+    </div>
+    <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+      <i class="fa-solid fa-lock text-2xl p6-text"></i>
+      <div class="w-full flex flex-col">
+        <label class="p3-text text-lg font-bold">Contraseña</label>
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="Tu contraseña" class="w-full p6-text text-lg font-bold focus:outline-none">
+      </div>
+      <button (click)="toggleShowPassword($event)">
+        @if (showPassword) {
+          <i class="fa-solid fa-eye-slash text-2xl p6-text p2-hover transition ease-in duration-300"></i>
+        } @else {
+          <i class="fa-solid fa-eye text-2xl p6-text p2-hover transition ease-in duration-300"></i>
+        }
+      </button>
+    </div>
+  </form>
+</app-modal>

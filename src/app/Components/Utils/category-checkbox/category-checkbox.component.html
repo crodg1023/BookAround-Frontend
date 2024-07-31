@@ -1,0 +1,7 @@
+<div class="inline-block p1-text">
+  <input type="checkbox" name="{{ id }}" id="{{ id }}" class="hidden" (change)="onChecked($event)">
+  <label for="{{ id }}" class="flex items-center cursor-pointer gap-2 p-4 p6-border rounded-lg" [ngClass]="{'p6-bg': isChecked}">
+    <i class="{{ icon + ' text-2xl p1-text' }}"></i>
+    <span class="text-lg font-bold">{{ label }}</span>
+  </label>
+</div>

@@ -1,0 +1,94 @@
+<app-modal [title]="modalTitle" [buttonText]="modalButtonText" [buttonAction]="nextStep.bind(this)" modalType="businessRegister">
+  <form action="" class="flex flex-col gap-4">
+    @if (currentStep === 1) {
+      <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <i class="fa-regular fa-envelope text-2xl p6-text"></i>
+        <div class="w-full flex flex-col">
+          <label class="p3-text text-lg font-bold">Correo electrónico</label>
+          <input type="text" placeholder="Tu correo electrónico" class="w-full p6-text text-lg font-bold focus:outline-none">
+        </div>
+      </div>
+      <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <i class="fa-solid fa-lock text-2xl p6-text"></i>
+        <div class="w-full flex flex-col">
+          <label class="p3-text text-lg font-bold">Contraseña</label>
+          <input formControlName="passwordInput" [type]="showPassword ? 'text' : 'password'" placeholder="Tu contraseña" class="w-full p6-text text-lg font-bold focus:outline-none">
+        </div>
+        <button (click)="toggleShowPassword($event)">
+          @if (showPassword) {
+            <i class="fa-solid fa-eye-slash text-2xl p6-text p2-hover transition ease-in duration-300"></i>
+          } @else {
+            <i class="fa-solid fa-eye text-2xl p6-text p2-hover transition ease-in duration-300"></i>
+          }
+        </button>
+      </div>
+    }
+
+    @if (currentStep === 2) {
+      <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <i class="fa-solid fa-user-tie text-2xl p6-text"></i>
+        <div class="w-full flex flex-col">
+          <label class="p3-text text-lg font-bold">¿Cómo se llama tu comercio?</label>
+          <input type="text" placeholder="Nombre del comercio" class="w-full p6-text text-lg font-bold focus:outline-none">
+        </div>
+      </div>
+      <h3 class="text-center text-2xl font-bold">Ubicación de tu comercio</h3>
+      <div class="w-full p6-border p-4 rounded-2xl">
+        <div class="w-full flex items-center rounded-2xl py-4 gap-4">
+          <i class="fa-solid fa-city text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-bold">Ciudad</label>
+            <input type="text" placeholder="Ciudad donde te encuentras ubicado" class="w-full p6-text text-lg font-bold focus:outline-none">
+          </div>
+        </div>
+        <div class="w-full flex items-center rounded-2xl py-4 gap-4">
+          <i class="fa-solid fa-location-dot text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-bold">Dirección</label>
+            <input type="text" placeholder="Dirección de tu comercio" class="w-full p6-text text-lg font-bold focus:outline-none">
+          </div>
+        </div>
+        <div class="w-full flex items-center rounded-2xl py-4 gap-4">
+          <i class="fa-solid fa-earth-americas text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-bold">País</label>
+            <input type="text" placeholder="País donde te encuentras ubicado" class="w-full p6-text text-lg font-bold focus:outline-none">
+          </div>
+        </div>
+      </div>
+      <h3 class="text-center text-2xl font-bold">Contacto de tu comercio</h3>
+      <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <i class="fa-solid fa-phone text-2xl p6-text"></i>
+        <div class="w-full flex flex-col">
+          <label class="p3-text text-lg font-bold">Teléfono </label>
+          <input type="text" placeholder="Número de teléfono" class="w-full p6-text text-lg font-bold focus:outline-none">
+        </div>
+      </div>
+    }
+
+    @if (currentStep === 3) {
+      <div class="w-full flex flex-col gap-4 rounded-2xl p-4 p6-border">
+        <h3 class="text-center text-2xl font-bold">Selecciona la categoría de tu comercio</h3>
+        <div class="flex flex-wrap justify-center items-center gap-4">
+          <app-category-checkbox [id]="'cocina'" [label]="'Cocina'" [icon]="'fa-solid fa-utensils'"></app-category-checkbox>
+          <app-category-checkbox [id]="'barberia'" [label]="'Barbería'" [icon]="'fa-solid fa-scissors'"></app-category-checkbox>
+          <app-category-checkbox [id]="'belleza'" [label]="'Belleza'" [icon]="'fa-solid fa-paintbrush'"></app-category-checkbox>
+          <app-category-checkbox [id]="'bar'" [label]="'Bar'" [icon]="'fa-solid fa-wine-glass'"></app-category-checkbox>
+          <app-category-checkbox [id]="'panaderia'" [label]="'Panadería'" [icon]="'fa-solid fa-bread-slice'"></app-category-checkbox>
+          <app-category-checkbox [id]="'spa'" [label]="'Spa'" [icon]="'fa-solid fa-spa'"></app-category-checkbox>
+          <app-category-checkbox [id]="'cafes'" [label]="'Cafés'" [icon]="'fa-solid fa-mug-hot'"></app-category-checkbox>
+          <app-category-checkbox [id]="'vestuario'" [label]="'Vestuario'" [icon]="'fa-solid fa-shirt'"></app-category-checkbox>
+          <!--
+          <div class="inline-block p1-text">
+            <input type="checkbox" id="barberia" class="hidden checkbox" (change)="onChecked($event)" />
+            <label for="barberia" class="flex items-center cursor-pointer gap-2 p-4 p6-border rounded-lg transition ease-in duration-100" [ngClass]="{'p6-bg' : isChecked}">
+              <i class="fa-solid fa-utensils text-2xl p1-text"></i>
+              <span class="text-lg font-bold">Barberia</span>
+            </label>
+          </div>
+          -->
+        </div>
+      </div>
+    }
+  </form>
+</app-modal>

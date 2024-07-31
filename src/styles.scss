@@ -2,3 +2,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+// Morados.
+$purple_1: #402E7F;
+$purple_2: #3B2B77;
+$purple_3: #2A1F55;
+$purple_4: #7F5CFF;
+$purple_5: #6E50DD;
+$purple_6: #A193D4;
+$purple_7: #E3DBFF;
+$purple_8: #352D55;
+$purple_9: #5A2E80;
+$purple_10: #752E80;
+
+// Rojos.
+$red_1: #D62042;
+$red_2: #AC1A35;
+$red_3: #8A152A;
+$red_4: #681020;
+$red_5: #AC364C;
+$red_6: #813E4B;
+
+// Verdes.
+$green_1: #2E8031;
+$green_2: #DBFFDD;
+$green_3: #2E805F;
+
+// Font sizes.
+
+// Clases morado.
+.p7-hover:hover {
+  background-color: $purple_7;
+}
+.p6-border {
+  border: 1px solid $purple_6;
+}
+.p6-text {
+  color: $purple_6;
+}
+.p6-bg {
+  background: $purple_6;
+}
+.p5-text {
+  color: $purple_5;
+}
+.p3-hover:hover {
+  border-color: $purple_3;
+  color: $purple_3;
+}
+.p3-text {
+  color: $purple_3;
+}
+.p2-hover:hover {
+  color: $purple_2;
+}
+.p2-bg {
+  background: $purple_2;
+}
+.p1-text {
+  color: $purple_1;
+}
