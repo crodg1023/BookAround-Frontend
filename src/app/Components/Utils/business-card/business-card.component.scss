@@ -1,0 +1,21 @@
+
+article {
+  border: 2px solid transparent;
+  &:hover {
+    border: 2px solid #2A1F55;
+  }
+}
+
+#card-img {
+  background-position: center;
+  background-size: cover;
+}
+
+h2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+}

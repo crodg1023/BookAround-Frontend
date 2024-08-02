@@ -1,0 +1,35 @@
+<section class="w-full flex justify-center">
+  <div class="w-full max-w-[1300px] flex gap-16">
+    <div class="w-2/3 flex flex-col gap-4">
+      <div
+        class="w-full h-[500px] rounded-2xl p3-border"
+        [ngStyle]="{'background-image': business.image ? 'url(' + business.image + ')' : 'none'}"
+        id="business-img"
+      >
+      </div>
+      <div class="w-full flex flex-col gap-4">
+        <h1 class="text-[38px] font-bold p3-text">{{ business.name }}</h1>
+        <div class="flex items-center p5-text text-xl">
+          @for (star of getScoreStars(); track $index) {
+            <i [ngClass]="star"></i>
+          }
+        </div>
+        <div class="flex gap-8 items-center">
+          <div class="flex items-center p3-text text-2xl gap-2">
+            <i [ngClass]="getBusinessCategory()"></i>
+          </div>
+          <div class="flex items-center p3-text gap-2">
+            <i class="fa-regular fa-clock"></i>
+            <span class="text-lg font-bold">Horarios: {{ business.schedule }}</span>
+          </div>
+        </div>
+        <div class="p3-text text-lg">
+          <p>{{ business.description }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="w-1/3 h-full bg-red-300">
+      calendario
+    </div>
+  </div>
+</section>

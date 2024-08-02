@@ -1,0 +1,21 @@
+@use '../../../../styles.scss';
+
+li {
+  cursor: pointer;
+  position: relative;
+  padding: 8px 0;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: styles.$purple_3;
+    transform: scaleX(0);
+    transition: transform 200ms ease-in;
+  }
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}

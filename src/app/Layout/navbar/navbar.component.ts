@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserMenuButtonComponent } from '../../Components/Utils/user-menu-button/user-menu-button.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,4 +11,9 @@ import { UserMenuButtonComponent } from '../../Components/Utils/user-menu-button
 })
 export class NavbarComponent {
 
+  constructor(private router: Router) {}
+
+  goToHome() {
+    this.router.navigate(['/']);
+  }
 }

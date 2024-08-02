@@ -1,0 +1,33 @@
+<article
+  class="relative w-72 flex flex-col-reverse rounded-2xl shadow-xl cursor-pointer transition duration-100 ease-in"
+  (click)="onCardClick()"
+  [ngClass]="isFeatured ? 'h-[336px]' : 'h-[400px]'"
+>
+  @if (!isFeatured) {
+    <div class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white flex justify-center items-center">
+      <i class="{{ getIcon() }} text-xl p3-text"></i>
+    </div>
+    <div class="w-full bg-white p-2 flex flex-col gap-1 rounded-b-2xl p3-text">
+      <div class="w-full flex items-center gap-2">
+        <span class="p3-text"><i class="fa-solid fa-location-dot"></i></span>
+        <span class="text-sm p3-text">{{ business.address }}</span>
+      </div>
+      <div class="w-full flex items-center gap-2">
+        <span class="text-base"><i class="fa-regular fa-clock"></i></span>
+        <span class="text-sm">{{ business.schedule }}</span>
+      </div>
+      <div class="w-full flex items-center gap-2">
+        <span class="text-base"><i class="fa-solid fa-star"></i></span>
+        <span class="p3-text text-sm">{{ business.score }}</span>
+      </div>
+    </div>
+  }
+  <div class="w-full h-[58px] p3-bg p-2 flex items-center text-center justify-center" [ngClass]="{'rounded-b-2xl' : isFeatured}">
+    <h2 class="text-white text-lg font-medium drop-shadow-xl leading-8">{{ business.name }}</h2>
+  </div>
+  <div
+    class="w-full h-full rounded-t-2xl"
+    [ngStyle]="{'background-image': business.image ? 'url(' + business.image + ')' : 'none'}"
+    id="card-img"
+  ></div>
+</article>
