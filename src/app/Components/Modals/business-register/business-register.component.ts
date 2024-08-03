@@ -44,6 +44,11 @@ export class BusinessRegisterComponent {
     }
   }
 
+  stepBack() {
+    this.currentStep--;
+    this.modalService.nextStep(this.currentStep);
+  }
+
   updateModalInformation() {
     this.currentStep === this.lastStep ? this.modalButtonText = 'Finalizar' : this.modalButtonText = 'Siguiente';
   }

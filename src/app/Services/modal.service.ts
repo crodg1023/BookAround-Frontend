@@ -15,12 +15,14 @@ export class ModalService {
   currentModalStep$ = this.currentModalStepSubject.asObservable();
 
   openModal(modalType: string) {
+    document.body.classList.add('overflow-hidden');
     this.modalStateSubject.next({ [modalType]: true });
     this.currentModalTypeSubject.next(modalType);
     this.currentModalStepSubject.next(1);
   }
 
   closeModal(modalType: string) {
+    document.body.classList.remove('overflow-hidden');
     this.modalStateSubject.next({ [modalType]: false });
     setTimeout(() => this.currentModalStepSubject.next(1), 300);
     if (modalType === this.currentModalTypeSubject.value) {
@@ -33,6 +35,7 @@ export class ModalService {
   }
 
   closeAllModals() {
+    document.body.classList.remove('overflow-hidden');
     this.modalStateSubject.next({});
     this.currentModalTypeSubject.next('');
   }

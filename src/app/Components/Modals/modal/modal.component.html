@@ -1,5 +1,5 @@
 @if (isVisible) {
-  <div class="w-full h-screen absolute flex items-center justify-center z-50">
+  <div class="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-50" [ngClass]="{'is-active': isOpen}">
     <div
     class="relative max-w-3xl bg-white rounded-2xl shadow-2xl py-8 px-8 transition ease-in duration-300 transform"
     [ngClass]="{
@@ -13,7 +13,12 @@
     <div class="flex flex-col gap-4 mt-4">
       <h3 class="text-[28px] font-bold p5-text text-center">{{ title }}</h3>
       <ng-content></ng-content>
-      <button class="w-full p2-bg text-white text-2xl font-bold rounded-lg py-2 px-10" (click)="buttonAction()">{{ buttonText }}</button>
+      <div class="flex gap-4">
+        @if (hasStepBack && step > 1) {
+          <button class="w-full button-2" (click)="stepBackAction()">Retroceder</button>
+        }
+        <button class="w-full p2-bg text-white text-2xl font-bold rounded-lg py-2 px-10" (click)="buttonAction()">{{ buttonText }}</button>
+      </div>
     </div>
   </div>
   </div>

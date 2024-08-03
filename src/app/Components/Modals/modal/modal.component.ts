@@ -13,6 +13,9 @@ export class ModalComponent implements OnInit {
   @Input() title: string = '';
   @Input() buttonText: string = '';
   @Input() buttonAction!: () => void;
+  @Input() stepBackAction!: () => void;
+  @Input() hasStepBack: boolean = false;
+  @Input() step: number = 0;
   @Input() modalType: string = '';
   @Input() username: string = '';
   isOpen: boolean = false;

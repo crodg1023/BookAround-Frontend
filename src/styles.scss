@@ -65,9 +65,16 @@ $green_3: #2E805F;
 .p5-bg {
   background: $purple_5;
 }
+.p5-border {
+  border: 2px solid $purple_5;
+}
 .p5-hover:hover {
   color: $purple_5;
   border-color: $purple_5;
+}
+.p5-menu-hover:hover {
+  background-color: $purple_5;
+  color: white;
 }
 .p3-hover:hover {
   border-color: $purple_3;
@@ -96,6 +103,9 @@ $green_3: #2E805F;
 }
 .p1-text {
   color: $purple_1;
+}
+.p1-bg {
+  background-color: $purple_1;
 }
 
 // Botones.

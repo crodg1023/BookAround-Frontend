@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { LoginModalComponent } from '../../Modals/login-modal/login-modal.component';
 import { ClientRegisterComponent } from '../../Modals/client-register/client-register.component';
 import { BusinessRegisterComponent } from '../../Modals/business-register/business-register.component';
 import { ModalService } from '../../../Services/modal.service';
+import { ModalTypes } from '../../../Interfaces/modal-types';
 
 @Component({
   selector: 'app-user-menu-button',
@@ -26,17 +27,17 @@ export class UserMenuButtonComponent {
   }
 
   onLoginClick() {
-    this.modalService.openModal('login');
+    this.modalService.openModal(ModalTypes.Login);
     this.isOpen = false;
     this.isVisible = false;
   }
   onClientRegisterClick() {
-    this.modalService.openModal('clientRegister');
+    this.modalService.openModal(ModalTypes.ClientRegister);
     this.isOpen = false;
     this.isVisible = false;
   }
   onBusinessRegisterClick() {
-    this.modalService.openModal('businessRegister');
+    this.modalService.openModal(ModalTypes.BusinessRegister);
     this.isOpen = false;
     this.isVisible = false;
   }

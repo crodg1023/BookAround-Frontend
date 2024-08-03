@@ -4,11 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Business } from '../../Interfaces/business';
 import { Title } from '@angular/platform-browser';
 import { CategoryIconsService } from '../../Services/Icons/category-icons.service';
+import { ReviewCardComponent } from '../../Components/Utils/review-card/review-card.component';
 
 @Component({
   selector: 'app-business-information',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReviewCardComponent],
   templateUrl: './business-information.component.html',
   styleUrl: './business-information.component.scss'
 })
