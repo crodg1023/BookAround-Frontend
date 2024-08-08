@@ -14,9 +14,14 @@
         <span class="text-lg p3-text">enero 1, 2024</span>
       </div>
     </div>
-    <p class="text-sm p3-text">
-      kjasdjhaisoñas ksdk lkld ks dlkfj sdlkjf kwkjw jwjiow jh ook kkqk jshdh kaksid jajsjj jah leorn paas kkii  kaka lelqo kakak
+    <p class="text-sm p3-text" #reviewContent [ngClass]="{'truncated' : !isExpanded, 'expanded' : isExpanded}">
+      kjasdjhaisoñas ksdk lkld ks dlkfj sdlkjf kwkjw jwjiow jh ook kkqk jshdh kaksid jajsjj jah leorn paas kkii  kaka lelqo kakakasdasdasdsadddddddddddddddddddddddddddsdasdas
     </p>
-    <button class="text-lg font-medium p5-text">Leer más</button>
+    @if (isTruncated) {
+      <button class="flex gap-2 items-center text-lg font-medium p5-text" (click)="toggleReadMore()">
+        <span>Leer más</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    }
   </div>
 </article>

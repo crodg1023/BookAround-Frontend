@@ -9,35 +9,53 @@
       </div>
       <div class="w-full flex flex-col gap-4">
         <h1 class="text-[38px] font-bold p3-text">{{ business.name }}</h1>
-        <div class="flex items-center p5-text text-xl">
-          @for (star of getScoreStars(); track $index) {
-            <i [ngClass]="star"></i>
-          }
-        </div>
-        <div class="flex gap-8 items-center">
+        <div class="flex gap-8">
+          <div class="flex items-center p5-text text-2xl">
+            @for (star of getScoreStars(); track $index) {
+              <i [ngClass]="star"></i>
+            }
+          </div>
           <div class="flex items-center p3-text text-2xl gap-2">
             <i [ngClass]="getBusinessCategory()"></i>
           </div>
+        </div>
+        <div class="flex gap-8 items-center">
           <div class="flex items-center p3-text gap-2">
             <i class="fa-regular fa-clock"></i>
-            <span class="text-lg font-bold">Horarios: {{ business.schedule }}</span>
+            <span class="text-lg font-medium">Horarios: {{ business.schedule }}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-location-dot"></i>
+            <span class="text-lg font-medium">{{ business.address }}</span>
           </div>
         </div>
-        <div class="p3-text text-lg">
-          <p>{{ business.description }}</p>
+        <div class="flex flex-col gap-4 items-start">
+          <p class="p3-text text-lg" [ngClass]="{'truncated' : !isExpanded, 'expanded' : isExpanded}" #description>{{ business.description }}</p>
+          @if (isTruncated) {
+            <button (click)="toggleReadMore()" class="flex gap-2 items-center p5-text">
+              <span class="text-lg font-medium">Leer {{ isExpanded ? 'menos' : 'más' }}</span>
+              <i class="fa-solid fa-arrow-right text-2xl"></i>
+            </button>
+          }
         </div>
       </div>
     </div>
-    <div class="w-1/3 h-full bg-red-300">
-      calendario
+    <div class="w-1/3 h-full">
+      <app-calendar></app-calendar>
     </div>
   </div>
   <div class="w-full max-w-[1300px] flex gap-8">
-    <div class="w-2/3 grid grid-cols-2 gap-4">
-      <app-review-card></app-review-card>
-      <app-review-card></app-review-card>
-      <app-review-card></app-review-card>
-      <app-review-card></app-review-card>
+    <div class="w-2/3 flex flex-col gap-4">
+      <div class="grid grid-cols-2 gap-4">
+        <app-review-card></app-review-card>
+        <app-review-card></app-review-card>
+        <app-review-card></app-review-card>
+        <app-review-card></app-review-card>
+      </div>
+      <div class="w-full flex gap-16">
+        <button class="button-1 w-full">Deja tu reseña</button>
+        <button class="button-2 w-full">Lee más reseñas</button>
+      </div>
     </div>
     <div class="w-1/3 h-full">
       <img src="../../../assets/images/bookaround-reviews.jpg" alt="">

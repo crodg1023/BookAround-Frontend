@@ -19,6 +19,10 @@ export class MockService {
     return this.http.get<Business>(`${this.mocksUrl}/business/${id}`).pipe(retry(2), catchError(this.error));
   }
 
+  getCategories() : Observable<any> {
+    return this.http.get<any>(`${this.mocksUrl}/categories`).pipe(retry(2), catchError(this.error));
+  }
+
   private error(error: HttpErrorResponse) {
     if (error.status === 0) return throwError(() => new Error('No ha sido posible establecer conexion'));
     else return throwError(() => new Error(error.error));

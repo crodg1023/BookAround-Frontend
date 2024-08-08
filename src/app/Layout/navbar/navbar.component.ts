@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserMenuButtonComponent } from '../../Components/Utils/user-menu-button/user-menu-button.component';
 import { Router } from '@angular/router';
+import { ScrollService } from '../../Services/Scroll/scroll.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +12,13 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private scrollService: ScrollService) {}
 
   goToHome() {
     this.router.navigate(['/']);
+  }
+
+  scrollToAboutUs() {
+    this.scrollService.scrollTo('about-us');
   }
 }

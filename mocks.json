@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Tienda de Electrónica",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 4.3,
       "address": "Calle Falsa 123",
       "schedule": "9:00 AM - 8:00 PM",
@@ -13,7 +13,7 @@
     {
       "id": 2,
       "name": "Cafetería Delicias",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 4.8,
       "address": "Avenida Siempreviva 456",
       "schedule": "8:00 AM - 6:00 PM",
@@ -23,7 +23,7 @@
     {
       "id": 3,
       "name": "Librería El Saber",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 3.2,
       "address": "Calle de los Libros 789",
       "schedule": "10:00 AM - 7:00 PM",
@@ -33,7 +33,7 @@
     {
       "id": 4,
       "name": "Boutique Moda",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 4.5,
       "address": "Paseo de la Moda 101",
       "schedule": "11:00 AM - 9:00 PM",
@@ -43,7 +43,7 @@
     {
       "id": 5,
       "name": "Restaurante Gourmet",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 4.9,
       "address": "Gourmet Plaza 202",
       "schedule": "12:00 PM - 10:00 PM",
@@ -53,7 +53,7 @@
     {
       "id": 6,
       "name": "Gimnasio Fitness",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 4.1,
       "address": "Calle del Deporte 303",
       "schedule": "6:00 AM - 10:00 PM",
@@ -63,7 +63,7 @@
     {
       "id": 7,
       "name": "Panadería Artesanal",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 2.7,
       "address": "Avenida del Pan 404",
       "schedule": "7:00 AM - 7:00 PM",
@@ -73,7 +73,7 @@
     {
       "id": 8,
       "name": "Farmacia Saludable",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 1.6,
       "address": "Salud Street 505",
       "schedule": "8:00 AM - 9:00 PM",
@@ -83,7 +83,7 @@
     {
       "id": 9,
       "name": "Joyería Elegante",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 3.8,
       "address": "Diamante Avenue 606",
       "schedule": "10:00 AM - 8:00 PM",
@@ -93,7 +93,7 @@
     {
       "id": 10,
       "name": "Centro de Belleza",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 4.4,
       "address": "Beauty Boulevard 707",
       "schedule": "9:00 AM - 7:00 PM",
@@ -103,7 +103,7 @@
     {
       "id": 11,
       "name": "Tienda de Mascotas",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 4.2,
       "address": "Pet Street 808",
       "schedule": "10:00 AM - 6:00 PM",
@@ -113,7 +113,7 @@
     {
       "id": 12,
       "name": "Centro Deportivo",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 3.9,
       "address": "Fitness Road 909",
       "schedule": "6:00 AM - 10:00 PM",
@@ -123,7 +123,7 @@
     {
       "id": 13,
       "name": "Clínica Dental",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 3.1,
       "address": "Dental Drive 1010",
       "schedule": "9:00 AM - 6:00 PM",
@@ -133,7 +133,7 @@
     {
       "id": 14,
       "name": "Pizzería Italiana",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 4.6,
       "address": "Pizza Lane 1111",
       "schedule": "12:00 PM - 11:00 PM",
@@ -143,7 +143,7 @@
     {
       "id": 15,
       "name": "Estudio Fotográfico",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 3.5,
       "address": "Photo Boulevard 1212",
       "schedule": "10:00 AM - 5:00 PM",
@@ -153,7 +153,7 @@
     {
       "id": 16,
       "name": "Jardinería Verde",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 2.8,
       "address": "Green Street 1313",
       "schedule": "7:00 AM - 3:00 PM",
@@ -163,7 +163,7 @@
     {
       "id": 17,
       "name": "Tienda de Ropa Infantil",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 4.0,
       "address": "Kids Avenue 1414",
       "schedule": "10:00 AM - 7:00 PM",
@@ -173,7 +173,7 @@
     {
       "id": 18,
       "name": "Librería de Arte",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 3.7,
       "address": "Art Street 1515",
       "schedule": "9:00 AM - 6:00 PM",
@@ -183,7 +183,7 @@
     {
       "id": 19,
       "name": "Zapatería Moderna",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 4.7,
       "address": "Shoe Lane 1616",
       "schedule": "10:00 AM - 8:00 PM",
@@ -193,12 +193,62 @@
     {
       "id": 20,
       "name": "Tienda de Deportes",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/200",
       "score": 3.4,
       "address": "Sport Avenue 1717",
       "schedule": "9:00 AM - 9:00 PM",
       "category": "ropa",
       "description": "Tienda de Deportes ofrece una variada selección de equipo deportivo y ropa para atletas y entusiastas del deporte. Desde artículos para entrenamientos y competiciones hasta accesorios para actividades al aire libre, tenemos todo lo que necesitas para mantenerte activo y rendir al máximo en tus deportes favoritos."
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "type": "cocina",
+      "name": "Cocina local",
+      "icon": "fa-solid fa-utensils"
+    },
+    {
+      "id": 2,
+      "type": "barberia",
+      "name": "Barbería",
+      "icon": "fa-solid fa-scissors"
+    },
+    {
+      "id": 3,
+      "type": "maquillaje",
+      "name": "Maquillaje",
+      "icon": "fa-solid fa-paintbrush"
+    },
+    {
+      "id": 4,
+      "type": "bar",
+      "name": "Bar",
+      "icon": "fa-solid fa-wine-glass"
+    },
+    {
+      "id": 5,
+      "type": "panaderia",
+      "name": "Panadería",
+      "icon": "fa-solid fa-bread-slice"
+    },
+    {
+      "id": 6,
+      "type": "spa",
+      "name": "Spa",
+      "icon": "fa-solid fa-spa"
+    },
+    {
+      "id": 7,
+      "type": "cafe",
+      "name": "Café",
+      "icon": "fa-solid fa-mug-hot"
+    },
+    {
+      "id": 8,
+      "type": "ropa",
+      "name": "Ropa",
+      "icon": "fa-solid fa-shirt"
     }
   ]
 }

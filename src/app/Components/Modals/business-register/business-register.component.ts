@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { CategoryCheckboxComponent } from '../../Utils/category-checkbox/category-checkbox.component';
 import { ModalService } from '../../../Services/modal.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { trigger, transition, style, animate, query } from '@angular/animations';
 
 @Component({
   selector: 'app-business-register',
   standalone: true,
   imports: [ModalComponent, CommonModule, CategoryCheckboxComponent],
   templateUrl: './business-register.component.html',
-  styleUrl: './business-register.component.scss'
+  styleUrl: './business-register.component.scss',
+  animations: []
 })
 export class BusinessRegisterComponent {
   modalTitle: string = 'Registra tu negocio';
@@ -26,6 +28,10 @@ export class BusinessRegisterComponent {
       this.currentStep = step;
       this.updateModalInformation();
     });
+  }
+
+  get stepState() {
+    return `step${this.currentStep}`;
   }
 
   toggleShowPassword(e: Event) {

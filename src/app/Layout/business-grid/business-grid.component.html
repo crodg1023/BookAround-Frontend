@@ -1,14 +1,22 @@
 <div class="flex flex-col gap-8 items-center justify-center">
+  @if (category) {
+    <button (click)="showAll()" class="flex items-center gap-2 p3-text">
+      <span class="text-2xl-text"><i class="fa-solid fa-arrow-left"></i></span>
+      <span class="text-lg font-medium">Ver todos</span>
+    </button>
+  }
   <button class="flex items-center gap-2 p3-text">
     <span class="text-2xl-text"><i class="fa-solid fa-sliders"></i></span>
     <span class="text-lg font-medium">Filtros</span>
   </button>
-  <div class="w-full max-w-[1300px] grid grid-cols-4 gap-y-4">
+  <div class="w-full max-w-[1300px] flex flex-wrap gap-4 justify-center">
     @for (b of displayed; track b.id) {
       <app-business-card [business]="b"></app-business-card>
     }
   </div>
-  <button class="button-2" (click)="currentIndex >= business.length ? showLess() : showMore()">
-    <span class="drop-shadow-xl">Mostrar {{ currentIndex >= business.length ? 'menos' : 'más' }}</span>
-  </button>
+  @if (displayed.length >= count) {
+    <button class="button-2" (click)="currentIndex >= business.length ? showLess() : showMore()">
+      <span class="drop-shadow-xl">Mostrar {{ currentIndex >= business.length ? 'menos' : 'más' }}</span>
+    </button>
+  }
 </div>

@@ -1,0 +1,52 @@
+
+<div class="w-full flex flex-col gap-4 items-center">
+  <div class="max-w-sm w-full rounded-2xl p6-border">
+      <div class="md:p-8 p-5 rounded-2xl bg-white">
+          <div class="px-4 flex items-center justify-between">
+              <span  tabindex="0" class="focus:outline-none  text-base font-bold p3-text">{{ firstDayOfMonth().monthLong }} {{ firstDayOfMonth().year }}</span>
+              <div class="flex items-center">
+                <button aria-label="calendar backward" class="focus:text-gray-400 hover:text-gray-400 p3-text" (click)="previousMonth()" [disabled]="!isNotPreviousMonth(firstDayOfMonth())">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+              <button aria-label="calendar forward" class="focus:text-gray-400 hover:text-gray-400 ml-3 p3-text" (click)="nextMonth()">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+
+              </div>
+          </div>
+          <div class="flex items-center justify-between pt-12 overflow-x-auto">
+              <table class="w-full">
+                  <thead>
+                      <tr>
+                        @for (weekDay of weekDays(); track $index) {
+                          <th>
+                            <div class="w-full flex justify-center">
+                                <p class="text-base font-medium text-center p3-text">{{ weekDay }}</p>
+                            </div>
+                          </th>
+                        }
+                      </tr>
+                  </thead>
+                  <tbody>
+                    @for (week of weeks; track $index) {
+                      <tr>
+                        @for (day of week; track $index) {
+                          <td class="pt-6">
+                            <div
+                              class="px-2 py-2 cursor-pointer flex w-full justify-center rounded-full"
+                              [ngClass]="[activeDay().toISODate() === day.toISODate() ? 'p5-bg text-white' : 'p3-text', checkDaysOutOfDate(day) ? '' : 'bg-gray-100 rounded-md']"
+                              (click)="setActiveDay(day)"
+                            >
+                              <p class="text-base" [ngClass]="checkDaysOutOfDate(day) ? 'font-medium' : 'font-light cursor-not-allowed'">{{ day.day }}</p>
+                            </div>
+                        </td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+  <button class="button-1">Agenda tu cita</button>
+</div>

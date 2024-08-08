@@ -1,7 +1,7 @@
 @if (isVisible) {
   <div class="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-50" [ngClass]="{'is-active': isOpen}">
     <div
-    class="relative max-w-3xl bg-white rounded-2xl shadow-2xl py-8 px-8 transition ease-in duration-300 transform"
+    class="relative max-w-3xl bg-white rounded-2xl shadow-2xl py-8 px-8 transition ease-in duration-300 transform overflow-x-hidden"
     [ngClass]="{
       'opacity-100' : isOpen,
       'opacity-0': !isOpen
