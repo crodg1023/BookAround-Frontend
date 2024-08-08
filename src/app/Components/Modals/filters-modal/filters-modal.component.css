@@ -1,0 +1,17 @@
+@charset "UTF-8";
+::ng-deep .ngx-slider {
+  height: 8px !important;
+}
+::ng-deep .ngx-slider .ngx-slider-selection {
+  background: #6E50DD !important;
+}
+::ng-deep .ngx-slider .ngx-slider-pointer {
+  width: 32px !important;
+  height: 32px !important;
+}
+::ng-deep .ngx-slider .ngx-slider-pointer-min {
+  background: #2A1F55 !important;
+}
+::ng-deep .ngx-slider .ngx-slider-pointer-max {
+  background: #2A1F55 !important;
+}/*# sourceMappingURL=filters-modal.component.css.map */

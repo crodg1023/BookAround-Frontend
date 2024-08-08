@@ -123,4 +123,16 @@ body {
   font-size: 24px;
   border-radius: 8px;
   padding: 8px 40px;
-}/*# sourceMappingURL=styles.css.map */
+}
+
+li {
+  cursor: pointer;
+  position: relative;
+  border: 2px solid #2A1F55;
+  border-radius: 32px;
+  transition: all 200ms ease-in;
+}
+li:hover {
+  color: #6E50DD;
+  border-color: #6E50DD;
+}/*# sourceMappingURL=category-filter.component.css.map */

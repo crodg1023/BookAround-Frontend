@@ -4,6 +4,7 @@ import { HomeComponent } from './Views/home/home.component';
 import { businessInformationResolver, businessResolver } from './Resolvers/Business/business.resolver';
 import { BusinessInformationComponent } from './Views/business-information/business-information.component';
 import { BusinessGridComponent } from './Layout/business-grid/business-grid.component';
+import { NotFoundComponent } from './Views/not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Book Arounde | Home' },
@@ -11,4 +12,5 @@ export const routes: Routes = [
     { path: '', component: BusinessGridComponent },
     { path: 'find/:id', component: BusinessInformationComponent, resolve: { businessInformation: businessInformationResolver } }
   ] },
+  { path: '**', component: NotFoundComponent, title: 'Ups! | Página no encontrada' }
 ];

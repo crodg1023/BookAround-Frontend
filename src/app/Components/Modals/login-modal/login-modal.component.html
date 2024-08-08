@@ -1,4 +1,10 @@
-<app-modal [title]="title" [buttonText]="buttonText" [buttonAction]="modalButtonAction" modalType="login">
+<app-modal
+  [title]="title"
+  [buttonText]="buttonText"
+  [buttonAction]="modalButtonAction"
+  [hasHeader]="true"
+  modalType="login"
+>
   <form action="" class="flex flex-col gap-4">
     <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
       <i class="fa-regular fa-envelope text-2xl p6-text"></i>

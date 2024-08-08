@@ -1,5 +1,6 @@
 export enum ModalTypes {
   Login = 'login',
   ClientRegister = 'clientRegister',
-  BusinessRegister = 'businessRegister'
+  BusinessRegister = 'businessRegister',
+  Filters = 'filters'
 }

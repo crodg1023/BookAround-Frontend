@@ -1,0 +1,20 @@
+#business-img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.truncated {
+  display: -webkit-box;
+  line-clamp: 8;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.expanded {
+  display: block;
+  overflow: hidden;
+  line-clamp: unset;
+  -webkit-line-clamp: unset;
+}/*# sourceMappingURL=business-information.component.css.map */

@@ -7,9 +7,11 @@
       'opacity-0': !isOpen
     }"
   >
-    <button class="absolute top-2 right-3 text-2xl p3-text"><i class="fa-regular fa-circle-xmark" (click)="onClose()"></i></button>
-    <h2 class="text-[38px] font-bold p3-text text-center">Te damos la bienvenida a Book Around</h2>
-    <div class="w-full h-1 p6-bg my-4"></div>
+  <button class="absolute top-2 right-3 text-2xl p3-text"><i class="fa-regular fa-circle-xmark" (click)="onClose()"></i></button>
+    @if (hasHeader) {
+      <h2 class="text-[38px] font-bold p3-text text-center">Te damos la bienvenida a Book Around</h2>
+      <div class="w-full h-1 p6-bg my-4"></div>
+    }
     <div class="flex flex-col gap-4 mt-4">
       <h3 class="text-[28px] font-bold p5-text text-center">{{ title }}</h3>
       <ng-content></ng-content>

@@ -1,0 +1,24 @@
+::ng-deep {
+  .ngx-slider {
+    .ngx-slider-bar {
+      height: 8px !important;
+      border-radius: 99px !important;
+    }
+    .ngx-slider-selection {
+      background: #6E50DD !important;
+    }
+    .ngx-slider-pointer {
+      width: 32px !important;
+      height: 32px !important;
+    }
+    .ngx-slider-pointer-min {
+      background: #2A1F55 !important;
+    }
+    .ngx-slider-pointer-max {
+      background: #2A1F55 !important;
+    }
+    .ngx-slider-pointer::after {
+      background-color: #2A1F55 !important;
+    }
+  }
+}

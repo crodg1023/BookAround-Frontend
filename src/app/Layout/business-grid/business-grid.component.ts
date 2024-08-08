@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { BusinessCardComponent } from '../../Components/Utils/business-card/business-card.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FiltersModalComponent } from '../../Components/Modals/filters-modal/filters-modal.component';
+import { ModalService } from '../../Services/modal.service';
 
 @Component({
   selector: 'app-business-grid',
   standalone: true,
-  imports: [BusinessCardComponent],
+  imports: [BusinessCardComponent, FiltersModalComponent],
   templateUrl: './business-grid.component.html',
   styleUrl: './business-grid.component.scss'
 })
@@ -15,8 +17,9 @@ export class BusinessGridComponent {
   category: string = '';
   count: number = 12;
   currentIndex = 0;
+  showing: number = 0;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router, private modalService: ModalService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(({ business }) => {
@@ -26,11 +29,12 @@ export class BusinessGridComponent {
       this.category = params['category'];
       this.filterByCategory();
     });
-    this.showMore();
+    this.category ?? this.showMore();
   }
 
   showMore() {
     const nextIndex = this.currentIndex + this.count;
+    nextIndex >= this.business.length ? this.showing = this.business.length : this.showing = nextIndex;
     if (this.category) {
       this.displayed = this.displayed = this.business.filter(x => x.category === this.category);
     } else {
@@ -41,17 +45,24 @@ export class BusinessGridComponent {
 
   showLess() {
     this.currentIndex >= this.count ? this.currentIndex -= this.count : this.currentIndex = 0;
+    this.showing = this.currentIndex;
     this.displayed = this.displayed.slice(0, this.currentIndex);
   }
 
   filterByCategory() {
     if (this.category) {
       this.displayed = this.business.filter(x => x.category === this.category);
+      this.showing = this.displayed.length;
     }
   }
 
   showAll() {
     this.displayed = this.business.slice(0, 12);
+    this.showing = this.displayed.length;
     this.router.navigate(['/business']);
+  }
+
+  openFiltersModal() {
+    this.modalService.openModal('filters');
   }
 }

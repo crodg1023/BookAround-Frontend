@@ -18,6 +18,7 @@ export class ModalComponent implements OnInit {
   @Input() step: number = 0;
   @Input() modalType: string = '';
   @Input() username: string = '';
+  @Input() hasHeader: boolean = false;
   isOpen: boolean = false;
   isVisible: boolean = false;
 

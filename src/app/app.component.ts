@@ -5,6 +5,7 @@ import { LoginModalComponent } from './Components/Modals/login-modal/login-modal
 import { ClientRegisterComponent } from './Components/Modals/client-register/client-register.component';
 import { BusinessRegisterComponent } from './Components/Modals/business-register/business-register.component';
 import { HomeComponent } from './Views/home/home.component';
+import { FiltersModalComponent } from './Components/Modals/filters-modal/filters-modal.component';
 
 @Component({
   selector: 'app-root',
