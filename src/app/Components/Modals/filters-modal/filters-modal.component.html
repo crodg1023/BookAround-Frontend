@@ -19,14 +19,7 @@
     <div class="p-4 flex flex-col gap-4 p6-border rounded-2xl">
       <h3 class="p3-text font-bold text-lg">Puntuación</h3>
       <div class="flex items-center gap-4">
-        <div>
-          @for (star of stars; track $index; let i = $index) {
-            <input type="radio" name="rating" id="star{{i}}" [value]="i + 1" class="hidden">
-            <label for="star{{i}}" class="text-2xl p6-text cursor-pointer" (click)="setRate(i + 1)" (mouseover)="setHoverRating(i + 1)" (mouseleave)="resetHover()">
-              <i class="{{ i < (rating || hoverRating) ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"></i>
-            </label>
-          }
-        </div>
+        <app-rating-stars (rate)="handleRating($event)"></app-rating-stars>
         <span class="p3-text font-medium text-lg">{{ rating }}</span>
       </div>
     </div>

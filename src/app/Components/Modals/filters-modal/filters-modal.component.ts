@@ -4,11 +4,15 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgxSliderModule, Options } from '@angular-slider/ngx-slider';
 import { ModalService } from '../../../Services/modal.service';
+import { RatingStarsComponent } from '../../Utils/rating-stars/rating-stars.component';
+import { FiltersService } from '../../../Services/Filters/filters.service';
+import { Filters } from '../../../Interfaces/filters';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filters-modal',
   standalone: true,
-  imports: [ModalComponent, CommonModule, ReactiveFormsModule, NgxSliderModule],
+  imports: [ModalComponent, CommonModule, ReactiveFormsModule, NgxSliderModule, RatingStarsComponent],
   templateUrl: './filters-modal.component.html',
   styleUrl: './filters-modal.component.scss'
 })
@@ -16,35 +20,35 @@ export class FiltersModalComponent implements OnInit {
 
   filtersForm!: FormGroup;
   rating: number = 0;
-  hoverRating: number = 0;
-  maxRating: number = 5;
-  stars = Array(this.maxRating)
   from: number = 50;
   to: number = 150;
   options: Options = {
     floor: 0,
     ceil: 200,
   }
+  filters!: Filters;
 
-  constructor(private formBuilder: FormBuilder, private modalService: ModalService) {}
+  constructor(private formBuilder: FormBuilder, private modalService: ModalService, private FiltersService: FiltersService, private router: Router) {}
 
   ngOnInit(): void {
     this.filtersForm = this.formBuilder.group({
     });
   }
 
-  setRate(rating: number) {
+  handleRating(rating: number) {
     this.rating = rating;
   }
-  setHoverRating(rating: number) {
-    this.hoverRating = rating;
-  }
-  resetHover() {
-    this.hoverRating = 0;
-  }
 
-  filter() {
-    alert('Filtrando!');
+  filter = () => {
+    this.filters = {
+      country: '',
+      city: '',
+      rating: this.rating,
+      minPrice: this.from,
+      maxPrice: this.to
+    }
+    this.FiltersService.updateFilters(this.filters);
+    this.router.navigate(['/business'], { queryParams: [] })
     this.modalService.closeModal('filters');
   }
 }

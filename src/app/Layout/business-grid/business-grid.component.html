@@ -4,13 +4,13 @@
       <span class="text-2xl p3-text px-4 py-2 rounded-[32px] p3-filter-border p5-hover transition duration-100 ease-in"><i class="fa-solid fa-sliders"></i></span>
       <span class="text-lg font-medium">Filtros</span>
     </button>
-    @if (category) {
+    @if (category || hasFiltered) {
       <button (click)="showAll()" class="flex items-center gap-2 p3-text">
         <span class="text-2xl-text"><i class="fa-solid fa-arrow-left"></i></span>
         <span class="text-lg font-medium">Volver a la selección general</span>
       </button>
     }
-    <p class="p3-text text-lg font-medium">Mostrando <span class="px-2 py-1 p5-text p5-border">{{ showing }}</span> de {{ category ? displayed.length : business.length }}</p>
+    <p class="p3-text text-lg font-medium">Mostrando <span class="px-2 py-1 p5-text p5-border">{{ showing }}</span> de {{ (category || hasFiltered) ? displayed.length : business.length }}</p>
   </div>
   <div class="w-full max-w-[1300px] flex flex-wrap gap-4 justify-center">
     @for (b of displayed; track b.id) {
@@ -18,7 +18,7 @@
     }
   </div>
   @if (displayed.length >= count) {
-    <button class="button-2" (click)="currentIndex >= business.length ? showLess() : showMore()">
+    <button class="button-2 text-2xl" (click)="currentIndex >= business.length ? showLess() : showMore()">
       <span class="drop-shadow-xl">Mostrar {{ currentIndex >= business.length ? 'menos' : 'más' }}</span>
     </button>
   }

@@ -1,0 +1,15 @@
+<div class="w-full relative">
+  <button
+    class="flex items-center justify-center absolute top-1/2 right-4 transform -translate-y-1/2 rounded-full p-3 hover:bg-gray-100 transition duration-100 ease-in"
+    (click)="search()"
+  >
+    <i class="fa-solid fa-magnifying-glass text-2xl p6-text"></i>
+  </button>
+  <input
+    type="text"
+    class="w-full p6-search-bar-border rounded-[32px] shadow-lg p-4 text-lg p3-text outline-none"
+    placeholder="Busca un comercio"
+    #nameInput
+    (keydown.enter)="search()"
+  >
+</div>

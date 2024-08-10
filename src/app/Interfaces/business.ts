@@ -7,4 +7,5 @@ export interface Business {
   schedule: string;
   category: string;
   description: string;
+  price: number;
 }

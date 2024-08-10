@@ -6,11 +6,13 @@ import { Title } from '@angular/platform-browser';
 import { CategoryIconsService } from '../../Services/Icons/category-icons.service';
 import { ReviewCardComponent } from '../../Components/Utils/review-card/review-card.component';
 import { CalendarComponent } from '../../Components/Utils/calendar/calendar.component';
+import { ReviewModalComponent } from '../../Components/Modals/review-modal/review-modal.component';
+import { ModalService } from '../../Services/modal.service';
 
 @Component({
   selector: 'app-business-information',
   standalone: true,
-  imports: [CommonModule, ReviewCardComponent, CalendarComponent],
+  imports: [CommonModule, ReviewCardComponent, CalendarComponent, ReviewModalComponent],
   templateUrl: './business-information.component.html',
   styleUrl: './business-information.component.scss'
 })
@@ -20,7 +22,7 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit {
   isTruncated: boolean = false;
   isExpanded: boolean = false;
 
-  constructor(private route: ActivatedRoute, private titleService: Title, private categoriesService: CategoryIconsService) {}
+  constructor(private route: ActivatedRoute, private titleService: Title, private categoriesService: CategoryIconsService, private modalService: ModalService) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(({ businessInformation }) => this.business = businessInformation);
@@ -51,5 +53,9 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit {
 
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  openReviewModal() {
+    this.modalService.openModal('review');
   }
 }
