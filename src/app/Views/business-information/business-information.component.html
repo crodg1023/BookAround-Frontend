@@ -68,7 +68,11 @@
         <h2 class="text-[38px] font-bold text-white">Encuéntranos</h2>
       </div>
     </div>
-    <div class="w-full h-[500px] bg-red-300">mapa</div>
+    <div class="w-full h-[500px]">
+      <google-map width="w-full" [options]="mapOptions" (mapClick)="moveMap($event)">
+        <map-marker [options]="markerOptions"></map-marker>
+      </google-map>
+    </div>
   </div>
 </section>
 <app-review-modal></app-review-modal>

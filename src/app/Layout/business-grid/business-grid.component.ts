@@ -1,19 +1,21 @@
-import { Component, signal, Signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal, Signal } from '@angular/core';
 import { BusinessCardComponent } from '../../Components/Utils/business-card/business-card.component';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { FiltersModalComponent } from '../../Components/Modals/filters-modal/filters-modal.component';
 import { ModalService } from '../../Services/modal.service';
 import { FiltersService } from '../../Services/Filters/filters.service';
 import { Filters } from '../../Interfaces/filters';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-business-grid',
   standalone: true,
-  imports: [BusinessCardComponent, FiltersModalComponent],
+  imports: [BusinessCardComponent, FiltersModalComponent, NgxSkeletonLoaderModule],
   templateUrl: './business-grid.component.html',
   styleUrl: './business-grid.component.scss'
 })
-export class BusinessGridComponent {
+export class BusinessGridComponent implements OnInit, OnDestroy {
   business: any[] = [];
   displayed: any[] = [];
   category: string = '';
@@ -21,27 +23,33 @@ export class BusinessGridComponent {
   currentIndex = signal(0);
   showing: number = 0;
   hasFiltered: boolean = false;
+  isLoading: boolean = false;
+  subscriptions: Subscription[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private modalService: ModalService, private filtersService: FiltersService) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe(({ business }) => {
-      this.business = business;
-    });
-    this.route.queryParams.subscribe(params => {
-      this.category = params['category'];
-      this.filterByCategory();
-    });
-    this.filtersService.filters$.subscribe(filters => {
-      if (filters) {
-        this.filter(filters);
-      }
-    });
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.filtersService.resetFilters();
-      }
-    });
+    this.isLoading = true;
+    this.subscriptions.push(
+      this.route.data.subscribe(({ business }) => {
+        this.business = business;
+        setTimeout(() => this.isLoading = false, 300);
+      }),
+      this.route.queryParams.subscribe(params => {
+        this.category = params['category'];
+        this.filterByCategory();
+      }),
+      this.filtersService.filters$.subscribe(filters => {
+        if (filters) {
+          this.filter(filters);
+        }
+      }),
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.filtersService.resetFilters();
+        }
+      })
+    );
 
     if (!this.category && !this.hasFiltered) this.showMore();
   }
@@ -100,5 +108,9 @@ export class BusinessGridComponent {
 
   openFiltersModal() {
     this.modalService.openModal('filters');
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

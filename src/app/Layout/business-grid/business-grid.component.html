@@ -14,7 +14,15 @@
   </div>
   <div class="w-full max-w-[1300px] flex flex-wrap gap-4 justify-center">
     @for (b of displayed; track b.id) {
-      <app-business-card [business]="b"></app-business-card>
+      @if (isLoading) {
+        <ngx-skeleton-loader
+        appearance="line"
+        [theme]="{ height: '400px', width: '288px', borderRadius: '16px' }"
+      >
+      </ngx-skeleton-loader>
+      } @else {
+        <app-business-card [business]="b"></app-business-card>
+      }
     }
   </div>
   @if (displayed.length >= count) {
