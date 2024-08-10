@@ -18,8 +18,8 @@
     }
   </div>
   @if (displayed.length >= count) {
-    <button class="button-2 text-2xl" (click)="currentIndex >= business.length ? showLess() : showMore()">
-      <span class="drop-shadow-xl">Mostrar {{ currentIndex >= business.length ? 'menos' : 'más' }}</span>
+    <button class="button-2 text-2xl" (click)="currentIndex() >= business.length ? showLess() : showMore()">
+      <span class="drop-shadow-xl">Mostrar {{ currentIndex() >= business.length ? 'menos' : 'más' }}</span>
     </button>
   }
 </div>
