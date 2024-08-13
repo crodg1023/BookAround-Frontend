@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef } from '@angular/core';
+import { Component, ComponentRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { LoginModalComponent } from '../../Modals/login-modal/login-modal.component';
 import { ClientRegisterComponent } from '../../Modals/client-register/client-register.component';
 import { BusinessRegisterComponent } from '../../Modals/business-register/business-register.component';
@@ -14,10 +14,14 @@ import { ModalTypes } from '../../../Interfaces/modal-types';
   styleUrl: './user-menu-button.component.scss'
 })
 export class UserMenuButtonComponent {
+
+  @ViewChild('modalsContainer', { read: ViewContainerRef, static: true })
+  dynamicContainer!: ViewContainerRef;
+  private componentRef!: ComponentRef<LoginModalComponent | ClientRegisterComponent | BusinessRegisterComponent>;
   isOpen: boolean = false;
   isVisible: boolean = false;
 
-  constructor(private eRef: ElementRef, private modalService: ModalService) {}
+  constructor(private modalService: ModalService) {}
 
   toggleMenu() {
     this.isOpen = !this.isOpen;
@@ -27,16 +31,22 @@ export class UserMenuButtonComponent {
   }
 
   onLoginClick() {
+    this.dynamicContainer.clear();
+    this.componentRef = this.dynamicContainer.createComponent(LoginModalComponent);
     this.modalService.openModal(ModalTypes.Login);
     this.isOpen = false;
     this.isVisible = false;
   }
   onClientRegisterClick() {
+    this.dynamicContainer.clear();
+    this.componentRef = this.dynamicContainer.createComponent(ClientRegisterComponent);
     this.modalService.openModal(ModalTypes.ClientRegister);
     this.isOpen = false;
     this.isVisible = false;
   }
   onBusinessRegisterClick() {
+    this.dynamicContainer.clear();
+    this.componentRef = this.dynamicContainer.createComponent(BusinessRegisterComponent);
     this.modalService.openModal(ModalTypes.BusinessRegister);
     this.isOpen = false;
     this.isVisible = false;

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ComponentRef, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Business } from '../../Interfaces/business';
 import { Title } from '@angular/platform-browser';
@@ -21,14 +21,15 @@ import { GeoCodingService } from '../../Services/GeoCoding/geo-coding.service';
 })
 export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('description') businessDescription!: ElementRef;
+  @ViewChild('reviewContainer', { read: ViewContainerRef, static: true })
+  reviewContainer!: ViewContainerRef;
+  componentRef!: ComponentRef<ReviewModalComponent>
   business!: Business;
   isTruncated: boolean = false;
   isExpanded: boolean = false;
   subscriptions: Subscription[] = [];
-  center!: google.maps.LatLngLiteral;
-  zoom: number = 15;
   mapOptions!: google.maps.MapOptions;
-  markerOptions!: google.maps.marker.AdvancedMarkerElementOptions;
+  mapMarkerOptions!: google.maps.marker.AdvancedMarkerElementOptions;
 
   constructor (
     private route: ActivatedRoute,
@@ -49,7 +50,7 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   moveMap(event: google.maps.MapMouseEvent) {
-    if (event.latLng !== null) this.center = event.latLng.toJSON();
+    if (event.latLng !== null) this.mapOptions.center = event.latLng.toJSON();
   }
 
   getScoreStars() : string[] {
@@ -67,14 +68,13 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
 
   getAddressCoordinates() {
     this.subscriptions.push(this.geocodeSerivce.getCoordinates(this.business.address).subscribe((response: any) => {
-      this.center = response.results[0].geometry.location;
       this.mapOptions = {
-        center: this.center,
-        zoom: this.zoom,
+        center: response.results[0].geometry.location,
+        zoom: 15,
         streetViewControl: false
       }
-      this.markerOptions = {
-        position: this.center,
+      this.mapMarkerOptions = {
+        position: response.results[0].geometry.location,
         title: this.business.name
       }
     }));
@@ -90,6 +90,8 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   openReviewModal() {
+    this.reviewContainer.clear();
+    this.componentRef = this.reviewContainer.createComponent(ReviewModalComponent);
     this.modalService.openModal('review');
   }
 

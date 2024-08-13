@@ -1,7 +1,18 @@
-<div class="inline-block p1-text">
-  <input type="checkbox" name="{{ id }}" id="{{ id }}" class="hidden" (change)="onChecked($event)">
-  <label for="{{ id }}" class="flex items-center cursor-pointer gap-2 p-4 p6-border rounded-lg" [ngClass]="{'p6-bg': isChecked}">
-    <i class="{{ icon + ' text-2xl p1-text' }}"></i>
+<div class="inline-block" [ngClass]="isChecked ? 'text-white' : 'p3-text'">
+  <input
+    type="checkbox"
+    name="{{ id }}"
+    id="{{ id }}"
+    class="hidden"
+    (change)="onChecked($event)"
+    [checked]="isChecked"
+  >
+  <label
+    for="{{ id }}"
+    class="flex items-center cursor-pointer gap-2 p-4 p6-border rounded-lg transition duration-100 ease-in"
+    [ngClass]="{'p3-bg': isChecked}"
+  >
+    <i class="{{ icon + ' text-2xl' }}"></i>
     <span class="text-lg font-bold">{{ label }}</span>
   </label>
 </div>

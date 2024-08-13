@@ -1,0 +1,26 @@
+::ng-deep {
+  .pac-container {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+
+  .pac-item {
+    font-size: 14px;
+    padding: 10px;
+    color: #2A1F55;
+  }
+
+  .pac-item:hover, .pac-item-selected {
+    background-color: #E3DBFF;
+  }
+
+  .pac-item .pac-item-query {
+    color: #6E50DD;
+  }
+
+  .pac-icon-marker {
+    display: none;
+  }
+}

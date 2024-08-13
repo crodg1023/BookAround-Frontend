@@ -17,9 +17,14 @@
       <ng-content></ng-content>
       <div class="flex gap-4">
         @if (hasStepBack && step > 1) {
-          <button class="w-full button-2" (click)="stepBackAction()">Retroceder</button>
+          <button class="w-full button-2 text-2xl" (click)="stepBackAction()">Retroceder</button>
         }
-        <button class="w-full p2-bg text-white text-2xl font-bold rounded-lg py-2 px-10" (click)="buttonAction()">{{ buttonText }}</button>
+        <button
+          class="w-full p2-bg text-white text-2xl font-bold rounded-lg py-2 px-10"
+          [disabled]="buttonActionIsDisabled"
+          [ngClass]="{'opacity-70 cursor-not-allowed': buttonActionIsDisabled}"
+          (click)="buttonAction()"
+        >{{ buttonText }}</button>
       </div>
     </div>
   </div>

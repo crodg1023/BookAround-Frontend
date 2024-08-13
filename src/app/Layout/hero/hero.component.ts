@@ -1,4 +1,4 @@
-import { Component, ComponentRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalService } from '../../Services/modal.service';
 import { ModalTypes } from '../../Interfaces/modal-types';
@@ -14,6 +14,9 @@ import { ScrollService } from '../../Services/Scroll/scroll.service';
 })
 export class HeroComponent {
 
+  @ViewChild('businessRegisterContainer', { read: ViewContainerRef, static: true }) businessRegisterContainer!: ViewContainerRef;
+  private componentRef!: ComponentRef<BusinessRegisterComponent>;
+
   constructor(private router: Router, private modalService: ModalService, private scrollService: ScrollService) {}
 
   onGoToBusinessClick() {
@@ -21,6 +24,8 @@ export class HeroComponent {
   }
 
   onRegisterMyBusinessClick() {
+    this.businessRegisterContainer.clear();
+    this.componentRef = this.businessRegisterContainer.createComponent(BusinessRegisterComponent);
     this.modalService.openModal(ModalTypes.BusinessRegister);
   }
 

@@ -1,0 +1,11 @@
+@use '../../../../styles.scss';
+
+label:hover {
+  border-color: styles.$purple_5;
+  color: styles.$purple_5;
+}
+
+input[type="checkbox"]:checked + label:hover {
+  background-color: styles.$purple_5;
+  color: white;
+}

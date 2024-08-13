@@ -1,31 +1,69 @@
 <app-modal
   [title]="modalTitle"
   [buttonText]="modalButtonText"
-  [buttonAction]="modalButtonAction"
+  [buttonAction]="modalButtonAction.bind(this)"
   [hasHeader]="true"
+  [buttonActionIsDisabled]="isDisabled"
   modalType="clientRegister"
 >
   <h3 class="text-center text-xl font-bold p6-text -mt-4">Bienvenido {{ clientName }}!</h3>
-  <form class="flex flex-col gap-4" [formGroup]="regtisterForm">
+  <form
+    class="flex flex-col gap-4"
+    [formGroup]="clientRegtisterForm"
+    (ngSubmit)="submit()"
+  >
     <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
       <i class="fa-regular fa-user text-2xl p6-text"></i>
       <div class="w-full flex flex-col">
         <label class="p3-text text-lg font-medium">Nombre</label>
-        <input type="text" placeholder="Tu nombre" class="w-full p6-text text-lg focus:outline-none" formControlName="name">
+        <input
+          type="text"
+          placeholder="Tu nombre"
+          class="w-full p6-text text-lg focus:outline-none"
+          formControlName="name"
+        >
       </div>
     </div>
+    @if (name?.invalid && (name?.dirty || name?.touched)) {
+      <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+        <div class="w-[24px] flex items-center justify-center">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <span *ngIf="name?.errors?.['required']">Tu nombre es obligatorio</span>
+        <span *ngIf="name?.errors?.['minlength']">El nombre debe tener una longitud de al menos 3 caracteres</span>
+      </div>
+    }
     <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
       <i class="fa-regular fa-envelope text-2xl p6-text"></i>
       <div class="w-full flex flex-col">
         <label class="p3-text text-lg font-medium">Correo electrónico</label>
-        <input type="text" placeholder="Tu correo electrónico" class="w-full p6-text text-lg focus:outline-none">
+        <input
+          type="text"
+          placeholder="Tu correo electrónico"
+          class="w-full p6-text text-lg focus:outline-none"
+          formControlName="email"
+        >
       </div>
     </div>
+    @if (email?.invalid && (email?.dirty || email?.touched)) {
+      <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+        <div class="w-[24px] flex items-center justify-center">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <span *ngIf="email?.errors?.['required']">El email es obligatorio</span>
+        <span *ngIf="email?.errors?.['email']">El email debe coincidir con una dirección de correo electrónico real</span>
+      </div>
+    }
     <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
       <i class="fa-solid fa-lock text-2xl p6-text"></i>
       <div class="w-full flex flex-col">
         <label class="p3-text text-lg font-medium">Contraseña</label>
-        <input formControlName="passwordInput" [type]="showPassword ? 'text' : 'password'" placeholder="Tu contraseña" class="w-full p6-text text-lg focus:outline-none">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Tu contraseña"
+          class="w-full p6-text text-lg focus:outline-none"
+          formControlName="password"
+        >
       </div>
       <button (click)="toggleShowPassword($event)">
         @if (showPassword) {
@@ -35,5 +73,13 @@
         }
       </button>
     </div>
+    @if (password?.invalid && (password?.dirty || password?.touched)) {
+      <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+        <div class="w-[24px] flex items-center justify-center">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <span *ngIf="password?.errors?.['required']">La contraseña es obligatoria</span>
+      </div>
+    }
   </form>
 </app-modal>

@@ -6,23 +6,43 @@
   [hasStepBack]="true"
   [hasHeader]="true"
   [step]="currentStep"
+  [buttonActionIsDisabled]="buttonIsDisbaled"
   modalType="businessRegister"
 >
   <div>
-      <form action="" class="flex flex-col gap-4">
+      <form class="flex flex-col gap-4" [formGroup]="businessRegisterForm" (ngSubmit)="submit()">
         @if (currentStep === 1) {
           <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
             <i class="fa-regular fa-envelope text-2xl p6-text"></i>
-            <div class="w-full flex flex-col">
+            <div class="w-full flex flex-col relative">
               <label class="p3-text text-lg font-medium">Correo electrónico</label>
-              <input type="text" placeholder="Tu correo electrónico" class="w-full p6-text text-lg focus:outline-none">
+              <input
+                type="text"
+                placeholder="Tu correo electrónico"
+                class="w-full p6-text text-lg focus:outline-none"
+                formControlName="email"
+              >
             </div>
           </div>
+          @if (email?.invalid && (email?.dirty || email?.touched)) {
+            <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+              <div class="w-[24px] flex items-center justify-center">
+                <i class="fa-solid fa-circle-exclamation"></i>
+              </div>
+              <span *ngIf="email?.errors?.['required']">El email es obligatorio</span>
+              <span *ngIf="email?.errors?.['email']">El email debe coincidir con una dirección de correo electrónico real</span>
+            </div>
+          }
           <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
             <i class="fa-solid fa-lock text-2xl p6-text"></i>
             <div class="w-full flex flex-col">
               <label class="p3-text text-lg font-medium">Contraseña</label>
-              <input formControlName="passwordInput" [type]="showPassword ? 'text' : 'password'" placeholder="Tu contraseña" class="w-full p6-text text-lg focus:outline-none">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                placeholder="Tu contraseña"
+                class="w-full p6-text text-lg focus:outline-none"
+                formControlName="password"
+              >
             </div>
             <button (click)="toggleShowPassword($event)">
               @if (showPassword) {
@@ -32,6 +52,14 @@
               }
             </button>
           </div>
+          @if (password?.invalid && (password?.dirty || password?.touched)) {
+            <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+              <div class="w-[24px] flex items-center justify-center">
+                <i class="fa-solid fa-circle-exclamation"></i>
+              </div>
+              <span *ngIf="password?.errors?.['required']">La contraseña es obligatoria</span>
+            </div>
+          }
         }
 
         @if (currentStep === 2) {
@@ -39,55 +67,71 @@
             <i class="fa-solid fa-user-tie text-2xl p6-text"></i>
             <div class="w-full flex flex-col">
               <label class="p3-text text-lg font-medium">¿Cómo se llama tu comercio?</label>
-              <input type="text" placeholder="Nombre del comercio" class="w-full p6-text text-lg focus:outline-none">
+              <input
+                type="text"
+                placeholder="Nombre del comercio"
+                class="w-full p6-text text-lg focus:outline-none"
+                formControlName="name"
+              >
             </div>
           </div>
-          <h3 class="text-center text-2xl font-bold">Ubicación de tu comercio</h3>
+          @if (name?.invalid && (name?.dirty || name?.touched)) {
+            <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+              <div class="w-[24px] flex items-center justify-center">
+                <i class="fa-solid fa-circle-exclamation"></i>
+              </div>
+              <span *ngIf="name?.errors?.['required']" class="">El nombre del comercio es obligatoria</span>
+              <span *ngIf="name?.errors?.['minlength']" class="">El nombre del comercio debe tener una longitud de al menos 5 caracteres</span>
+            </div>
+          }
+          <h3 class="p3-text text-center text-2xl font-bold">Ubicación de tu comercio</h3>
           <div class="w-full p6-border p-4 rounded-2xl">
-            <div class="w-full flex items-center rounded-2xl py-4 gap-4">
-              <i class="fa-solid fa-earth-americas text-2xl p6-text"></i>
-              <div class="w-full flex flex-col">
-                <label class="p3-text text-lg font-medium">País</label>
-                <input type="text" placeholder="País donde te encuentras ubicado" class="w-full p6-text text-lg focus:outline-none">
-              </div>
-            </div>
-            <div class="w-full flex items-center rounded-2xl py-4 gap-4">
-              <i class="fa-solid fa-city text-2xl p6-text"></i>
-              <div class="w-full flex flex-col">
-                <label class="p3-text text-lg font-medium">Ciudad</label>
-                <input type="text" placeholder="Ciudad donde te encuentras ubicado" class="w-full p6-text text-lg focus:outline-none">
-              </div>
-            </div>
-            <div class="w-full flex items-center rounded-2xl py-4 gap-4">
-              <i class="fa-solid fa-location-dot text-2xl p6-text"></i>
-              <div class="w-full flex flex-col">
-                <label class="p3-text text-lg font-medium">Dirección</label>
-                <input type="text" placeholder="Dirección de tu comercio" class="w-full p6-text text-lg focus:outline-none">
-              </div>
-            </div>
+            <app-places-input-autocomplete formControlName="address"></app-places-input-autocomplete>
           </div>
-          <h3 class="text-center text-2xl font-bold">Contacto de tu comercio</h3>
+          @if (address?.invalid && (address?.dirty || address?.touched)) {
+            <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+              <div class="w-[24px] flex items-center justify-center">
+                <i class="fa-solid fa-circle-exclamation"></i>
+              </div>
+              <span *ngIf="address?.errors?.['required']" class="">La dirección del comercio es obligatoria</span>
+            </div>
+          }
+          <h3 class="p3-text text-center text-2xl font-bold">Contacto de tu comercio</h3>
           <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
             <i class="fa-solid fa-phone text-2xl p6-text"></i>
             <div class="w-full flex flex-col">
               <label class="p3-text text-lg font-medium">Teléfono </label>
-              <input type="text" placeholder="Número de teléfono" class="w-full p6-text text-lg focus:outline-none">
+              <input
+                type="text"
+                placeholder="Número de teléfono"
+                class="w-full p6-text text-lg focus:outline-none"
+                formControlName="phone"
+              >
             </div>
           </div>
+          @if (phone?.invalid && (phone?.dirty || phone?.touched)) {
+            <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+              <div class="w-[24px] flex items-center justify-center">
+                <i class="fa-solid fa-circle-exclamation"></i>
+              </div>
+              <span *ngIf="phone?.errors?.['required']" class="">El telefono de contacto es obligatorio</span>
+              <span *ngIf="phone?.errors?.['pattern']" class="">Introduce un numero de telefono correcto</span>
+            </div>
+          }
         }
 
         @if (currentStep === 3) {
           <div class="w-full flex flex-col gap-4 rounded-2xl p-4 p6-border">
-            <h3 class="text-center text-2xl font-medium">Selecciona la categoría de tu comercio</h3>
+            <h3 class="p3-text text-center text-2xl font-medium">Selecciona la categoría de tu comercio</h3>
             <div class="flex flex-wrap justify-center items-center gap-4">
-              <app-category-checkbox [id]="'cocina'" [label]="'Cocina'" [icon]="'fa-solid fa-utensils'"></app-category-checkbox>
-              <app-category-checkbox [id]="'barberia'" [label]="'Barbería'" [icon]="'fa-solid fa-scissors'"></app-category-checkbox>
-              <app-category-checkbox [id]="'belleza'" [label]="'Belleza'" [icon]="'fa-solid fa-paintbrush'"></app-category-checkbox>
-              <app-category-checkbox [id]="'bar'" [label]="'Bar'" [icon]="'fa-solid fa-wine-glass'"></app-category-checkbox>
-              <app-category-checkbox [id]="'panaderia'" [label]="'Panadería'" [icon]="'fa-solid fa-bread-slice'"></app-category-checkbox>
-              <app-category-checkbox [id]="'spa'" [label]="'Spa'" [icon]="'fa-solid fa-spa'"></app-category-checkbox>
-              <app-category-checkbox [id]="'cafes'" [label]="'Cafés'" [icon]="'fa-solid fa-mug-hot'"></app-category-checkbox>
-              <app-category-checkbox [id]="'vestuario'" [label]="'Vestuario'" [icon]="'fa-solid fa-shirt'"></app-category-checkbox>
+              @for (category of categories; track category.id; let i = $index) {
+                <app-category-checkbox
+                  [id]="category.type"
+                  [label]="category.name"
+                  [icon]="category.icon"
+                  (checked)="onChange($event, category.name)"
+                ></app-category-checkbox>
+              }
             </div>
           </div>
         }

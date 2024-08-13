@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal, Signal } from '@angular/core';
+import { Component, ComponentRef, OnDestroy, OnInit, signal, Signal, ViewChild, ViewContainerRef } from '@angular/core';
 import { BusinessCardComponent } from '../../Components/Utils/business-card/business-card.component';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { FiltersModalComponent } from '../../Components/Modals/filters-modal/filters-modal.component';
@@ -16,6 +16,10 @@ import { Subscription } from 'rxjs';
   styleUrl: './business-grid.component.scss'
 })
 export class BusinessGridComponent implements OnInit, OnDestroy {
+
+  @ViewChild('filtersContainer', { read: ViewContainerRef, static: true })
+  filtersContainer!: ViewContainerRef;
+  private componentRef!: ComponentRef<FiltersModalComponent>;
   business: any[] = [];
   displayed: any[] = [];
   category: string = '';
@@ -107,6 +111,8 @@ export class BusinessGridComponent implements OnInit, OnDestroy {
   }
 
   openFiltersModal() {
+    this.filtersContainer.clear();
+    this.componentRef = this.filtersContainer.createComponent(FiltersModalComponent);
     this.modalService.openModal('filters');
   }
 

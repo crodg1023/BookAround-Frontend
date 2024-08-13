@@ -24,7 +24,7 @@
             <i class="fa-regular fa-clock"></i>
             <span class="text-lg font-medium">Horarios: {{ business.schedule }}</span>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center p3-text gap-2">
             <i class="fa-solid fa-location-dot"></i>
             <span class="text-lg font-medium">{{ business.address }}</span>
           </div>
@@ -63,16 +63,16 @@
   </div>
   <div class="w-full max-w-[1300px] flex flex-col gap-4">
     <div class="w-full flex gap-8 items-center">
-      <img src="../../../assets/images/bookaround-find-us.jpg" alt="encuentranos ilustracion" class="w-72">
-      <div class="w-full h-48 p1-bg rounded-e-2xl flex items-center justify-center">
+      <img src="../../../assets/images/bookaround-find-us.jpg" alt="encuentranos ilustracion" class="w-[169px]">
+      <div class="w-full h-[109px] p1-bg rounded-e-2xl flex items-center justify-center">
         <h2 class="text-[38px] font-bold text-white">Encuéntranos</h2>
       </div>
     </div>
     <div class="w-full h-[500px]">
       <google-map width="w-full" [options]="mapOptions" (mapClick)="moveMap($event)">
-        <map-marker [options]="markerOptions"></map-marker>
+        <map-marker [options]="mapMarkerOptions"></map-marker>
       </google-map>
     </div>
   </div>
 </section>
-<app-review-modal></app-review-modal>
+<div #reviewContainer></div>
