@@ -3,18 +3,18 @@ import { ModalComponent } from '../modal/modal.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalService } from '../../../Services/modal.service';
 import { CommonModule } from '@angular/common';
+import { PasswordInputComponent } from '../../Utils/password-input/password-input.component';
 
 @Component({
   selector: 'app-login-modal',
   standalone: true,
-  imports: [CommonModule, ModalComponent, ReactiveFormsModule],
+  imports: [CommonModule, ModalComponent, ReactiveFormsModule, PasswordInputComponent],
   templateUrl: './login-modal.component.html',
   styleUrl: './login-modal.component.scss'
 })
 export class LoginModalComponent implements OnInit {
   title: string = 'Inicia sesión';
   buttonText: string = 'Iniciar sesión';
-  showPassword: boolean = false;
   loginForm: FormGroup;
   username: string = '';
   isDisabled: boolean = true;
@@ -32,11 +32,6 @@ export class LoginModalComponent implements OnInit {
 
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
-
-  toggleShowPassword(e: Event) {
-    e.preventDefault();
-    this.showPassword = !this.showPassword;
-  }
 
   checkIfDisabled() {
     if (this.email && this.password) {

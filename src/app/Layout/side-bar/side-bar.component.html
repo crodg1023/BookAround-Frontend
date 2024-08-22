@@ -1,0 +1,32 @@
+<aside class="w-full h-screen flex flex-col px-4 py-8 gap-[22px] p3-bg">
+  <div class="w-full flex flex-col items-center gap-4">
+    <img
+      src="https://picsum.photos/id/237/200"
+      alt="user profile picture"
+      class="rounded-full w-[200px] h-[200px] border-white border-[1px]"
+      [ngClass]="{ 'hidden': showProfilePicture }"
+    >
+    <h1 class="text-white font-medium text-lg">Nombre del negocio</h1>
+    <button
+      class="button-2 flex justify-center items-center gap-2 w-full"
+      (click)="onProfileClick()"
+    >
+      <i class="fa-solid fa-pen-to-square text-2xl"></i>
+      <span class="text-lg">Editar perfil</span>
+  </button>
+  </div>
+  <button
+    class="button-3 flex justify-center items-center gap-2"
+    (click)="onAppointmentsClick()"
+  >
+    <i class="fa-solid fa-calendar-days text-2xl"></i>
+    <span class="text-lg">Citas</span>
+  </button>
+  <button
+    class="button-3 flex justify-center items-center gap-2"
+    (click)="onAnalyticsClick()"
+  >
+    <i class="fa-solid fa-chart-pie text-2xl"></i>
+    <span class="text-lg">Analíticas</span>
+  </button>
+</aside>
