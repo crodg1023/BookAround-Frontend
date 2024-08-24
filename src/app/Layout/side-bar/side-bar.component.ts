@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,7 +11,8 @@ import { Subscription } from 'rxjs';
   styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent implements OnInit, OnDestroy {
-  showProfilePicture: boolean = true;
+  showProfilePictureButtons: boolean = true;
+  isClient: boolean = true;
   subscription!: Subscription;
 
   constructor(private router: Router) {}
@@ -21,7 +22,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   hiddenProfilePicture() {
-    this.showProfilePicture = this.router.url === '/control-panel/profile';
+    this.showProfilePictureButtons = this.router.url === '/control-panel/profile';
   }
 
   onProfileClick() { this.router.navigate(['control-panel/profile']); }

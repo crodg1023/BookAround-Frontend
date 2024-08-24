@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class ProfileComponent implements OnInit {
   userInformationForm!: FormGroup;
   passwordsMatches: boolean = true;
+  isClient: boolean = true;
 
   constructor(private fb: FormBuilder) {}
 
