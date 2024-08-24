@@ -1,11 +1,11 @@
 export interface Business {
   id: number;
   name: string;
-  image: string;
-  score: number;
   address: string;
+  pictures: string;
+  description: string;
+  score: number;
   schedule: string;
   category: string;
-  description: string;
   price: number;
 }

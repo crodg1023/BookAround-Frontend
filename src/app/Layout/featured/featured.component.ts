@@ -5,6 +5,7 @@ import { CategoryFilterComponent } from '../../Components/Utils/category-filter/
 import { Business } from '../../Interfaces/business';
 import { Subscription } from 'rxjs';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { BusinessService } from '../../Services/Business/business.service';
 
 @Component({
   selector: 'app-featured',
@@ -19,11 +20,11 @@ export class FeaturedComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   isLoading: boolean = false;
 
-  constructor(private mockService: MockService) {}
+  constructor(private mockService: MockService, private businessService: BusinessService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.subscription = this.mockService.getBusiness().subscribe(business => {
+    this.subscription = this.businessService.getAllBusiness().subscribe(business => {
       this.business = business;
       this.isLoading = false;
       this.getFeaturedBusiness();
