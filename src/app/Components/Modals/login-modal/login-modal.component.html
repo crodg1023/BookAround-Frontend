@@ -32,24 +32,12 @@
         <span *ngIf="email?.errors?.['email']">El email debe coincidir con una dirección de correo electrónico real</span>
       </div>
     }
-    <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
-      <i class="fa-solid fa-lock text-2xl p6-text"></i>
-      <div class="w-full flex flex-col">
-        <label class="p3-text text-lg font-medium">Contraseña</label>
-        <input
-          [type]="showPassword ? 'text' : 'password'"
-          placeholder="Tu contraseña"
-          class="w-full p6-text text-lg focus:outline-none"
-          formControlName="password"
-        >
-      </div>
-      <button (click)="toggleShowPassword($event)">
-        @if (showPassword) {
-          <i class="fa-solid fa-eye-slash text-2xl p6-text p2-hover transition ease-in duration-300"></i>
-        } @else {
-          <i class="fa-solid fa-eye text-2xl p6-text p2-hover transition ease-in duration-300"></i>
-        }
-      </button>
+    <div class="rounded-2xl p-4 p6-border">
+      <app-password-input
+        [labelText]="'Contraseña'"
+        [showIcon]="true"
+        formControlName="password"
+      ></app-password-input>
     </div>
     @if (password?.invalid && (password?.dirty || password?.touched)) {
       <div class="w-full flex items-center gap-4 px-4 invalid-input-message">

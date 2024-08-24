@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MockService } from '../../../Services/Mocks/mock.service';
 import { Router } from '@angular/router';
+import { CategoriesService } from '../../../Services/Categories/categories.service';
+import { Category } from '../../../Interfaces/category';
 
 @Component({
   selector: 'app-category-filter',
@@ -11,15 +13,16 @@ import { Router } from '@angular/router';
 })
 export class CategoryFilterComponent implements OnInit {
 
-  categories: any[] = [];
+  categories: Category[] = [];
 
-  constructor(private mocksService: MockService, private router: Router) {}
+  constructor(private router: Router, private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
-    this.mocksService.getCategories().subscribe(categories => this.categories = categories);
+    this.categoriesService.getCategories().subscribe(categories => this.categories = categories);
   }
 
   onCategoryClick(category: string) {
+    console.log(category);
     this.router.navigate(['/business'], { queryParams: { category: category }});
   }
 }

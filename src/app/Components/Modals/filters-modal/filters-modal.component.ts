@@ -47,6 +47,7 @@ export class FiltersModalComponent implements OnInit {
       minPrice: this.from,
       maxPrice: this.to
     }
+    console.log(this.filters);
     this.FiltersService.updateFilters(this.filters);
     this.router.navigate(['/business'], { queryParams: [] })
     this.modalService.closeModal('filters');

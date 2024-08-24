@@ -3,18 +3,18 @@ import { ModalComponent } from '../modal/modal.component';
 import { ModalService } from '../../../Services/modal.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PasswordInputComponent } from '../../Utils/password-input/password-input.component';
 
 @Component({
   selector: 'app-client-register',
   standalone: true,
-  imports: [CommonModule, ModalComponent, ReactiveFormsModule],
+  imports: [CommonModule, ModalComponent, ReactiveFormsModule, PasswordInputComponent],
   templateUrl: './client-register.component.html',
   styleUrl: './client-register.component.scss'
 })
 export class ClientRegisterComponent implements OnInit {
   modalTitle: string = 'Regístrate';
   modalButtonText: string = 'Finalizar';
-  showPassword: boolean = false;
   clientRegtisterForm!: FormGroup;
   clientName: string = '@User';
   isDisabled: boolean = true;
@@ -39,11 +39,6 @@ export class ClientRegisterComponent implements OnInit {
   get name() { return this.clientRegtisterForm.get('name'); }
   get email() { return this.clientRegtisterForm.get('email'); }
   get password() { return this.clientRegtisterForm.get('password'); }
-
-  toggleShowPassword(e: Event) {
-    e.preventDefault();
-    this.showPassword = !this.showPassword;
-  }
 
   checkIfValid() {
     if (this.name && this.email && this.password) {

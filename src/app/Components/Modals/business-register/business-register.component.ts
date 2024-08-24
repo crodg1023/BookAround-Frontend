@@ -8,11 +8,19 @@ import { trigger, transition, style, animate, query } from '@angular/animations'
 import { PlacesInputAutocompleteComponent } from '../../Utils/places-input-autocomplete/places-input-autocomplete.component';
 import { Subscription } from 'rxjs';
 import { MockService } from '../../../Services/Mocks/mock.service';
+import { PasswordInputComponent } from '../../Utils/password-input/password-input.component';
 
 @Component({
   selector: 'app-business-register',
   standalone: true,
-  imports: [ModalComponent, CommonModule, CategoryCheckboxComponent, PlacesInputAutocompleteComponent, ReactiveFormsModule],
+  imports: [
+    ModalComponent,
+    CommonModule,
+    CategoryCheckboxComponent,
+    PlacesInputAutocompleteComponent,
+    ReactiveFormsModule,
+    PasswordInputComponent
+  ],
   templateUrl: './business-register.component.html',
   styleUrl: './business-register.component.scss',
   animations: []
@@ -22,7 +30,6 @@ export class BusinessRegisterComponent implements OnInit, OnDestroy {
   businessRegisterForm!: FormGroup;
   modalTitle: string = 'Registra tu negocio';
   modalButtonText: string = 'Siguiente';
-  showPassword: boolean = false;
   currentStep: number = 1;
   lastStep: number = 3;
   buttonIsDisbaled: boolean = true;
@@ -64,11 +71,6 @@ export class BusinessRegisterComponent implements OnInit, OnDestroy {
   get address() { return this.businessRegisterForm.get('address'); }
   get phone() { return this.businessRegisterForm.get('phone'); }
   get categos() { return this.businessRegisterForm.get('categories'); }
-
-  toggleShowPassword(e: Event) {
-    e.preventDefault();
-    this.showPassword = !this.showPassword;
-  }
 
   onChange(isChecked: boolean, name: string) {
     const categoriesFormArray = <FormArray>this.businessRegisterForm.controls['categories'];

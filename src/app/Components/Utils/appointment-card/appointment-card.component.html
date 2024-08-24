@@ -1,0 +1,14 @@
+<article class="w-full h-14 flex gap-1 rounded-[4px] p6-border">
+  <div
+    class="w-2 h-full"
+    [ngClass]="{'g1-bg': status === 'active', 'r2-bg': status === 'canceled'}"
+  >
+  </div>
+  <div class="px-1 py-2 flex flex-col gap-1">
+    <span class="p3-text text-sm">Nombre del usuario</span>
+    <div class="flex gap-1">
+      <i class="fa-regular fa-clock"></i>
+      <span class="p3-text text-sm">10:00 a.m.</span>
+    </div>
+  </div>
+</article>

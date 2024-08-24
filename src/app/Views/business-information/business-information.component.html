@@ -3,7 +3,7 @@
     <div class="w-2/3 flex flex-col gap-4">
       <div
         class="w-full h-[500px] rounded-2xl p3-border"
-        [ngStyle]="{'background-image': business.image ? 'url(' + business.image + ')' : 'none'}"
+        [ngStyle]="{'background-image': business.pictures ? 'url(' + business.pictures + ')' : 'none'}"
         id="business-img"
       >
       </div>
@@ -16,13 +16,15 @@
             }
           </div>
           <div class="flex items-center p3-text text-2xl gap-2">
-            <i [ngClass]="getBusinessCategory()"></i>
+            @for (cat of business.categorias; track $index) {
+              <i [ngClass]="cat.icon"></i>
+            }
           </div>
         </div>
         <div class="flex gap-8 items-center">
           <div class="flex items-center p3-text gap-2">
             <i class="fa-regular fa-clock"></i>
-            <span class="text-lg font-medium">Horarios: {{ business.schedule }}</span>
+            <span class="text-lg font-medium">Horarios: {{ business.starting_hour }} - {{ business.closing_hour }}</span>
           </div>
           <div class="flex items-center p3-text gap-2">
             <i class="fa-solid fa-location-dot"></i>

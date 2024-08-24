@@ -53,6 +53,9 @@ $green_3: #2E805F;
 .p7-text {
   color: $purple_7;
 }
+.p7-border {
+  border: 1px solid $purple_7;
+}
 .p6-border {
   border: 1px solid $purple_6;
 }
@@ -123,6 +126,19 @@ $green_3: #2E805F;
   background-color: $purple_1;
 }
 
+// Clases verde.
+.g1-bg {
+  background-color: $green_1;
+}
+
+// Clases rojo
+.r1-bg {
+  background-color: $red_1;
+}
+.r2-bg {
+  background-color: $red_2;
+}
+
 // Error.
 .invalid-input {
   border: 1px solid $red_3;
@@ -141,7 +157,7 @@ $green_3: #2E805F;
   linear-gradient(to right, $purple_3, $purple_1) border-box;
   border: 2px solid transparent;
   color: white;
-  font-weight: bold;
+  font-weight: 500;
   border-radius: 8px;
   padding: 8px 40px;
 }
@@ -150,9 +166,18 @@ $green_3: #2E805F;
   linear-gradient(to right, $purple_3, $purple_1) border-box;
   border: 2px solid transparent;
   color: $purple_2;
-  font-weight: bold;
+  font-weight: 500;
   border-radius: 8px;
   padding: 8px 40px;
+}
+
+.button-3 {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 8px 16px;
 }
 
 // Placeholders.

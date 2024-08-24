@@ -62,10 +62,6 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
     return stars;
   }
 
-  getBusinessCategory() : string {
-    return this.categoriesService.getCategoryIcon(this.business.category);
-  }
-
   getAddressCoordinates() {
     this.subscriptions.push(this.geocodeSerivce.getCoordinates(this.business.address).subscribe((response: any) => {
       this.mapOptions = {

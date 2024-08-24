@@ -1,11 +1,14 @@
+import { Category } from "./category";
+
 export interface Business {
   id: number;
   name: string;
-  image: string;
-  score: number;
   address: string;
-  schedule: string;
-  category: string;
+  pictures: string;
   description: string;
+  score: number;
+  starting_hour: string,
+  closing_hour: string,
+  categorias: Category[];
   price: number;
 }
