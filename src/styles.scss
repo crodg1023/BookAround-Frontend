@@ -130,6 +130,10 @@ $green_3: #2E805F;
 .invalid-input-message {
   color: $red_3;
 }
+.button-disabled {
+  background-color: $purple_7;
+  color: $purple_6;
+}
 
 // Botones.
 .button-1 {

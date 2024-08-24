@@ -19,22 +19,25 @@
   >
     <ul>
       <li
-        class="w-full py-2 px-4 text-center text-lg font-bold p3-text p5-menu-hover"
+        class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+        (click)="onLoginClick()"
       >
-        <button (click)="onLoginClick()" class="w-full">Inicia sesión</button>
+        <button class="w-full">Inicia sesión</button>
       </li>
       <li
-        class="w-full py-2 px-4 text-center text-lg font-bold p3-text p5-menu-hover"
+        class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+        (click)="onClientRegisterClick()"
       >
-        <button (click)="onClientRegisterClick()" class="w-full">Regístrate</button>
+        <button class="w-full">Regístrate</button>
       </li>
       <li>
-        <div class="w-full h-1 rounded-2xl p6-bg"></div>
+        <div class="w-full h-[2px] rounded-2xl p6-bg"></div>
       </li>
       <li
-        class="w-full py-2 px-4 text-center text-lg font-bold p3-text p5-menu-hover"
+        class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+        (click)="onBusinessRegisterClick()"
       >
-        <button (click)="onBusinessRegisterClick()" class="w-full">Inscribe tu negocio</button>
+        <button class="w-full">Inscribe tu negocio</button>
       </li>
     </ul>
   </div>

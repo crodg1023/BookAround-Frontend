@@ -7,7 +7,7 @@ import { BusinessGridComponent } from './Layout/business-grid/business-grid.comp
 import { NotFoundComponent } from './Views/not-found/not-found.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, title: 'Book Arounde | Home' },
+  { path: '', component: HomeComponent, title: 'Book Around | Home' },
   { path: 'business', component: DashboardComponent, title: 'Comercios locales', resolve: { business: businessResolver }, children: [
     { path: '', component: BusinessGridComponent },
     { path: 'find/:id', component: BusinessInformationComponent, resolve: { businessInformation: businessInformationResolver } }
