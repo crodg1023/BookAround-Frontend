@@ -24,6 +24,6 @@ export class BusinessCardComponent {
 
 
   getIcon() : string {
-    return this.categoriesService.getCategoryIcon(this.business.category);
+    return this.business.categorias[0].icon;
   }
 }

@@ -7,6 +7,7 @@ import { FiltersService } from '../../Services/Filters/filters.service';
 import { Filters } from '../../Interfaces/filters';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { Subscription } from 'rxjs';
+import { Business } from '../../Interfaces/business';
 
 @Component({
   selector: 'app-business-grid',
@@ -20,8 +21,8 @@ export class BusinessGridComponent implements OnInit, OnDestroy {
   @ViewChild('filtersContainer', { read: ViewContainerRef, static: true })
   filtersContainer!: ViewContainerRef;
   private componentRef!: ComponentRef<FiltersModalComponent>;
-  business: any[] = [];
-  displayed: any[] = [];
+  business: Business[] = [];
+  displayed: Business[] = [];
   category: string = '';
   count: number = 12;
   currentIndex = signal(0);
@@ -62,7 +63,7 @@ export class BusinessGridComponent implements OnInit, OnDestroy {
     const nextIndex = this.currentIndex() + this.count;
     nextIndex >= this.business.length ? this.showing = this.business.length : this.showing = nextIndex;
     if (this.category) {
-      this.displayed = this.business.filter(x => x.category === this.category);
+      this.displayed = this.business.filter(x => x.categorias.some(x => x.type === this.category));
     } else {
       this.displayed = this.displayed.concat(this.business.slice(this.currentIndex(), nextIndex));
     }
@@ -79,7 +80,7 @@ export class BusinessGridComponent implements OnInit, OnDestroy {
 
   filterByCategory() {
     if (this.category) {
-      this.displayed = this.business.filter(x => x.category === this.category);
+      this.displayed = this.business.filter(x => x.categorias.some(x => x.type === this.category));
       this.showing = this.displayed.length;
     }
   }
@@ -95,12 +96,10 @@ export class BusinessGridComponent implements OnInit, OnDestroy {
   filter(filters: Filters) {
       this.displayed = this.business.filter(business => {
         const matchesName = !filters.name || this.removeAccent(business.name).toLocaleLowerCase().includes(this.removeAccent(filters.name).toLocaleLowerCase());
-        const matchesCoutnry = !filters.country || filters.country === business.country;
-        const matchesCity = !filters.city || filters.city === business.city;
         const matchesRating = !filters.rating || (business.score >= filters.rating && business.score < filters.rating + 1);
         const matchesPrice = (!filters.minPrice || business.price >= filters.minPrice) && (!filters.maxPrice || business.price <= filters.maxPrice);
 
-        return matchesName && matchesCoutnry && matchesCity && matchesRating && matchesPrice;
+        return matchesName && matchesRating && matchesPrice;
       }).sort((a, b) => b.score - a.score);
     this.showing = this.displayed.length;
     this.hasFiltered = true;

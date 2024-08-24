@@ -1,3 +1,5 @@
+import { Category } from "./category";
+
 export interface Business {
   id: number;
   name: string;
@@ -5,7 +7,8 @@ export interface Business {
   pictures: string;
   description: string;
   score: number;
-  schedule: string;
-  category: string;
+  starting_hour: string,
+  closing_hour: string,
+  categorias: Category[];
   price: number;
 }
