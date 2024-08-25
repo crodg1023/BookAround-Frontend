@@ -1,43 +1,62 @@
 <aside class="w-full h-screen flex flex-col px-4 py-8 gap-16">
-  <div class="w-full flex flex-col items-center gap-4">
-    <img
-      src="https://picsum.photos/id/237/200"
-      alt="user profile picture"
-      class="rounded-full w-[200px] h-[200px] border-white border-[1px]"
-    >
-    <h1 class="text-2xl p3-text font-medium">Nombre del negocio</h1>
-    @if (showProfilePictureButtons && !isClient) {
-      <button class="button-1 flex justify-center items-center gap-2 w-full">
-        <i class="fa-solid fa-image text-2xl"></i>
-        <span class="text-lg">Cambiar foto de perfil</span>
+  @if (isLoading) {
+    <div class="w-full flex flex-col items-center gap-4">
+      <ngx-skeleton-loader appearance="circle" [theme]="{ height: '200px', width: '200px' }"></ngx-skeleton-loader>
+      <ngx-skeleton-loader appearance="line" [theme]="{ height: '18px', width: '300px' }"></ngx-skeleton-loader>
+    </div>
+
+    <div class="flex flex-col gap-[22px]">
+      <ngx-skeleton-loader
+      appearance="line"
+      [theme]="{ height: '50px', width: '300px', borderRadius: '8px' }"
+    ></ngx-skeleton-loader>        <ngx-skeleton-loader
+    appearance="line"
+    [theme]="{ height: '50px', width: '300px', borderRadius: '8px' }"
+  ></ngx-skeleton-loader>
+    </div>
+  } @else {
+    <div class="w-full flex flex-col items-center gap-4">
+      <img
+        src="{{ isClient ? clientInfo.picture : businessInfo.pictures }}"
+        alt="user profile picture"
+        class="rounded-full w-[200px] h-[200px] border-white border-[1px]"
+      >
+      <h1 class="text-2xl p3-text font-medium">{{ isClient ? clientInfo.name : businessInfo.name }}</h1>
+      @if (showProfilePictureButtons && !isClient) {
+        <button class="button-1 flex justify-center items-center gap-2 w-full">
+          <i class="fa-solid fa-image text-2xl"></i>
+          <span class="text-lg">Cambiar foto de perfil</span>
+        </button>
+        <button class="button-2 flex justify-center items-center gap-2 w-full">
+          <i class="fa-solid fa-trash text-2xl"></i>
+          <span class="text-lg">Eliminar foto de perfil</span>
+        </button>
+      }
+    </div>
+    <div class="flex flex-col gap-[22px]">
+      <button
+        class="button-1 flex justify-center items-center gap-2 w-full"
+        (click)="onProfileClick()"
+      >
+        <i class="fa-solid fa-pen-to-square text-2xl"></i>
+        <span class="text-lg">Editar perfil</span>
       </button>
-      <button class="button-2 flex justify-center items-center gap-2 w-full">
-        <i class="fa-solid fa-trash text-2xl"></i>
-        <span class="text-lg">Eliminar foto de perfil</span>
+      <button
+        class="button-2 flex justify-center items-center gap-2"
+        (click)="onAppointmentsClick()"
+      >
+        <i class="fa-solid fa-calendar-days text-2xl"></i>
+        <span class="text-lg">Citas</span>
       </button>
-    }
-  </div>
-  <div class="flex flex-col gap-[22px]">
-    <button
-      class="button-1 flex justify-center items-center gap-2 w-full"
-      (click)="onProfileClick()"
-    >
-      <i class="fa-solid fa-pen-to-square text-2xl"></i>
-      <span class="text-lg">Editar perfil</span>
-    </button>
-    <button
-      class="button-2 flex justify-center items-center gap-2"
-      (click)="onAppointmentsClick()"
-    >
-      <i class="fa-solid fa-calendar-days text-2xl"></i>
-      <span class="text-lg">Citas</span>
-    </button>
-    <button
-      class="button-2 flex justify-center items-center gap-2"
-      (click)="onAnalyticsClick()"
-    >
-      <i class="fa-solid fa-chart-pie text-2xl"></i>
-      <span class="text-lg">Analíticas</span>
-    </button>
-  </div>
+      @if (!isClient) {
+        <button
+          class="button-2 flex justify-center items-center gap-2"
+          (click)="onAnalyticsClick()"
+        >
+          <i class="fa-solid fa-chart-pie text-2xl"></i>
+          <span class="text-lg">Analíticas</span>
+        </button>
+      }
+    </div>
+  }
 </aside>

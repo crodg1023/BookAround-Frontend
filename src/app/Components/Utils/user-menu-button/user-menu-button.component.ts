@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, ComponentRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { LoginModalComponent } from '../../Modals/login-modal/login-modal.component';
 import { ClientRegisterComponent } from '../../Modals/client-register/client-register.component';
 import { BusinessRegisterComponent } from '../../Modals/business-register/business-register.component';
 import { ModalService } from '../../../Services/modal.service';
 import { ModalTypes } from '../../../Interfaces/modal-types';
+import { AuthService } from '../../../Services/Auth/auth.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-menu-button',
@@ -13,15 +16,25 @@ import { ModalTypes } from '../../../Interfaces/modal-types';
   templateUrl: './user-menu-button.component.html',
   styleUrl: './user-menu-button.component.scss'
 })
-export class UserMenuButtonComponent {
+export class UserMenuButtonComponent implements OnInit, OnDestroy {
 
   @ViewChild('modalsContainer', { read: ViewContainerRef, static: true })
   dynamicContainer!: ViewContainerRef;
   private componentRef!: ComponentRef<LoginModalComponent | ClientRegisterComponent | BusinessRegisterComponent>;
+  subscription!: Subscription;
   isOpen: boolean = false;
   isVisible: boolean = false;
+  userHasLoggedIn!: boolean;
 
-  constructor(private modalService: ModalService) {}
+  constructor(
+    private modalService: ModalService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.subscription = this.authService.isLogged$.subscribe(value => this.userHasLoggedIn = value);
+  }
 
   toggleMenu() {
     this.isOpen = !this.isOpen;
@@ -50,6 +63,19 @@ export class UserMenuButtonComponent {
     this.modalService.openModal(ModalTypes.BusinessRegister);
     this.isOpen = false;
     this.isVisible = false;
+  }
+  onControlPanelClick() {
+    this.router.navigate(['/control-panel']);
+  }
+  onProfileClick() {
+    this.router.navigate(['/control-panel/profile']);
+  }
+  onLogoutClick() {
+    this.authService.logout();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 

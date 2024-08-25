@@ -6,6 +6,12 @@
   [buttonActionIsDisabled]="isDisabled"
   modalType="login"
 >
+  <span
+    class="text-lg text-center"
+    [ngClass]="hasError ? 'invalid-input-message' : 'text-green-400'"
+  >
+    {{ loginMessage }}
+  </span>
   <form
     class="flex flex-col gap-4"
     [formGroup]="loginForm"

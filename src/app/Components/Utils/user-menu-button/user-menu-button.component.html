@@ -17,29 +17,60 @@
       'transition ease-in duration-75 transform opacity-0 scale-95': !isOpen
     }"
   >
-    <ul>
-      <li
-        class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
-        (click)="onLoginClick()"
-      >
-        <button class="w-full">Inicia sesión</button>
-      </li>
-      <li
-        class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
-        (click)="onClientRegisterClick()"
-      >
-        <button class="w-full">Regístrate</button>
-      </li>
-      <li>
-        <div class="w-full h-[2px] rounded-2xl p6-bg"></div>
-      </li>
-      <li
-        class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
-        (click)="onBusinessRegisterClick()"
-      >
-        <button class="w-full">Inscribe tu negocio</button>
-      </li>
-    </ul>
+    @if (!userHasLoggedIn) {
+      <ul>
+        <li
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          (click)="onLoginClick()"
+        >
+          <span class="w-full">Inicia sesión</span>
+        </li>
+        <li
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          (click)="onClientRegisterClick()"
+        >
+          <span class="w-full">Regístrate</span>
+        </li>
+        <li>
+          <div class="w-full h-[2px] rounded-2xl p6-bg"></div>
+        </li>
+        <li
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          (click)="onBusinessRegisterClick()"
+        >
+          <span class="w-full">Inscribe tu negocio</span>
+        </li>
+      </ul>
+    } @else {
+      <ul>
+        <li
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          (click)="onControlPanelClick()"
+        >
+          <span class="w-full">Panel de control</span>
+        </li>
+        <li
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          (click)="onProfileClick()"
+        >
+          <span class="w-full">Tu perfil</span>
+        </li>
+        <li
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+        >
+          <span class="w-full">Administra tus citas</span>
+        </li>
+        <li>
+          <div class="w-full h-[2px] rounded-2xl p6-bg"></div>
+        </li>
+        <li
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          (click)="onLogoutClick()"
+        >
+          <span class="w-full">Cerrar sesión</span>
+        </li>
+      </ul>
+    }
   </div>
   }
 </div>

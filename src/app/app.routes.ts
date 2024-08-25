@@ -10,6 +10,7 @@ import { ProfileComponent } from './Layout/profile/profile.component';
 import { AnalyticsComponent } from './Layout/analytics/analytics.component';
 import { AppointmentsComponent } from './Layout/appointments/appointments.component';
 import { AccountSummaryComponent } from './Layout/account-summary/account-summary.component';
+import { authGuard } from './Guards/Auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Book Around | Home' },
@@ -17,7 +18,7 @@ export const routes: Routes = [
     { path: '', component: BusinessGridComponent },
     { path: 'find/:id', component: BusinessInformationComponent, resolve: { businessInformation: businessInformationResolver } }
   ] },
-  { path: 'control-panel', component: ControlPanelComponent, title: 'Panel de control', children: [
+  { path: 'control-panel', component: ControlPanelComponent, title: 'Panel de control', canActivate: [authGuard], canActivateChild: [authGuard], children: [
     { path: '', component: AccountSummaryComponent, title: 'Resumen de tu cuenta' },
     { path: 'profile', component: ProfileComponent, title: 'Tu perfil' },
     { path: 'analytics', component: AnalyticsComponent, title: 'Analíticas de tu comercio' },
