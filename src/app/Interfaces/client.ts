@@ -1,6 +1,6 @@
 export interface Client {
-  id: number;
+  id?: number;
   name: string;
-  picture: string;
-  usuario_id: number;
+  picture?: string;
+  usuario_id?: number;
 }

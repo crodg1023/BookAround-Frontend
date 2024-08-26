@@ -4,6 +4,11 @@ import { ModalService } from '../../../Services/modal.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PasswordInputComponent } from '../../Utils/password-input/password-input.component';
+import { User } from '../../../Interfaces/user';
+import { Client } from '../../../Interfaces/client';
+import { UsersService } from '../../../Services/Users/users.service';
+import { ClientService } from '../../../Services/Client/client.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-client-register',
@@ -19,7 +24,12 @@ export class ClientRegisterComponent implements OnInit {
   clientName: string = '@User';
   isDisabled: boolean = true;
 
-  constructor(private modalService: ModalService, private formBuilder: FormBuilder) {}
+  constructor(
+    private modalService: ModalService,
+    private formBuilder: FormBuilder,
+    private usersService: UsersService,
+    private clientService: ClientService
+  ) {}
 
   ngOnInit(): void {
     this.clientRegtisterForm = this.formBuilder.group({
@@ -52,6 +62,32 @@ export class ClientRegisterComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.clientRegtisterForm.getRawValue());
+    const userInfo: User = {
+      email: this.email?.value,
+      password: this.password?.value,
+      role_id: 1
+    }
+
+    this.usersService.postNewUser(userInfo).pipe(
+      switchMap(newUser => {
+        const clientInfo: Client = {
+          name: this.name?.value,
+          usuario_id: newUser.id
+        };
+
+        return this.clientService.postNewClient(clientInfo).pipe(
+          switchMap(newClient => {
+            const data = {
+              cliente_id: newClient.id
+            };
+
+            return this.usersService.updateUserInformation(data, newClient.usuario_id || 0);
+          })
+        );
+      })
+    ).subscribe({
+      next: result => console.log(result),
+      error: error => console.error(error)
+    });
   }
 }

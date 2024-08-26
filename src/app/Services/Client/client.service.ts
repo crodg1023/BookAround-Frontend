@@ -19,8 +19,12 @@ export class ClientService {
     return this.http.get<Client>(`${this.BASE_URL}/${id}`).pipe(retry(2), catchError(this.error));
   }
 
+  postNewClient(clientInfo: Client) {
+    return this.http.post<Client>(this.BASE_URL, clientInfo).pipe(catchError(this.error));
+  }
+
   private error(error: HttpErrorResponse) {
     if (error.status === 0) return throwError(() => new Error('No ha sido posible establecer conexion'));
-    else return throwError(() => new Error(error.error.message));
+    else return throwError(() => new Error(error.error.errors));
   }
 }

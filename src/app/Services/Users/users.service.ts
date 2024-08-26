@@ -20,6 +20,14 @@ export class UsersService {
     return this.http.get<User>(`${this.BASE_URL}/users`).pipe(retry(2), catchError(this.error));
   }
 
+  postNewUser(userInfo: User) {
+    return this.http.post<User>(`${this.BASE_URL}/users`, userInfo).pipe(catchError(this.error));
+  }
+
+  updateUserInformation(data: any, id: number) {
+    return this.http.put<any>(`${this.BASE_URL}/users/${id}`, data).pipe(catchError(this.error));
+  }
+
   private error(error: HttpErrorResponse) {
     if (error.status === 0) return throwError(() => new Error('No ha sido posible establecer conexion'));
     else return throwError(() => new Error(error.error.message));
