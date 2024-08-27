@@ -26,6 +26,12 @@ export class ProfileComponent implements OnInit {
   passwordsMatches: boolean = true;
   isClient!: boolean;
   isLoading: boolean = false;
+  isEditing: { [key: string]: boolean } = {
+    name: false,
+    email: false,
+    address: false,
+    phone: false
+  }
   clientInformation!: Client;
 
   constructor(
@@ -52,6 +58,10 @@ export class ProfileComponent implements OnInit {
   get address() { return this.userInformationForm.get('address'); }
   get password() { return this.userInformationForm.get('password'); }
 
+  toggleEditing(field: string) {
+    this.isEditing[field] = !this.isEditing[field];
+  }
+
   checkIfPasswordsMatches(value: string) {
     this.passwordsMatches = value.toLocaleLowerCase().trim() === this.password?.value;
   }
@@ -73,12 +83,7 @@ export class ProfileComponent implements OnInit {
     if (client_id) {
       this.clientService.getClientById(+client_id).subscribe(info => {
         console.log(info);
-        this.clientInformation = {
-          id: info.id,
-          name: info.name,
-          picture: info.picture,
-          usuario_id: info.usuario_id
-        }
+        this.clientInformation = info;
         this.isLoading = false;
       });
     }

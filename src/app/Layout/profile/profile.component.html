@@ -30,6 +30,7 @@
       }
     </section>
   }
+
   <section class="w-full flex flex-col gap-4">
     <h1 class="font-bold text-[28px] p3-text">{{ isClient ? 'Tus datos' : 'Datos de tu negocio' }}</h1>
     <form
@@ -37,38 +38,64 @@
       [formGroup]="userInformationForm"
       (ngSubmit)="onSubmit()"
     >
-      <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
-        <i class="fa-regular fa-user text-2xl p6-text"></i>
-        <div class="w-full flex flex-col">
-          <label class="p3-text text-lg font-medium">Nombre {{ isClient ? '' : 'del negocio' }}</label>
-          <input
-            type="text"
-            placeholder="Tu nombre"
-            class="w-full p6-text text-lg focus:outline-none"
-            formControlName="name"
-          >
-        </div>
-      </div>
-      <div class="w-full flex items-center gap-4 p-4 p6-border rounded-2xl">
-        <i class="fa-regular fa-envelope text-2xl p6-text"></i>
-        <div class="w-full flex flex-col">
-          <label class="p3-text text-lg font-medium">Correo electrónico</label>
-          <input
-            type="text"
-            placeholder="Tu correo electrónico"
-            class="w-full p6-text text-lg focus:outline-none"
-            formControlName="email"
-          >
-        </div>
-      </div>
-      @if (email?.invalid) {
-        <div class="w-full flex items-center gap-4 invalid-input-message">
-          <div class="w-[24px] flex items-center justify-center">
-            <i class="fa-solid fa-circle-exclamation"></i>
+      @if (isLoading) {
+        <ngx-skeleton-loader
+        appearance="line"
+        [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"
+      ></ngx-skeleton-loader>
+      } @else {
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+          <i class="fa-regular fa-user text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-medium">Nombre {{ isClient ? '' : 'del negocio' }}</label>
+            @if (isEditing['name']) {
+              <input
+                type="text"
+                placeholder="Tu nombre"
+                class="w-full p6-text text-lg focus:outline-none"
+                formControlName="name"
+              >
+            } @else {
+              <span class="w-full p6-text text-lg">{{ clientInformation.name }}</span>
+            }
           </div>
-          <span *ngIf="email?.errors?.['email']" class="">El email debe coincidir con una dirección de correo electrónico real</span>
+          <i class="fa-solid text-2xl p6-text cursor-pointer" (click)="toggleEditing('name')" [ngClass]="isEditing['name'] ? 'fa-ban' : 'fa-pen-to-square'"></i>
         </div>
       }
+
+      @if (isLoading) {
+        <ngx-skeleton-loader
+          appearance="line"
+          [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"
+        ></ngx-skeleton-loader>
+      } @else {
+        <div class="w-full flex items-center gap-4 p-4 p6-border rounded-2xl">
+          <i class="fa-regular fa-envelope text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-medium">Correo electrónico</label>
+            @if (isEditing['email']) {
+              <input
+                type="text"
+                placeholder="Tu correo electrónico"
+                class="w-full p6-text text-lg focus:outline-none"
+                formControlName="email"
+              >
+            } @else {
+              <span class="w-full p6-text text-lg">{{ clientInformation.usuario?.email }}</span>
+            }
+          </div>
+          <i class="fa-solid text-2xl p6-text cursor-pointer" (click)="toggleEditing('email')" [ngClass]="isEditing['email'] ? 'fa-ban' : 'fa-pen-to-square'"></i>
+        </div>
+        @if (email?.invalid) {
+          <div class="w-full flex items-center gap-4 invalid-input-message">
+            <div class="w-[24px] flex items-center justify-center">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <span *ngIf="email?.errors?.['email']" class="">El email debe coincidir con una dirección de correo electrónico real</span>
+          </div>
+        }
+      }
+
       @if (!isClient) {
         <div class="w-full flex items-center gap-4 p-4 p6-border rounded-2xl">
           <i class="fa-solid fa-phone text-2xl p6-text"></i>
@@ -86,29 +113,37 @@
           <app-places-input-autocomplete formControlName="address"></app-places-input-autocomplete>
         </div>
       }
-      <div class="flex items-center gap-4 rounded-2xl p-4 p6-border">
-        <i class="fa-solid fa-lock text-2xl p6-text"></i>
-        <div class="w-full flex flex-col gap-2">
-          <app-password-input
-            [labelText]="'Contraseña'"
-            [showIcon]="false"
-            formControlName="password"
-          ></app-password-input>
-          <app-password-input
-            [labelText]="'Confirmar contraseña'"
-            [showIcon]="false"
-            (valueChange)="checkIfPasswordsMatches($event)"
-          ></app-password-input>
-          @if (!passwordsMatches) {
-            <div class="w-full flex items-center gap-4 invalid-input-message">
-              <div class="w-[24px] flex items-center justify-center">
-                <i class="fa-solid fa-circle-exclamation"></i>
+
+      @if (isLoading) {
+        <ngx-skeleton-loader
+          appearance="line"
+          [theme]="{ height: '150px', width: '100%', borderRadius: '16px' }"
+        ></ngx-skeleton-loader>
+      } @else {
+        <div class="flex items-center gap-4 rounded-2xl p-4 p6-border">
+          <i class="fa-solid fa-lock text-2xl p6-text"></i>
+          <div class="w-full flex flex-col gap-2">
+            <app-password-input
+              [labelText]="'Contraseña'"
+              [showIcon]="false"
+              formControlName="password"
+            ></app-password-input>
+            <app-password-input
+              [labelText]="'Confirmar contraseña'"
+              [showIcon]="false"
+              (valueChange)="checkIfPasswordsMatches($event)"
+            ></app-password-input>
+            @if (!passwordsMatches) {
+              <div class="w-full flex items-center gap-4 invalid-input-message">
+                <div class="w-[24px] flex items-center justify-center">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+                <span>Las contraseñas no coinciden</span>
               </div>
-              <span>Las contraseñas no coinciden</span>
-            </div>
-          }
+            }
+          </div>
         </div>
-      </div>
+      }
       <button class="button-1 disabled:opacity-70" [disabled]="checkIfValid()">Guardar cambios</button>
     </form>
   </section>

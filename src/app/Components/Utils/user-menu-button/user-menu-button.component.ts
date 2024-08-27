@@ -72,6 +72,7 @@ export class UserMenuButtonComponent implements OnInit, OnDestroy {
   }
   onLogoutClick() {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {

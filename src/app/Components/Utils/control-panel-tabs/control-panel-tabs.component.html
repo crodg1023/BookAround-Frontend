@@ -9,7 +9,7 @@
     class="px-8 py-4 rounded-tr-2xl cursor-pointer p5-menu-hover p8-bg text-white z-20 -translate-x-[20%]"
     (click)="onProfileClick()"
   >
-    Perfil de tu negocio
+    {{ isClient ? 'Editar perfil' : 'Perfil de tu negocio' }}
   </span>
   <span
     class="px-8 py-4 rounded-tr-2xl cursor-pointer p5-menu-hover p6-bg text-white -translate-x-[35%] z-10"
@@ -17,10 +17,13 @@
   >
     Administra tus citas
   </span>
-  <span
-    class="px-8 py-4 rounded-tr-2xl cursor-pointer p5-menu-hover p7-bg text-white z-0 -translate-x-[85%]"
-    (click)="onAnalyticsClick()"
-  >
-    Analíticas
-  </span>
+
+  @if (!isClient) {
+    <span
+      class="px-8 py-4 rounded-tr-2xl cursor-pointer p5-menu-hover p7-bg text-white z-0 -translate-x-[85%]"
+      (click)="onAnalyticsClick()"
+    >
+      Analíticas
+    </span>
+  }
 </div>

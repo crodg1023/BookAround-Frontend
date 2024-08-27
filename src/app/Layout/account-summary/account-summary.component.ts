@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentCardComponent } from '../../Components/Utils/appointment-card/appointment-card.component';
 import { AppointmentsGroupComponent } from '../../Components/Utils/appointments-group/appointments-group.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-account-summary',
   standalone: true,
-  imports: [AppointmentsGroupComponent],
+  imports: [CommonModule, AppointmentsGroupComponent],
   templateUrl: './account-summary.component.html',
   styleUrl: './account-summary.component.scss'
 })
