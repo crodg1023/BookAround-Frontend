@@ -19,7 +19,7 @@
       <div
         alt="user profile picture"
         class="rounded-full w-[200px] h-[200px] border-white border-[1px] user-profile-pic"
-        [ngStyle]="{'background-image': 'url(' + ((isClient ? clientInfo.picture : businessInfo.pictures) || '../../../assets/images') + ')'}"
+        [ngStyle]="{'background-image': 'url(' + ((isClient ? clientInfo.picture : businessInfo.pictures) || 'assets/images/profile-placeholder.jpg') + ')'}"
       ></div>
       <h1 class="text-2xl p3-text font-medium">{{ isClient ? clientInfo.name : businessInfo.name }}</h1>
       @if (showProfilePictureButtons && !isClient) {

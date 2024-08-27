@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-// Fuentes.
 @font-face {
   font-family: Rubik;
   src: url('./assets/fonts/Rubik-VariableFont_wght.ttf');
@@ -13,7 +12,6 @@ body {
   font-family: Rubik;
 }
 
-// Morados.
 $purple_1: #402E7F;
 $purple_2: #3B2B77;
 $purple_3: #2A1F55;
@@ -25,7 +23,6 @@ $purple_8: #352D55;
 $purple_9: #5A2E80;
 $purple_10: #752E80;
 
-// Rojos.
 $red_1: #D62042;
 $red_2: #AC1A35;
 $red_3: #8A152A;
@@ -33,14 +30,11 @@ $red_4: #681020;
 $red_5: #AC364C;
 $red_6: #813E4B;
 
-// Verdes.
 $green_1: #2E8031;
 $green_2: #DBFFDD;
 $green_3: #2E805F;
 
-// Font sizes.
 
-// Clases morado.
 .p8-bg {
   background: $purple_8;
 }
@@ -126,12 +120,10 @@ $green_3: #2E805F;
   background-color: $purple_1;
 }
 
-// Clases verde.
 .g1-bg {
   background-color: $green_1;
 }
 
-// Clases rojo
 .r1-bg {
   background-color: $red_1;
 }
@@ -139,7 +131,6 @@ $green_3: #2E805F;
   background-color: $red_2;
 }
 
-// Error.
 .invalid-input {
   border: 1px solid $red_3;
 }
@@ -151,7 +142,6 @@ $green_3: #2E805F;
   color: $purple_6;
 }
 
-// Botones.
 .button-1 {
   background: linear-gradient($purple_2 0 0) padding-box,
   linear-gradient(to right, $purple_3, $purple_1) border-box;
@@ -180,7 +170,6 @@ $green_3: #2E805F;
   padding: 8px 16px;
 }
 
-// Placeholders.
 input::placeholder {
   color: $purple_6;
 }
