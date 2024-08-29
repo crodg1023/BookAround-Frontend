@@ -6,9 +6,15 @@ import { ModalService } from '../../../Services/modal.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { trigger, transition, style, animate, query } from '@angular/animations';
 import { PlacesInputAutocompleteComponent } from '../../Utils/places-input-autocomplete/places-input-autocomplete.component';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription, switchMap } from 'rxjs';
 import { MockService } from '../../../Services/Mocks/mock.service';
 import { PasswordInputComponent } from '../../Utils/password-input/password-input.component';
+import { Category } from '../../../Interfaces/category';
+import { CategoriesService } from '../../../Services/Categories/categories.service';
+import { User } from '../../../Interfaces/user';
+import { Business } from '../../../Interfaces/business';
+import { BusinessService } from '../../../Services/Business/business.service';
+import { UsersService } from '../../../Services/Users/users.service';
 
 @Component({
   selector: 'app-business-register',
@@ -34,13 +40,15 @@ export class BusinessRegisterComponent implements OnInit, OnDestroy {
   lastStep: number = 3;
   buttonIsDisbaled: boolean = true;
   oneCategoryChecked: boolean = false;
-  categories: any[] = [];
+  categories: Category[] = [];
   subscriptions: Subscription[] = [];
 
   constructor(
     private modalService: ModalService,
     private formBuilder: FormBuilder,
-    private mocksService: MockService
+    private categoriesService: CategoriesService,
+    private businessService: BusinessService,
+    private usersService: UsersService
   ) {}
 
   ngOnInit() : void {
@@ -49,7 +57,7 @@ export class BusinessRegisterComponent implements OnInit, OnDestroy {
         this.currentStep = step;
         this.updateModalInformation();
       }),
-      this.mocksService.getCategories().subscribe(categories => this.categories = categories)
+      this.categoriesService.getCategories().subscribe(categories => this.categories = categories)
     );
 
     this.businessRegisterForm = this.formBuilder.group({
@@ -122,7 +130,41 @@ export class BusinessRegisterComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    console.log(this.businessRegisterForm.getRawValue());
+    const userInfo : User = {
+      email: this.email?.value,
+      password: this.password?.value,
+      role_id: 2
+    }
+
+    this.usersService.postNewUser(userInfo).pipe(
+      switchMap(newUser => {
+        const businessInfo : Partial<Business> = {
+          name: this.name?.value,
+          address: this.address?.value,
+          phone: this.phone?.value,
+          usuario_id: newUser.id
+        }
+        return this.businessService.postNewBusiness(businessInfo).pipe(
+          switchMap(newBusiness => {
+            const categories = {
+              categories: this.categos?.value,
+              comercio_id: newBusiness.id
+            };
+            const data = {
+              comercio_id: newBusiness.id
+            };
+
+            return forkJoin([
+              this.businessService.postBusinessCategories(categories),
+              this.usersService.updateUserInformation(data, newBusiness.usuario_id || 0)
+            ]);
+          })
+        );
+      })
+    ).subscribe({
+      next: result => console.log(result),
+      error: err => console.error(err)
+    });
   }
 
   ngOnDestroy(): void {

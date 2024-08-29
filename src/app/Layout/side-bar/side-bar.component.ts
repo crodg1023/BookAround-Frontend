@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ClientService } from '../../Services/Client/client.service';
@@ -16,6 +16,8 @@ import { BusinessService } from '../../Services/Business/business.service';
   styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent implements OnInit, OnDestroy {
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
   showProfilePictureButtons: boolean = true;
   isClient!: boolean;
   isLoading: boolean = false;
@@ -66,6 +68,24 @@ export class SideBarComponent implements OnInit, OnDestroy {
         });
       }
     }
+  }
+
+  triggerFileInput() {
+    this.fileInput.nativeElement.click();
+  }
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.uploadProfilePicture(file);
+    }
+  }
+
+  uploadProfilePicture(file: File) {
+    const formData = new FormData();
+    formData.append('picture', file);
+    console.log(formData.get('picture'));
   }
 
   ngOnDestroy(): void {

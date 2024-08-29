@@ -8,6 +8,7 @@ import { Business } from '../../Interfaces/business';
 })
 export class BusinessService {
   private URL: string = 'http://bookaround-backend.lo/api/companies';
+  private categoriesURL: string = 'http://bookaround-backend.lo/api/business-categories';
 
   constructor(private http: HttpClient) { }
 
@@ -17,6 +18,14 @@ export class BusinessService {
 
   getBusinessById(id: number) : Observable<Business> {
     return this.http.get<Business>(`${this.URL}/${id}`).pipe(retry(2), catchError(this.error));
+  }
+
+  postNewBusiness(businessInfo: Business | Partial<Business>) {
+    return this.http.post<Business>(this.URL, businessInfo).pipe(catchError(this.error));
+  }
+
+  postBusinessCategories(categories: any) {
+    return this.http.post<any>(this.categoriesURL, categories).pipe(catchError(this.error));
   }
 
   private error(error: HttpErrorResponse) {

@@ -4,11 +4,27 @@
       <div class="w-1/3 px-8 flex flex-col gap-8 justify-center">
         <div class="flex flex-col gap-4">
           <h3 class="p3-text font-bold text-lg">Calificación actual</h3>
-          <p>Calificación</p>
+          @if (isLoading) {
+            <ngx-skeleton-loader appearance="line" [theme]="{ height: '25px', width: '100%' }"></ngx-skeleton-loader>
+          } @else {
+            <div class="flex items-center text-2xl p5-text">
+              @for (star of getScoreStars(); track $index) {
+                <i [ngClass]="star"></i>
+              }
+            </div>
+          }
         </div>
         <div class="flex flex-col gap-4">
           <h3 class="p3-text font-bold text-lg">Categorías de tu negocio</h3>
-          <p>Categorías</p>
+          <div class="flex gap-2 items-center">
+            @if (isLoading) {
+              <ngx-skeleton-loader appearance="line" [theme]="{ height: '25px', width: '100px' }"></ngx-skeleton-loader>
+            } @else {
+              @for (category of businessInfo.categorias; track category.id) {
+                <i class="{{ category.icon }} text-2xl p5-text"></i>
+              }
+            }
+          </div>
         </div>
       </div>
     }
