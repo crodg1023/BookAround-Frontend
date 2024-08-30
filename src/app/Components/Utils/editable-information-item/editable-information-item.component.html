@@ -1,0 +1,29 @@
+@if (isAddress) {
+  <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+    <div class="w-full">
+      <app-places-input-autocomplete></app-places-input-autocomplete>
+    </div>
+    <i class="fa-solid fa-ban text-2xl p6-text cursor-pointer" (click)="disableEditing()"></i>
+  </div>
+} @else {
+  <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+    <i class="text-2xl p6-text" [ngClass]="getIcon()"></i>
+    <div class="w-full flex flex-col">
+      <label class="p3-text text-lg font-medium">{{ label }}</label>
+      @if (isEditing) {
+        <input
+          type="text"
+          [placeholder]="getPlaceholder()"
+          class="w-full p6-text text-lg focus:outline-none"
+        >
+      } @else {
+        <span class="w-full p6-text text-lg">{{ itemInformation }}</span>
+      }
+    </div>
+    @if (isEditing) {
+      <i class="fa-solid fa-ban text-2xl p6-text cursor-pointer" (click)="disableEditing()"></i>
+    } @else {
+      <i class="fa-solid fa-pen-to-square text-2xl p6-text cursor-pointer" (click)="enableEditing()"></i>
+    }
+  </div>
+}

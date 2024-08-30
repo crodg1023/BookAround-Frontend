@@ -11,10 +11,10 @@
       @for (b of featuredBusiness; track b.id) {
         @if (isLoading) {
           <ngx-skeleton-loader
-          appearance="line"
-          [theme]="{ height: '336px', width: '288px', borderRadius: '16px' }"
-        >
-        </ngx-skeleton-loader>
+            appearance="line"
+            [theme]="{ height: '336px', width: '288px', borderRadius: '16px' }"
+          >
+          </ngx-skeleton-loader>
         } @else {
           <app-business-card [isFeatured]="true" [business]="b"></app-business-card>
         }

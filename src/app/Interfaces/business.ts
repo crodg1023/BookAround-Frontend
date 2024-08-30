@@ -13,4 +13,5 @@ export interface Business {
   categorias: Category[];
   price: number;
   usuario_id?: number;
+  usuario?: any;
 }

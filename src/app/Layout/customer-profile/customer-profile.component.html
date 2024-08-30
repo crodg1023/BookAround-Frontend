@@ -1,0 +1,47 @@
+<main class="w-full flex flex-col gap-4 p-4 items-center">
+  <section class="flex flex-col gap-4">
+    @if (isLoading) {
+      <ngx-skeleton-loader
+        appearance="circle"
+        [theme]="{ height: '300px', width: '300px' }"
+      ></ngx-skeleton-loader>
+      <ngx-skeleton-loader
+        appearance="line"
+        [theme]="{ height: '50px', width: '300px', borderRadius: '8px' }"
+      ></ngx-skeleton-loader>
+      <ngx-skeleton-loader
+        appearance="line"
+        [theme]="{ height: '50px', width: '300px', borderRadius: '8px' }"
+      ></ngx-skeleton-loader>
+    } @else {
+      <div
+        class="w-[300px] h-[300px] rounded-full border-white border-[1px] user-profile-pic"
+        [ngStyle]="{'background-image': 'url(' + (picture || 'assets/images/profile-placeholder.jpg') + ')'}"
+      ></div>
+      <button class="button-1 flex justify-center items-center gap-2 w-full">
+        <i class="fa-solid fa-image text-2xl"></i>
+        <span class="text-lg">Cambiar foto de perfil</span>
+      </button>
+      <button class="button-2 flex justify-center items-center gap-2 w-full">
+        <i class="fa-solid fa-trash text-2xl"></i>
+        <span class="text-lg">Eliminar foto de perfil</span>
+      </button>
+    }
+  </section>
+
+  <section class="w-full flex flex-col gap-4">
+    <h1 class="font-bold text-[28px] p3-text">Tus datos</h1>
+    <form class="flex flex-col gap-4">
+      @if (isLoading) {
+        <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
+        <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
+      } @else {
+        @for (item of getObjectEntries(); track $index) {
+          <app-editable-information-item [type]="item[0]" [itemInformation]="item[1]" [label]="translateLabel(item[0])"></app-editable-information-item>
+        }
+        <app-change-password></app-change-password>
+      }
+      <button class="button-1 disabled:opacity-70" [disabled]="isLoading">Guardar cambios</button>
+    </form>
+  </section>
+</main>

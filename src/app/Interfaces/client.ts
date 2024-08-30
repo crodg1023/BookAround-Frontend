@@ -3,8 +3,5 @@ export interface Client {
   name: string;
   picture?: string;
   usuario_id?: number;
-  usuario?: {
-    id: number,
-    email: string
-  }
+  usuario?: any;
 }

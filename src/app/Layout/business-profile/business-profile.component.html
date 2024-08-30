@@ -1,0 +1,32 @@
+<main class="w-full flex flex-col gap-4 p-4 items-center">
+  <section class="w-full flex flex-col gap-4">
+    <h1 class="font-bold text-[28px] p3-text">Datos de tu negocio</h1>
+    <form class="flex flex-col gap-4">
+      @if (isLoading) {
+        <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
+        <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
+        <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
+        <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
+      } @else {
+        @for (item of getObjectEntries(); track $index) {
+          <app-editable-information-item [type]="item[0]" [itemInformation]="item[1]" [label]="translateLabel(item[0])"></app-editable-information-item>
+        }
+        <app-change-password></app-change-password>
+      }
+      <button class="button-1 disabled:opacity-70" [disabled]="isLoading">Guardar cambios</button>
+    </form>
+  </section>
+
+  <section class="w-full py-4">
+    <h2 class="p3-text font-bold text-2xl mb-4">Galería de tu negocio</h2>
+    <div class="w-full h-[500px] flex gap-4 items-center">
+      <div class="w-[500px] h-full p6-border rounded-2xl"></div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="w-[200px] h-[200px] p6-border rounded-2xl"></div>
+        <div class="w-[200px] h-[200px] p6-border rounded-2xl"></div>
+        <div class="w-[200px] h-[200px] p6-border rounded-2xl"></div>
+        <div class="w-[200px] h-[200px] p6-border rounded-2xl"></div>
+      </div>
+    </div>
+  </section>
+</main>
