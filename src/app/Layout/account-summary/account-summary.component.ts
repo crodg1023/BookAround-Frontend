@@ -6,6 +6,7 @@ import { BusinessService } from '../../Services/Business/business.service';
 import { UsersService } from '../../Services/Users/users.service';
 import { Business } from '../../Interfaces/business';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { StarsService } from '../../Services/Stars/stars.service';
 
 @Component({
   selector: 'app-account-summary',
@@ -22,7 +23,8 @@ export class AccountSummaryComponent implements OnInit {
 
   constructor(
     private businessService: BusinessService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private starsService: StarsService
   ) {}
 
   ngOnInit(): void {
@@ -47,12 +49,7 @@ export class AccountSummaryComponent implements OnInit {
     }
   }
 
-  getScoreStars() : string[] {
-    const fullStars = Math.round(this.businessInfo.score);
-    const stars = Array(5).fill('fa-regular fa-star');
-    for (let i = 0; i < fullStars; i++) {
-      stars[i] = 'fa-solid fa-star';
-    }
-    return stars;
+  getScoreStars() {
+    return this.starsService.getScoreStars(this.businessInfo.score);
   }
 }

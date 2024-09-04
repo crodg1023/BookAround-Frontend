@@ -1,22 +1,42 @@
 <article class="w-[400px]">
   <div class="flex flex-col gap-2 items-start">
     <div class="flex gap-4 items-center">
-      <img src="" alt="" class="w-16 h-16 rounded-full p5-border">
+      @if (isLoading) {
+        <ngx-skeleton-loader appearance="circle" [theme]="{ height: '64px', width: '64px', borderRadius: '100%' }"></ngx-skeleton-loader>
+      } @else {
+        <img src="{{ review.client?.picture }}" alt="" class="w-16 h-16 rounded-full p5-border">
+      }
       <div class="flex flex-col gap-2">
-        <h3 class="text-2xl font-bold p3-text">Pepito perez</h3>
+        @if (isLoading) {
+          <ngx-skeleton-loader appearance="line" [theme]="{ height: '32px', width: '200px' }"></ngx-skeleton-loader>
+        } @else {
+          <h3 class="text-2xl font-bold p3-text">{{ review.client?.name }}</h3>
+        }
         <div class="flex gap-1 p5-text">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-regular fa-star"></i>
+          @for (star of getScoreStars(); track $index) {
+            @if (isLoading) {
+              <ngx-skeleton-loader appearance="line" [theme]="{ height: '16px', width: '16px' }"></ngx-skeleton-loader>
+            } @else {
+              <i [ngClass]="star"></i>
+            }
+          }
         </div>
-        <span class="text-lg p3-text">enero 1, 2024</span>
+
+        @if (isLoading) {
+          <ngx-skeleton-loader appearance="line" [theme]="{ height: '28px', width: '200px' }"></ngx-skeleton-loader>
+        } @else {
+          <span class="text-lg p3-text">{{ getFormattedDate() }}</span>
+        }
       </div>
     </div>
-    <p class="text-sm p3-text" #reviewContent [ngClass]="{'truncated' : !isExpanded, 'expanded' : isExpanded}">
-      kjasdjhaisoñas ksdk lkld ks dlkfj sdlkjf kwkjw jwjiow jh ook kkqk jshdh kaksid jajsjj jah leorn paas kkii  kaka lelqo kakakasdasdasdsadddddddddddddddddddddddddddsdasdas
-    </p>
+
+    @if (isLoading) {
+      <ngx-skeleton-loader appearance="line" [theme]="{ height: '20px', width: '400px' }"></ngx-skeleton-loader>
+    } @else {
+      <p class="text-sm p3-text" #reviewContent [ngClass]="{'truncated' : !isExpanded, 'expanded' : isExpanded}">
+        {{ review.content }}
+      </p>
+    }
     @if (isTruncated) {
       <button class="flex gap-2 items-center text-lg font-medium p5-text" (click)="toggleReadMore()">
         <span>Leer más</span>

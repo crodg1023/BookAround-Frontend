@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { RatingStarsComponent } from '../../Utils/rating-stars/rating-stars.component';
 import { ModalService } from '../../../Services/modal.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Review } from '../../../Interfaces/review';
+import { ReviewService } from '../../../Services/Review/review.service';
 
 @Component({
   selector: 'app-review-modal',
@@ -14,17 +16,23 @@ import { CommonModule } from '@angular/common';
 })
 export class ReviewModalComponent implements OnInit {
 
+  business_id!: number;
   rating: number = 0;
   isDisabled: boolean = true;
   reviewForm!: FormGroup;
 
-  constructor(private modalService: ModalService, private fb: FormBuilder) {}
+  constructor(
+    private modalService: ModalService,
+    private fb: FormBuilder,
+    private reviewService: ReviewService
+  ) {}
 
   ngOnInit(): void {
     this.reviewForm = this.fb.group({
       content: ['', Validators.required]
     });
     this.reviewForm.valueChanges.subscribe(() => this.checkIfDisabled());
+    console.log(this.business_id);
   }
 
   get content() { return this.reviewForm.get('content'); }
@@ -45,10 +53,16 @@ export class ReviewModalComponent implements OnInit {
   }
 
   submit() {
-    const review = {
-      content: this.reviewForm.get('content')?.value,
-      score: this.rating
+    const client_id = sessionStorage.getItem('client_id');
+    if (client_id) {
+      const review: Review = {
+        content: this.reviewForm.get('content')?.value,
+        score: this.rating,
+        comercio_id: this.business_id,
+        cliente_id: +client_id
+      }
+      console.log(review);
+      this.reviewService.postNewReview(review).subscribe(x => console.log(x));
     }
-    console.log(review);
   }
 }
