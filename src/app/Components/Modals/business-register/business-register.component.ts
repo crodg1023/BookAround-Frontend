@@ -138,7 +138,7 @@ export class BusinessRegisterComponent implements OnInit, OnDestroy {
 
     this.usersService.postNewUser(userInfo).pipe(
       switchMap(newUser => {
-        const businessInfo : Partial<Business> = {
+        const businessInfo : Business = {
           name: this.name?.value,
           address: this.address?.value,
           phone: this.phone?.value,

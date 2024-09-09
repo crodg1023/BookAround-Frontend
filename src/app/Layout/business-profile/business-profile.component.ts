@@ -44,7 +44,8 @@ export class BusinessProfileComponent implements OnInit, OnDestroy {
   }
 
   simplifyBusinessInformation(obj: Business) {
-    const { name, address, phone, usuario: { email } } = obj;
+    const { name, address, phone, user } = obj;
+    const email = user?.email;
     const newObject = { name, address, phone, email };
     this.information = newObject;
   }

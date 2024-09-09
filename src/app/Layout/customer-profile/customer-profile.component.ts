@@ -44,7 +44,8 @@ export class CustomerProfileComponent implements OnInit, OnDestroy {
   }
 
   simplifyClientInformation(obj: Client) {
-    const { name, picture, usuario: { email } } = obj;
+    const { name, picture, user } = obj;
+    const email = user?.email;
     if (picture) this.picture = picture;
     const newObject = { name, email };
     this.information = newObject;

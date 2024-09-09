@@ -20,7 +20,7 @@
             @if (isLoading) {
               <ngx-skeleton-loader appearance="line" [theme]="{ height: '25px', width: '100px' }"></ngx-skeleton-loader>
             } @else {
-              @for (category of businessInfo.categorias; track category.id) {
+              @for (category of businessInfo.categories; track category.id) {
                 <i class="{{ category.icon }} text-2xl p5-text"></i>
               }
             }

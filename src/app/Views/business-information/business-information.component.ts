@@ -95,7 +95,7 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   getScoreStars() {
-    return this.starsService.getScoreStars(this.business.score);
+    return this.starsService.getScoreStars(this.business.score || 0);
   }
 
   checkIfIsTruncated() {

@@ -39,7 +39,7 @@ export class AccountSummaryComponent implements OnInit {
 
   getUserInformation() {
     if (this.isClient) {
-
+      //
     } else {
       const id = sessionStorage.getItem('business_id');
       if (id) this.businessService.getBusinessById(+id).subscribe(info => {
@@ -50,6 +50,6 @@ export class AccountSummaryComponent implements OnInit {
   }
 
   getScoreStars() {
-    return this.starsService.getScoreStars(this.businessInfo.score);
+    return this.starsService.getScoreStars(this.businessInfo.score || 0);
   }
 }

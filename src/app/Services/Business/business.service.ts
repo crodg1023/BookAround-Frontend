@@ -20,7 +20,7 @@ export class BusinessService {
     return this.http.get<Business>(`${this.URL}/${id}`).pipe(retry(2), catchError(this.error));
   }
 
-  postNewBusiness(businessInfo: Business | Partial<Business>) {
+  postNewBusiness(businessInfo: Business) {
     return this.http.post<Business>(this.URL, businessInfo).pipe(catchError(this.error));
   }
 

@@ -3,5 +3,11 @@ export interface Client {
   name: string;
   picture?: string;
   usuario_id?: number;
-  usuario?: any;
+  user?: {
+    id: number;
+    email: string;
+    role_id: number;
+    cliente_id: number;
+    comercio_id: number;
+  };
 }

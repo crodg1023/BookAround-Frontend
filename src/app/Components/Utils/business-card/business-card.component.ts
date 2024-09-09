@@ -24,8 +24,8 @@ export class BusinessCardComponent {
 
 
   getIcon() : string {
-    if (this.business.categorias.length > 0) {
-      return this.business.categorias[0].icon;
+    if (this.business.categories && this.business.categories.length > 0) {
+      return this.business.categories[0].icon;
     } else {
       return ''
     }

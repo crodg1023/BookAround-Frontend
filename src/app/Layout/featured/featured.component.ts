@@ -32,7 +32,7 @@ export class FeaturedComponent implements OnInit, OnDestroy {
   }
 
   getFeaturedBusiness() {
-    this.featuredBusiness = this.business.sort((a, b) => b.score - a.score).slice(0, 4);
+    this.featuredBusiness = this.business.sort((a, b) => (b.score ?? 0) - (a.score ?? 0)).slice(0, 4);
   }
 
   ngOnDestroy(): void {
