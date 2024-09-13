@@ -46,29 +46,39 @@
       <app-calendar></app-calendar>
     </div>
   </div>
-  <div class="w-full max-w-[1300px] flex items-center gap-8">
-    <div class="w-2/3 flex flex-col gap-4">
-      <div class="grid grid-cols-2 gap-4">
-        @for (review of displayedReviews; track review.id) {
-          <app-review-card [review]="review" [isLoading]="isLoading"></app-review-card>
-        }
+  <div class="w-full max-w-[1300px] flex items-center justify-center gap-8">
+    @if (displayedReviews.length > 0) {
+      <div class="w-2/3 flex flex-col gap-4">
+        <div class="grid grid-cols-2 gap-4">
+          @for (review of displayedReviews; track review.id) {
+            <app-review-card [review]="review" [isLoading]="isLoading"></app-review-card>
+          }
+        </div>
+        <div class="w-full flex gap-16">
+          <button class="button-1 w-full text-lg" (click)="openReviewModal()">Deja tu reseña</button>
+          @if (hasReviews) {
+            <button
+              class="button-2 w-full text-lg"
+              [ngClass]="{'hidden': reviews.length <= count}"
+              (click)="currentIndex() >= reviews.length ? resetDisplayedReviews() : showMoreReviews()"
+            >
+              Lee {{ currentIndex() >= reviews.length ? 'menos' : 'más' }} reseñas
+            </button>
+          }
+        </div>
       </div>
-      <div class="w-full flex gap-16">
+      <div class="w-1/3 h-full">
+        <img src="../../../assets/images/bookaround-reviews.jpg" alt="">
+      </div>
+    } @else {
+      <div class="flex flex-col gap-8 items-center">
+        <div class="flex gap-16 items-center justify-center w-[970px]">
+          <h2 class="p3-text text-[38px] font-bold">Sé el primero en dejar una reseña para este local</h2>
+          <img src="../../../assets/images/bookaround-no-reviews.jpg" alt="" class="w-[450px] h-[450px]">
+        </div>
         <button class="button-1 w-full text-lg" (click)="openReviewModal()">Deja tu reseña</button>
-        @if (hasReviews) {
-          <button
-            class="button-2 w-full text-lg"
-            [ngClass]="{'hidden': reviews.length <= count}"
-            (click)="currentIndex() >= reviews.length ? resetDisplayedReviews() : showMoreReviews()"
-          >
-            Lee {{ currentIndex() >= reviews.length ? 'menos' : 'más' }} reseñas
-          </button>
-        }
       </div>
-    </div>
-    <div class="w-1/3 h-full">
-      <img src="../../../assets/images/bookaround-reviews.jpg" alt="">
-    </div>
+    }
   </div>
   <div class="w-full max-w-[1300px] flex flex-col gap-4">
     <div class="w-full flex gap-8 items-center">

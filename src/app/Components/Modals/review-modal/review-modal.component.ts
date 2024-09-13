@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { Review } from '../../../Interfaces/review';
 import { ReviewService } from '../../../Services/Review/review.service';
+import { AuthService } from '../../../Services/Auth/auth.service';
 
 @Component({
   selector: 'app-review-modal',
@@ -61,8 +62,7 @@ export class ReviewModalComponent implements OnInit {
         comercio_id: this.business_id,
         cliente_id: +client_id
       }
-      console.log(review);
-      this.reviewService.postNewReview(review).subscribe(x => console.log(x));
+      this.reviewService.postNewReview(review).subscribe();
     }
   }
 }

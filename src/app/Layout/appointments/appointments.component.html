@@ -20,13 +20,32 @@
   <section class="w-full flex gap-8">
     <div class="w-full flex flex-col gap-2">
       <h2 class="p3-text text-lg font-medium">Agendadas para hoy</h2>
-      <span class="p3-text text-sm">01/01/2024</span>
-      <app-appointments-group></app-appointments-group>
+      <span class="p3-text text-sm">{{ today.toFormat('dd/MM/yyyy') }}</span>
+      @if (isLoading) {
+        <ngx-skeleton-loader appearance="line" [theme]="{ height: '300px', width: '100%' }"></ngx-skeleton-loader>
+      } @else {
+        <app-appointments-group [appointments]="getTodaysAppointments()"></app-appointments-group>
+      }
+
     </div>
     <div class="w-full flex flex-col gap-2">
       <h2 class="p3-text text-lg font-medium">Agendadas para esta semana</h2>
-      <span class="p3-text text-sm">01/01/2024</span>
-      <app-appointments-group></app-appointments-group>
+      <span class="p3-text text-sm">{{ startOfWeek.toFormat('dd/MM/yyyy') }} - {{ endOfWeek.toFormat('dd/MM/yyyy') }}</span>
+      @if (isLoading) {
+        <ngx-skeleton-loader appearance="line" [theme]="{ height: '300px', width: '100%' }"></ngx-skeleton-loader>
+      } @else {
+        <app-appointments-group [appointments]="getWeekAppointments()"></app-appointments-group>
+      }
     </div>
+  </section>
+
+  <section class="w-full flex flex-col gap-2">
+    <h2 class="p3-text font-medium text-lg">Historial</h2>
+    <span class="p3-text text-sm">2024</span>
+    @if (isLoading) {
+      <ngx-skeleton-loader appearance="line" [theme]="{ height: '300px', width: '100%' }"></ngx-skeleton-loader>
+    } @else {
+      <app-appointments-group [appointments]="appointments" [isHistory]="true" [year]="2010"></app-appointments-group>
+    }
   </section>
 </main>

@@ -14,6 +14,9 @@ import { GeoCodingService } from '../../Services/GeoCoding/geo-coding.service';
 import { ReviewService } from '../../Services/Review/review.service';
 import { Review } from '../../Interfaces/review';
 import { StarsService } from '../../Services/Stars/stars.service';
+import { LoginModalComponent } from '../../Components/Modals/login-modal/login-modal.component';
+import { AuthService } from '../../Services/Auth/auth.service';
+import { EchoService } from '../../Services/WebSockets/echo.service';
 
 @Component({
   selector: 'app-business-information',
@@ -34,6 +37,7 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
   @ViewChild('reviewContainer', { read: ViewContainerRef, static: true })
   reviewContainer!: ViewContainerRef;
   componentRef!: ComponentRef<ReviewModalComponent>
+  loginComponentRef!: ComponentRef<LoginModalComponent>
   business!: Business;
   isTruncated: boolean = false;
   isExpanded: boolean = false;
@@ -54,7 +58,9 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
     private modalService: ModalService,
     private geocodeSerivce: GeoCodingService,
     private reviewsService: ReviewService,
-    private starsService: StarsService
+    private starsService: StarsService,
+    private authService: AuthService,
+    private echoService: EchoService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +74,10 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
         this.isLoading = false;
       })
     );
+    this.echoService.listenForNewReviews((newReview) => {
+      console.log(newReview);
+      console.log('funciona!');
+    });
     this.titleService.setTitle(`${this.business.name} | Book Around`);
     this.getAddressCoordinates();
   }
@@ -120,9 +130,16 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
 
   openReviewModal() {
     this.reviewContainer.clear();
-    this.componentRef = this.reviewContainer.createComponent(ReviewModalComponent);
-    if (this.business.id) this.componentRef.instance.business_id = this.business.id;
-    this.modalService.openModal('review');
+    this.authService.isLogged$.subscribe(isLogged => {
+      if (isLogged) {
+        this.componentRef = this.reviewContainer.createComponent(ReviewModalComponent);
+        if (this.business.id) this.componentRef.instance.business_id = this.business.id;
+        this.modalService.openModal('review');
+      } else {
+        this.loginComponentRef = this.reviewContainer.createComponent(LoginModalComponent);
+        this.modalService.openModal('login');
+      }
+    });
   }
 
   ngOnDestroy(): void {
