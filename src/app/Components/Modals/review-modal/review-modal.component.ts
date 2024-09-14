@@ -33,7 +33,6 @@ export class ReviewModalComponent implements OnInit {
       content: ['', Validators.required]
     });
     this.reviewForm.valueChanges.subscribe(() => this.checkIfDisabled());
-    console.log(this.business_id);
   }
 
   get content() { return this.reviewForm.get('content'); }

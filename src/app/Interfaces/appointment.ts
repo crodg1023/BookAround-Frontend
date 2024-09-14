@@ -8,4 +8,5 @@ export interface Appointment {
   cliente_id: number;
   comercio_id: number;
   dateTime: string;
+  status: string;
 }

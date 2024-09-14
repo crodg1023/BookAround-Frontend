@@ -1,7 +1,7 @@
 <article class="w-full h-14 flex gap-1 rounded-[4px] p6-border">
   <div
     class="w-2 h-full"
-    [ngClass]="{'g1-bg': status === 'active', 'r2-bg': status === 'canceled'}"
+    [ngClass]="{'g1-bg': appointment.status === 'active', 'r2-bg': appointment.status === 'canceled', 'bg-[#548BDF]' : appointment.status === 'fulfilled'}"
   >
   </div>
   <div class="px-1 py-2 flex flex-col gap-1">

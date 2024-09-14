@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalService } from '../../../Services/modal.service';
@@ -22,6 +22,7 @@ export class LoginModalComponent implements OnInit {
   isDisabled: boolean = true;
   hasError: boolean = false;
   loginMessage: string = '';
+  @Output() loginSuccess = new EventEmitter<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -59,13 +60,11 @@ export class LoginModalComponent implements OnInit {
 
       this.authService.login(credentials).subscribe({
         next: x => {
-          console.log(x);
           this.hasError = false;
           this.loginMessage = 'Accediendo!';
-          setTimeout(() => this.modalService.closeModal('login'), 500);
+          this.loginSuccess.emit();
         },
         error: error => {
-          console.error(error);
           this.hasError = true;
           this.loginMessage = error;
         }

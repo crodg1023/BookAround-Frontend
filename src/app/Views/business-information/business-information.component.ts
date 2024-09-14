@@ -54,7 +54,6 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
   constructor (
     private route: ActivatedRoute,
     private titleService: Title,
-    private categoriesService: CategoryIconsService,
     private modalService: ModalService,
     private geocodeSerivce: GeoCodingService,
     private reviewsService: ReviewService,
@@ -65,6 +64,17 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.fetchReviews();
+    this.listenNewReviews();
+    this.titleService.setTitle(`${this.business.name} | Book Around`);
+    this.getAddressCoordinates();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => this.checkIfIsTruncated());
+  }
+
+  fetchReviews() {
     this. subscriptions.push(
       this.route.data.subscribe(({ businessInformation }) => this.business = businessInformation),
       this.reviewsService.getAllReviews().subscribe(reviews => {
@@ -74,16 +84,19 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
         this.isLoading = false;
       })
     );
-    this.echoService.listenForNewReviews((newReview) => {
-      console.log(newReview);
-      console.log('funciona!');
-    });
-    this.titleService.setTitle(`${this.business.name} | Book Around`);
-    this.getAddressCoordinates();
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => this.checkIfIsTruncated());
+  listenNewReviews() {
+    this.echoService.listenForNewReviews((newReview) => {
+      if (newReview.comercio_id === this.business.id) {
+        if (this.displayedReviews.length < 4 || this.displayedReviews.length < this.currentIndex()) {
+          this.displayedReviews.push(newReview);
+          this.reviews.push(newReview);
+        } else {
+          this.reviews.push(newReview);
+        }
+      }
+    });
   }
 
   moveMap(event: google.maps.MapMouseEvent) {
@@ -128,16 +141,24 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
     this.isExpanded = !this.isExpanded;
   }
 
+  createReviewModal() {
+    this.componentRef = this.reviewContainer.createComponent(ReviewModalComponent);
+    if (this.business.id) this.componentRef.instance.business_id = this.business.id;
+    this.modalService.openModal('review');
+  }
+
   openReviewModal() {
     this.reviewContainer.clear();
     this.authService.isLogged$.subscribe(isLogged => {
       if (isLogged) {
-        this.componentRef = this.reviewContainer.createComponent(ReviewModalComponent);
-        if (this.business.id) this.componentRef.instance.business_id = this.business.id;
-        this.modalService.openModal('review');
+        this.createReviewModal();
       } else {
         this.loginComponentRef = this.reviewContainer.createComponent(LoginModalComponent);
         this.modalService.openModal('login');
+        this.loginComponentRef.instance.loginSuccess.subscribe(() => {
+          this.modalService.closeModal('login');
+          this.createReviewModal();
+        });
       }
     });
   }
