@@ -4,21 +4,25 @@
   [ngClass]="isFeatured ? 'h-[336px]' : 'h-[400px]'"
 >
   @if (!isFeatured) {
-    <div class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white flex justify-center items-center">
-      <i class="{{ getIcon() }} text-xl p3-text"></i>
+    <div class="absolute top-2 right-2 flex flex-col gap-2">
+      @for (cat of business.categories; track cat.id) {
+        <span class="w-8 h-8 rounded-full bg-white flex justify-center items-center">
+          <i class="{{ cat.icon }} text-xl p3-text"></i>
+        </span>
+      }
     </div>
     <div class="w-full bg-white p-2 flex flex-col gap-1 rounded-b-2xl p3-text">
+      <div class="w-full flex items-center gap-2">
+        <span class="text-base"><i class="fa-solid fa-star"></i></span>
+        <span class="p3-text text-sm">{{ business.score }}</span>
+      </div>
       <div class="w-full flex items-center gap-2">
         <span class="p3-text"><i class="fa-solid fa-location-dot"></i></span>
         <span class="text-sm p3-text" id="business-address">{{ business.address }}</span>
       </div>
       <div class="w-full flex items-center gap-2">
         <span class="text-base"><i class="fa-regular fa-clock"></i></span>
-        <span class="text-sm">{{ business.workingHours?.opening }} - {{ business.workingHours?.closing }}</span>
-      </div>
-      <div class="w-full flex items-center gap-2">
-        <span class="text-base"><i class="fa-solid fa-star"></i></span>
-        <span class="p3-text text-sm">{{ business.score }}</span>
+        <span class="text-sm">{{ getFormattedHour(business.workingHours?.opening ?? 0) }} - {{ getFormattedHour(business.workingHours?.closing ?? 0) }}</span>
       </div>
     </div>
   }

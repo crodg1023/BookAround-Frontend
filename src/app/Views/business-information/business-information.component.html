@@ -24,7 +24,7 @@
         <div class="flex gap-8 items-center">
           <div class="flex items-center p3-text gap-2">
             <i class="fa-regular fa-clock"></i>
-            <span class="text-lg font-medium">Horarios: {{ business.workingHours?.opening }} - {{ business.workingHours?.closing }}</span>
+            <span class="text-lg font-medium">Horarios: {{ getFormattedHour(business.workingHours?.opening ?? 0) }} - {{ getFormattedHour(business.workingHours?.closing ?? 0) }}</span>
           </div>
           <div class="flex items-center p3-text gap-2">
             <i class="fa-solid fa-location-dot"></i>
@@ -42,8 +42,9 @@
         </div>
       </div>
     </div>
-    <div class="w-1/3 h-full">
+    <div class="w-1/3 h-full flex flex-col gap-4">
       <app-calendar></app-calendar>
+      <button class="button-1 text-2xl self-center" (click)="openScheduleAppointmentModal()">Agenda tu cita</button>
     </div>
   </div>
   <div class="w-full max-w-[1300px] flex items-center justify-center gap-8">

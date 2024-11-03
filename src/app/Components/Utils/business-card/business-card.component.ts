@@ -22,12 +22,7 @@ export class BusinessCardComponent {
     this.router.navigate(['/business/find', this.business.id]);
   }
 
-
-  getIcon() : string {
-    if (this.business.categories && this.business.categories.length > 0) {
-      return this.business.categories[0].icon;
-    } else {
-      return ''
-    }
+  getFormattedHour(hour: number) {
+    return hour.toString().split(':').slice(0, 2).join(':');
   }
 }

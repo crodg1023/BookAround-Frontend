@@ -3,5 +3,6 @@ export enum ModalTypes {
   ClientRegister = 'clientRegister',
   BusinessRegister = 'businessRegister',
   Filters = 'filters',
-  Review = 'review'
+  Review = 'review',
+  AppointmentSchedule = 'appointmentSchedule'
 }

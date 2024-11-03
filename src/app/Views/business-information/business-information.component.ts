@@ -17,6 +17,7 @@ import { StarsService } from '../../Services/Stars/stars.service';
 import { LoginModalComponent } from '../../Components/Modals/login-modal/login-modal.component';
 import { AuthService } from '../../Services/Auth/auth.service';
 import { EchoService } from '../../Services/WebSockets/echo.service';
+import { ScheduleAppointmentModalComponent } from '../../Components/Modals/schedule-appointment-modal/schedule-appointment-modal.component';
 
 @Component({
   selector: 'app-business-information',
@@ -26,6 +27,7 @@ import { EchoService } from '../../Services/WebSockets/echo.service';
     ReviewCardComponent,
     CalendarComponent,
     ReviewModalComponent,
+    ScheduleAppointmentModalComponent,
     GoogleMapsModule
   ],
   templateUrl: './business-information.component.html',
@@ -38,6 +40,7 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
   reviewContainer!: ViewContainerRef;
   componentRef!: ComponentRef<ReviewModalComponent>
   loginComponentRef!: ComponentRef<LoginModalComponent>
+  scheduleAppointmentComponentRef!: ComponentRef<ScheduleAppointmentModalComponent>
   business!: Business;
   isTruncated: boolean = false;
   isExpanded: boolean = false;
@@ -147,6 +150,11 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
     this.modalService.openModal('review');
   }
 
+  createScheduleAppointmentModal() {
+    this.scheduleAppointmentComponentRef = this.reviewContainer.createComponent(ScheduleAppointmentModalComponent);
+    this.modalService.openModal('appointmentSchedule');
+  }
+
   openReviewModal() {
     this.reviewContainer.clear();
     this.authService.isLogged$.subscribe(isLogged => {
@@ -161,6 +169,15 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
         });
       }
     });
+  }
+
+  openScheduleAppointmentModal() {
+    this.reviewContainer.clear();
+    this.createScheduleAppointmentModal();
+  }
+
+  getFormattedHour(hour: number) {
+    return hour.toString().split(':').slice(0, 2).join(':');
   }
 
   ngOnDestroy(): void {
