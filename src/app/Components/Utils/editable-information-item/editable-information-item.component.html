@@ -15,6 +15,7 @@
           type="text"
           [placeholder]="getPlaceholder()"
           class="w-full p6-text text-lg focus:outline-none"
+          (change)="informationChange($event)"
         >
       } @else {
         <span class="w-full p6-text text-lg">{{ itemInformation }}</span>

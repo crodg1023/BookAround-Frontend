@@ -14,18 +14,7 @@
         [theme]="{ height: '50px', width: '300px', borderRadius: '8px' }"
       ></ngx-skeleton-loader>
     } @else {
-      <div
-        class="w-[300px] h-[300px] rounded-full border-white border-[1px] user-profile-pic"
-        [ngStyle]="{'background-image': 'url(' + (picture || 'assets/images/profile-placeholder.jpg') + ')'}"
-      ></div>
-      <button class="button-1 flex justify-center items-center gap-2 w-full">
-        <i class="fa-solid fa-image text-2xl"></i>
-        <span class="text-lg">Cambiar foto de perfil</span>
-      </button>
-      <button class="button-2 flex justify-center items-center gap-2 w-full">
-        <i class="fa-solid fa-trash text-2xl"></i>
-        <span class="text-lg">Eliminar foto de perfil</span>
-      </button>
+      <app-update-profile-picture></app-update-profile-picture>
     }
   </section>
 
@@ -37,11 +26,11 @@
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
       } @else {
         @for (item of getObjectEntries(); track $index) {
-          <app-editable-information-item [type]="item[0]" [itemInformation]="item[1]" [label]="translateLabel(item[0])"></app-editable-information-item>
+          <app-editable-information-item [type]="item[0]" [itemInformation]="item[1]" [label]="translateLabel(item[0])" (itemChange)="getValuesChanged($event)"></app-editable-information-item>
         }
         <app-change-password></app-change-password>
       }
-      <button class="button-1 disabled:opacity-70" [disabled]="isLoading">Guardar cambios</button>
+      <button class="button-1 disabled:opacity-70" [disabled]="isLoading" (click)="saveChanges($event)">Guardar cambios</button>
     </form>
   </section>
 </main>

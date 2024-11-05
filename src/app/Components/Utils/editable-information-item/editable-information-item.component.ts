@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PlacesInputAutocompleteComponent } from '../places-input-autocomplete/places-input-autocomplete.component';
 
 @Component({
@@ -14,6 +14,7 @@ export class EditableInformationItemComponent {
   @Input() itemInformation: string = '';
   @Input() label: string = '';
   @Input() type: string = '';
+  @Output() itemChange = new EventEmitter<string>();
   isEditing: boolean = false;
   isAddress: boolean = false;
 
@@ -54,5 +55,11 @@ export class EditableInformationItemComponent {
   disableEditing() {
     this.isAddress = false;
     this.isEditing = false;
+  }
+
+  informationChange(e: Event) {
+    const newInformation = e.target as HTMLInputElement;
+    console.log(newInformation.value);
+    this.itemChange.emit(newInformation.value);
   }
 }

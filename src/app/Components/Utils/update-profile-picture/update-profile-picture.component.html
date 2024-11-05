@@ -1,0 +1,18 @@
+<div class="flex flex-col gap-3">
+  <img src="{{ imageUrl }}" alt="" class="w-[300px] h-[300px] rounded-full border-white border-[1px] user-profile-pic object-cover">
+  <input
+    #fileInput
+    type="file"
+    multiple
+    (change)="onFileChange($event)"
+    class="hidden"
+  >
+  <button class="button-1 flex justify-center items-center gap-2 w-full" (click)="triggerFileInput()">
+    <i class="fa-solid fa-image text-2xl"></i>
+    <span class="text-lg">Cambiar foto de perfil</span>
+  </button>
+  <button class="button-2 flex justify-center items-center gap-2 w-full">
+    <i class="fa-solid fa-trash text-2xl"></i>
+    <span class="text-lg">Eliminar foto de perfil</span>
+  </button>
+</div>

@@ -6,6 +6,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { EditableInformationItemComponent } from '../../Components/Utils/editable-information-item/editable-information-item.component';
 import { CommonModule } from '@angular/common';
 import { ChangePasswordComponent } from '../../Components/Utils/change-password/change-password.component';
+import { UpdateProfilePictureComponent } from '../../Components/Utils/update-profile-picture/update-profile-picture.component';
 
 @Component({
   selector: 'app-customer-profile',
@@ -14,7 +15,8 @@ import { ChangePasswordComponent } from '../../Components/Utils/change-password/
     CommonModule,
     NgxSkeletonLoaderModule,
     EditableInformationItemComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    UpdateProfilePictureComponent
   ],
   templateUrl: './customer-profile.component.html',
   styleUrl: './customer-profile.component.scss'
@@ -68,6 +70,15 @@ export class CustomerProfileComponent implements OnInit, OnDestroy {
       default:
         return '';
     }
+  }
+
+  saveChanges(e: Event) {
+    e.preventDefault();
+    console.log('guardando');
+  }
+
+  getValuesChanged(value: string) {
+    console.log(value);
   }
 
   ngOnDestroy(): void {
