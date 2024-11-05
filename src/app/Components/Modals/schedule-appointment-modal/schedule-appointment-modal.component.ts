@@ -90,8 +90,9 @@ export class ScheduleAppointmentModalComponent implements OnInit {
     if (this.currentStep < this.lastStep) {
       this.currentStep++;
       this.modalService.nextStep(this.currentStep);
-    } else {
-      this.scheduleAppointment();
+    }
+    if (this.currentStep === this.lastStep) {
+      this.closeModal();
     }
     this.updateModalInformation();
   }
@@ -105,13 +106,10 @@ export class ScheduleAppointmentModalComponent implements OnInit {
       reservation_email: this.loginEmail?.value || this.replacementEmail?.value
     }
 
-    console.log(this.getIsoDate());
-
     this.appointmentService.postNewAppointment(appointment).subscribe({
       next: () => {
         this.currentStep = this.lastStep;
         this.modalService.nextStep(this.currentStep);
-        this.closeModal();
       }
     });
   }

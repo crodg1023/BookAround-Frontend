@@ -4,7 +4,7 @@
   [hasHeader]="true"
   [buttonText]="modalButtonText"
   [icon]="modalSubtitleIcon"
-  [buttonAction]="nextStep.bind(this)"
+  [buttonAction]="currentStep === 3 ? scheduleAppointment.bind(this) : nextStep.bind(this)"
   [buttonActionIsDisabled]="modalButtonIsDisabled"
   modalType="appointmentSchedule"
 >
@@ -103,6 +103,10 @@
       </div>
     </form>
   } @else if (currentStep === lastStep) {
-    <p>Agendado correctamente!</p>
+    <img
+      src="assets/images/bookaround-appointment-success.jpg"
+      alt="Ilustración de una chica usando una tablet"
+      class=""
+    >
   }
 </app-modal>
