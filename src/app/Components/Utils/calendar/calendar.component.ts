@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, computed, OnDestroy, OnInit, signal, Signal, WritableSignal } from '@angular/core';
 import { DateTime, Info, Interval } from 'luxon';
+import { DateService } from '../../../Services/Appointments/date.service';
 
 @Component({
   selector: 'app-calendar',
@@ -10,6 +11,7 @@ import { DateTime, Info, Interval } from 'luxon';
   styleUrl: './calendar.component.scss'
 })
 export class CalendarComponent {
+
   today: Signal<DateTime> = signal(DateTime.local());
   activeDay: WritableSignal<DateTime> = signal(this.today());
   firstDayOfMonth: WritableSignal<DateTime> = signal(this.today().startOf('month'));
@@ -22,6 +24,10 @@ export class CalendarComponent {
         return day.start
       });
   });
+
+  constructor(
+    private dateService: DateService
+  ) {}
 
   get weeks() : DateTime[][] {
     const weeks: DateTime[][] = []
@@ -58,6 +64,7 @@ export class CalendarComponent {
   setActiveDay(day: DateTime) {
     if (day >= this.today().startOf('day')) {
       this.activeDay.set(day);
+      this.dateService.updateAppointmentDate(this.activeDay().toFormat('MM/dd/yyyy'));
     }
   }
 

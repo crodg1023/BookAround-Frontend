@@ -152,6 +152,7 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
 
   createScheduleAppointmentModal() {
     this.scheduleAppointmentComponentRef = this.reviewContainer.createComponent(ScheduleAppointmentModalComponent);
+    if (this.business.id) this.scheduleAppointmentComponentRef.instance.businessId = this.business.id;
     this.modalService.openModal('appointmentSchedule');
   }
 

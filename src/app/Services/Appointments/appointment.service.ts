@@ -16,6 +16,10 @@ export class AppointmentService {
     return this.http.get<Appointment[]>(this.URL).pipe(retry(2), catchError(this.error));
   }
 
+  postNewAppointment(appointmentInfo: Appointment) {
+    return this.http.post<Appointment>(this.URL, appointmentInfo).pipe(retry(2), catchError(this.error));
+  }
+
   private error(error: HttpErrorResponse) {
     if (error.status === 0) return throwError(() => new Error('No ha sido posible establecer conexion'));
     else return throwError(() => new Error(error.error.message));
