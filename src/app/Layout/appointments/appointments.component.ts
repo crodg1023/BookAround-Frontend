@@ -31,12 +31,23 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoading = true;
     this.checkUserRole();
-    this.subscription = this.appointmentService.getAllAppointments().subscribe(appointments => {
-      this.appointments = this.filterAppointments(appointments);
-      this.isLoading = false;
-    });
+    this.fetchAppointments();
     this.getTodayDate();
     this.getStartAndEndOfWeek();
+  }
+
+  fetchAppointments() {
+    if (this.isClient) {
+      this.subscription = this.appointmentService.getCustomerAppointments(Number(sessionStorage.getItem('client_id'))).subscribe(appointments => {
+        this.appointments = appointments
+        this.isLoading = false;
+      });
+    } else {
+      this.subscription = this.appointmentService.getBusinessAppointments(Number(sessionStorage.getItem('business_id'))).subscribe(appointments => {
+        this.appointments = appointments
+        this.isLoading = false;
+      });
+    }
   }
 
   checkUserRole() {
@@ -48,15 +59,6 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
   getStartAndEndOfWeek() {
     this.startOfWeek = DateTime.now().startOf('week');
     this.endOfWeek = DateTime.now().endOf('week');
-  }
-  filterAppointments(appointments: Appointment[]) {
-    if (this.isClient) {
-      const clientId = Number(sessionStorage.getItem('client_id')) || 0;
-      return appointments.filter(x => x.client?.id === 1); // CAMBIAR!!!
-    } else {
-      const businessId = Number(sessionStorage.getItem('business_id')) || 0;
-      return appointments.filter(x => x.business?.id === businessId);
-    }
   }
   getWeekAppointments() {
     return this.appointments.filter(x => {
