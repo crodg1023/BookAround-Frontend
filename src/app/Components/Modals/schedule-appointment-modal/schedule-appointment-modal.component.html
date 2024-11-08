@@ -4,28 +4,32 @@
   [hasHeader]="true"
   [buttonText]="modalButtonText"
   [icon]="modalSubtitleIcon"
-  [buttonAction]="currentStep === 3 ? scheduleAppointment.bind(this) : nextStep.bind(this)"
+  [buttonAction]="nextStep.bind(this)"
   [buttonActionIsDisabled]="modalButtonIsDisabled"
   modalType="appointmentSchedule"
 >
   @if (currentStep === 1) {
     <div class="grid grid-cols-6 gap-4">
       @for (hour of dayHours; track $index) {
-          <input
-            type="radio"
-            name="{{ hour }}"
-            id="{{ hour }}"
-            class="hidden"
-            (change)="onHourSelected($index)"
-            [checked]="selectedHourIndex === $index"
-          >
-          <label
-            for="{{ hour }}"
-            class="cursor-pointer p-4 p6-border rounded-2xl transition duration-100 ease-in"
-            [ngClass]="selectedHourIndex === $index ? 'p5-bg text-white' : 'p3-text'"
-          >
-            <span class="text-lg font-bold">{{ hour }}</span>
-          </label>
+        <input
+          type="radio"
+          name="{{ hour }}"
+          id="{{ hour }}"
+          class="hidden"
+          [disabled]="checkDisabledHour(hour)"
+          (change)="onHourSelected($index)"
+          [checked]="selectedHourIndex === $index"
+        >
+        <label
+          for="{{ hour }}"
+          class="p-4 p6-border rounded-2xl transition duration-100 ease-in"
+          [ngClass]="[
+            selectedHourIndex === $index ? 'p5-bg text-white' : 'p3-text',
+            checkDisabledHour(hour) ? 'cursor-not-allowed button-disabled' : 'cursor-pointer'
+          ]"
+        >
+          <span class="text-lg font-bold">{{ hour }}</span>
+        </label>
       }
     </div>
   } @else if (currentStep === 2) {
@@ -78,7 +82,7 @@
             formControlName="loginPassword"
           ></app-password-input>
         </div>
-        <button class="button-2">Iniciar sesión</button>
+        <button class="button-2" (click)="onLoginToSchedule()">Iniciar sesión</button>
         <h3 class="p3-text font-medium text-2xl text-center">Si aún no estás registrado vamos a pedirte un correo para completar tu solicitud.</h3>
         <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
           <i class="fa-regular fa-envelope text-2xl p6-text"></i>
@@ -104,9 +108,14 @@
     </form>
   } @else if (currentStep === lastStep) {
     <img
+      *ngIf="!appointmentBookingFailure"
       src="assets/images/bookaround-appointment-success.jpg"
       alt="Ilustración de una chica usando una tablet"
-      class=""
     >
+    <img
+    *ngIf="appointmentBookingFailure"
+    src="assets/images/bookaround-not-found.jpg"
+    alt="Ilustración de una chica usando una tablet"
+  >
   }
 </app-modal>

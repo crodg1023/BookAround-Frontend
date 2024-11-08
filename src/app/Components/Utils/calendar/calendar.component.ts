@@ -64,7 +64,7 @@ export class CalendarComponent {
   setActiveDay(day: DateTime) {
     if (day >= this.today().startOf('day')) {
       this.activeDay.set(day);
-      this.dateService.updateAppointmentDate(this.activeDay().toFormat('MM/dd/yyyy'));
+      this.dateService.updateAppointmentDate(this.activeDay());
     }
   }
 
