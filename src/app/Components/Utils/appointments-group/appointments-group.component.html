@@ -1,8 +1,12 @@
-<article class="p-2 flex gap-2 p6-border rounded-[4px]">
-  <div class="h-full flex flex-col gap-1 items-center p7-border rounded-[4px] p-2">
-    <span class="p3-text font-bold text-[38px]">{{ day }}</span>
-    <span class="p3-text text-sm font-medium">{{ month }}</span>
-    <span class="p3-text text-lg">{{ dayString }}</span>
+<article class="p-2 flex gap-2 p6-border rounded-[4px] items-center">
+  <div class="h-full flex flex-col gap-1 items-center rounded-[4px] p-2">
+    @if (isHistory) {
+      <p class="p3-text text-lg font-medium">{{ capitalizeFirstLetter(month) }}</p>
+    } @else if(!isWeekly) {
+      <span class="p3-text font-bold text-[38px]">{{ day }}</span>
+      <span class="p3-text text-sm font-medium">{{ capitalizeFirstLetter(month) }}</span>
+      <span class="p3-text text-lg">{{ capitalizeFirstLetter(dayString) }}</span>
+    }
   </div>
   <div class="w-full max-h-[500px] h-full flex flex-col gap-4 overflow-y-scroll">
     @for (appointment of displayedAppointments; track appointment.id) {

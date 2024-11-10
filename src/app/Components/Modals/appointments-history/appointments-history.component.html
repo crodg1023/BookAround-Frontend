@@ -1,0 +1,107 @@
+<app-modal
+  [hasActionButtons]="false"
+  modalType="appointmentsHistory"
+>
+  <section class="flex flex-col justify-center gap-8">
+    <h1 class="p3-text font-bold text-[28px] text-center">Historial de tus citas</h1>
+
+    <div class="flex items-center gap-16">
+      <div class="flex items-center gap-8 p3-text font-bold text-[28px]">
+        <span class="flex gap-4 items-center">
+          <button (click)="decreaseYear()">
+            <i class="fa-solid fa-caret-left p4-text text-lg"></i>
+          </button>
+          {{ selectedYear }}
+          <button (click)="increaseYear()">
+            <i class="fa-solid fa-caret-right p4-text text-lg"></i>
+          </button>
+        </span>
+        <span class="flex gap-4  items-center">
+          <button (click)="decreaseMonth()">
+            <i class="fa-solid fa-caret-left p4-text text-lg"></i>
+          </button>
+          {{ capitalizeFirstLetter(currentDate.monthLong || '') }}
+          <button (click)="increaseMonth()">
+            <i class="fa-solid fa-caret-right p4-text text-lg"></i>
+          </button>
+        </span>
+      </div>
+
+      <div class="w-full flex flex-col gap-2">
+        <span class="p3-text font-medium text-sm">Status</span>
+        <article class="w-full flex gap-4">
+          <div class="flex gap-2">
+            <div class="w-4 h-4 rounded-[4px] g1-bg"></div>
+            <span class="p3-text text-sm">Activas</span>
+          </div>
+          <div class="flex gap-2">
+            <div class="w-4 h-4 rounded-[4px] r1-bg"></div>
+            <span class="p3-text text-sm">Canceladas</span>
+          </div>
+          <div class="flex gap-2">
+            <div class="w-4 h-4 rounded-[4px] bg-[#548BDF]"></div>
+            <span class="p3-text text-sm">Cumplidas</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    @if (filterdAppointments().length <= 0) {
+      <div class="w-full flex">
+        <img src="" alt="">
+        <p class="p3-text font-bold text-2xl">No tuviste citas este mes</p>
+      </div>
+    } @else {
+      <div class="flex flex-col gap-4">
+        @for (appointment of pagedAppointments(); track appointment.id) {
+          <app-history-appointment-card [appointment]="appointment"></app-history-appointment-card>
+        }
+      </div>
+    }
+
+    @if (filterdAppointments().length > 0) {
+      <div class="flex items-center justify-between">
+        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+          <div>
+            <p class="text-sm text-gray-700">
+              Mostrando
+              <span class="font-medium">{{  pagedAppointments().length }}</span>
+              de
+              <span class="font-medium">{{ filterdAppointments().length }}</span>
+              resultados
+            </p>
+          </div>
+          <div>
+            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+              <button
+                class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                (click)="goToPrevious()"
+              >
+              <span class="sr-only">Anterior</span>
+              <i class="fa-solid fa-angle-left"></i>
+              </button>
+              @for (page of [].constructor(totalPages()); track $index) {
+                <button
+                class="relative inline-flex items-center px-4 py-2 text-sm font-semibold ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
+                [ngClass]="[
+                  $index + 1 === currentPage ? 'p5-bg text-white' : 'hover:bg-gray-50'
+                ]"
+                (click)="goToPage($index + 1)"
+                >
+                  {{ $index + 1 }}
+              </button>
+              }
+              <button
+                class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                (click)="goToNext()"
+              >
+                <span class="sr-only">Siguiente</span>
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    }
+  </section>
+</app-modal>

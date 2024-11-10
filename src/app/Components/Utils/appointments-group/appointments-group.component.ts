@@ -14,8 +14,9 @@ export class AppointmentsGroupComponent implements OnInit {
 
   @Input() appointments!: Appointment[];
   @Input() isHistory!: boolean;
-  @Input() year!: number;
+  @Input() isWeekly!: boolean;
   displayedAppointments: Appointment[] = [];
+  currentDate = DateTime.now();
   month = DateTime.now().monthLong
   day = DateTime.now().day
   dayString = DateTime.now().weekdayLong;
@@ -29,10 +30,14 @@ export class AppointmentsGroupComponent implements OnInit {
       this.displayedAppointments = this.appointments.filter(x => {
         const isoDate = x.dateTime.replace(' ', 'T');
         const date = DateTime.fromISO(isoDate);
-        return date.year === this.year;
-      });
+        return date.year === this.currentDate.year && date.month === this.currentDate.month && date.startOf('day') < this.currentDate.startOf('day');
+      }).slice(0, 5);
     } else {
       this.displayedAppointments = this.appointments;
     }
+  }
+
+  capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }

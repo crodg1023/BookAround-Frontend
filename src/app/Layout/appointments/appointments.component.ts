@@ -1,23 +1,28 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { AppointmentsGroupComponent } from '../../Components/Utils/appointments-group/appointments-group.component';
 import { DateTime } from 'luxon';
 import { Appointment } from '../../Interfaces/appointment';
 import { Subscription } from 'rxjs';
 import { AppointmentService } from '../../Services/Appointments/appointment.service';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ModalService } from '../../Services/modal.service';
+import { AppointmentsHistoryComponent } from '../../Components/Modals/appointments-history/appointments-history.component';
 
 @Component({
   selector: 'app-appointments',
   standalone: true,
   imports: [
     AppointmentsGroupComponent,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    AppointmentsHistoryComponent
   ],
   templateUrl: './appointments.component.html',
   styleUrl: './appointments.component.scss'
 })
 export class AppointmentsComponent implements OnInit, OnDestroy {
 
+  @ViewChild('historyContainer', { read: ViewContainerRef, static: true }) historyContainer!: ViewContainerRef;
+  componentRef!: ComponentRef<AppointmentsHistoryComponent>;
   today!: DateTime;
   startOfWeek!: DateTime;
   endOfWeek!: DateTime;
@@ -26,7 +31,10 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
   isLoading!: boolean;
   subscription!: Subscription;
 
-  constructor(private appointmentService: AppointmentService) {}
+  constructor(
+    private appointmentService: AppointmentService,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -76,6 +84,12 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
 
       return appointmentDate >= startOfDay && appointmentDate <= endOfDay;
     });
+  }
+  openHistory() {
+    this.historyContainer.clear();
+    this.componentRef = this.historyContainer.createComponent(AppointmentsHistoryComponent);
+    this.componentRef.instance.appointments = this.appointments;
+    this.modalService.openModal('appointmentsHistory');
   }
 
   ngOnDestroy(): void {

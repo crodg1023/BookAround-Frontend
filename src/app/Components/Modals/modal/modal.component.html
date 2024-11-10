@@ -18,17 +18,19 @@
         {{ title }}
       </h3>
       <ng-content></ng-content>
-      <div class="flex gap-4">
-        @if (hasStepBack && step > 1) {
-          <button class="w-full button-2 text-2xl" (click)="stepBackAction()">Retroceder</button>
-        }
-        <button
-          class="w-full p2-bg text-white text-2xl font-bold rounded-lg py-2 px-10 transition-all duration-100 ease-in"
-          [disabled]="buttonActionIsDisabled"
-          [ngClass]="{'button-disabled cursor-not-allowed': buttonActionIsDisabled}"
-          (click)="buttonAction()"
-        >{{ buttonText }}</button>
-      </div>
+      @if (hasActionButtons) {
+        <div class="flex gap-4">
+          @if (hasStepBack && step > 1) {
+            <button class="w-full button-2 text-2xl" (click)="stepBackAction()">Retroceder</button>
+          }
+          <button
+            class="w-full p2-bg text-white text-2xl font-bold rounded-lg py-2 px-10 transition-all duration-100 ease-in"
+            [disabled]="buttonActionIsDisabled"
+            [ngClass]="{'button-disabled cursor-not-allowed': buttonActionIsDisabled}"
+            (click)="buttonAction()"
+          >{{ buttonText }}</button>
+        </div>
+      }
     </div>
   </div>
   </div>

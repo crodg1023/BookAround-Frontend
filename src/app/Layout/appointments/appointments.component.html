@@ -34,7 +34,7 @@
       @if (isLoading) {
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '300px', width: '100%' }"></ngx-skeleton-loader>
       } @else {
-        <app-appointments-group [appointments]="getWeekAppointments()"></app-appointments-group>
+        <app-appointments-group [appointments]="getWeekAppointments()" [isWeekly]="true"></app-appointments-group>
       }
     </div>
   </section>
@@ -45,7 +45,8 @@
     @if (isLoading) {
       <ngx-skeleton-loader appearance="line" [theme]="{ height: '300px', width: '100%' }"></ngx-skeleton-loader>
     } @else {
-      <app-appointments-group [appointments]="appointments" [isHistory]="true" [year]="2010"></app-appointments-group>
+      <app-appointments-group [appointments]="appointments" [isHistory]="true" (click)="openHistory()"></app-appointments-group>
     }
   </section>
+  <div #historyContainer></div>
 </main>
