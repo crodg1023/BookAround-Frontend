@@ -116,6 +116,7 @@ export class ScheduleAppointmentModalComponent implements OnInit {
   }
 
   scheduleAppointment() {
+    this.modalButtonIsDisabled = true;
     if (this.userIsLogged) {
       this.loggedInUserScheduleAppointment();
     } else {
@@ -129,7 +130,7 @@ export class ScheduleAppointmentModalComponent implements OnInit {
       dateTime: this.getIsoDate(),
       status: 'active',
       people: this.numberOfPeople[this.selectedPeopleIndex],
-      reservation_email: this.replacementEmail?.value || 'asd@asd.com'
+      reservation_email: this.replacementEmail?.value
     }
 
     this.appointmentService.postNewAppointment(appointment).subscribe({

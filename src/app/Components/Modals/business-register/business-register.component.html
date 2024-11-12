@@ -107,22 +107,6 @@
             </div>
           }
         }
-
-        @if (currentStep === 3) {
-          <div class="w-full flex flex-col gap-4 rounded-2xl p-4 p6-border">
-            <h3 class="p3-text text-center text-2xl font-medium">Selecciona la categoría de tu comercio</h3>
-            <div class="flex flex-wrap justify-center items-center gap-4">
-              @for (category of categories; track category.id; let i = $index) {
-                <app-category-checkbox
-                  [id]="category.type"
-                  [label]="category.name"
-                  [icon]="category.icon"
-                  (checked)="onChange($event, category.name)"
-                ></app-category-checkbox>
-              }
-            </div>
-          </div>
-        }
       </form>
     </div>
 </app-modal>

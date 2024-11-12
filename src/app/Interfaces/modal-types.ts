@@ -5,5 +5,6 @@ export enum ModalTypes {
   Filters = 'filters',
   Review = 'review',
   AppointmentSchedule = 'appointmentSchedule',
-  AppointmentsHistory = 'appointmentsHistory'
+  AppointmentsHistory = 'appointmentsHistory',
+  CancelCompleteProfile = 'cancelCompleteProfile'
 }

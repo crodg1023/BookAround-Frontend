@@ -24,6 +24,9 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() headerTitle: string = 'Te damos la bienvenida a Book Around';
   @Input() icon!: string;
   @Input() buttonActionIsDisabled: boolean = true;
+  @Input() hasSecondaryAction: boolean = false;
+  @Input() secondaryActionText: string = '';
+  @Input() secondaryAction!: () => void;
   isOpen: boolean = false;
   isVisible: boolean = false;
   subscription!: Subscription;

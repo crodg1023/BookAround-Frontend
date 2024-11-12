@@ -30,6 +30,6 @@ export class UsersService {
 
   private error(error: HttpErrorResponse) {
     if (error.status === 0) return throwError(() => new Error('No ha sido posible establecer conexion'));
-    else return throwError(() => new Error(error.error.message));
+    else return throwError(() => new Error(JSON.stringify(error.error, null, 2)));
   }
 }

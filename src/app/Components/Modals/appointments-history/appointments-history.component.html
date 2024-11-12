@@ -47,8 +47,12 @@
     </div>
 
     @if (filterdAppointments().length <= 0) {
-      <div class="w-full flex">
-        <img src="" alt="">
+      <div class="w-full flex items-center">
+        <img
+          src="assets/images/bookaround-no-appointments.jpg"
+          alt=""
+          class="w-[500px]"
+          >
         <p class="p3-text font-bold text-2xl">No tuviste citas este mes</p>
       </div>
     } @else {

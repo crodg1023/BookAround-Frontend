@@ -1,0 +1,17 @@
+<app-modal
+  [hasHeader]="true"
+  [headerTitle]="modalHeaderTitle"
+  [title]="modalSubtitle"
+  [buttonText]="modalMainButtonText"
+  [buttonActionIsDisabled]="false"
+  [hasSecondaryAction]="true"
+  [secondaryActionText]="modalSecondaryButtonText"
+  [buttonAction]="closeModal"
+  [secondaryAction]="goToHome"
+  modalType="cancelCompleteProfile"
+>
+  <img
+    src="assets/images/bookaround-cancel.jpg"
+    class="w-[500px] mx-auto"
+  >
+</app-modal>

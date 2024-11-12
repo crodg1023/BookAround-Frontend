@@ -13,6 +13,7 @@ export class CategoryCheckboxComponent {
   @Input() label: string = '';
   @Input() id: string = '';
   @Input() icon: string = '';
+  @Input() disabled: boolean = false;
   @Output() checked: EventEmitter<boolean> = new EventEmitter<boolean>();
   isChecked: boolean = false;
 

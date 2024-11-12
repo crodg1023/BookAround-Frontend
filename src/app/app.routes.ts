@@ -11,6 +11,7 @@ import { AnalyticsComponent } from './Layout/analytics/analytics.component';
 import { AppointmentsComponent } from './Layout/appointments/appointments.component';
 import { AccountSummaryComponent } from './Layout/account-summary/account-summary.component';
 import { authGuard } from './Guards/Auth/auth.guard';
+import { CompleteBusinessProfileComponent } from './Views/complete-business-profile/complete-business-profile/complete-business-profile.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Book Around | Home' },
@@ -24,5 +25,6 @@ export const routes: Routes = [
     { path: 'analytics', component: AnalyticsComponent, title: 'Analíticas de tu comercio' },
     { path: 'appointments', component: AppointmentsComponent, title: 'Tus citas' }
   ] },
+  { path: 'complete-profile', component: CompleteBusinessProfileComponent, title: 'Completa tu perfil' },
   { path: '**', component: NotFoundComponent, title: 'Ups! | Página no encontrada' }
 ];

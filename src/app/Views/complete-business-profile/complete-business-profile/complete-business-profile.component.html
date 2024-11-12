@@ -1,0 +1,172 @@
+<app-navbar [isAtHome]="true"></app-navbar>
+<main class="w-full flex flex-col justify-center items-center mt-16">
+  <section class="w-full max-w-[1300px] flex items-center gap-16">
+    <div class="w-full flex flex-col gap-8 text-center">
+      <h1 class="p3-text font-bold text-5xl">Te damos la bienvenida a Book Around</h1>
+      <h2 class="p5-text font-bold text-4xl">Completa tu perfil</h2>
+    </div>
+
+    <img
+      src="assets/images/bookaround-complete-profile.jpg"
+      alt="Persona utilizando un telefono para hacer login"
+      class="w-80 h-80"
+    >
+  </section>
+
+  <form
+    class="w-full max-w-[1300px] flex flex-col gap-8 p-8"
+    [formGroup]="businessRegisterForm"
+    (ngSubmit)="submit()"
+  >
+    <div class="w-full flex flex-col gap-8 rounded-2xl p-4 p6-border">
+      <div class="flex flex-col gap-2 text-center">
+        <h3 class="p5-text text-center font-bold text-2xl">Selecciona las categorías de tu comercio</h3>
+        <p class="p3-text font-medium text-2xl">Pueden ser hasta 3</p>
+        <p class="p3-text font-medium text-2xl">{{ selectedCategories.length }}/{{ maxCategories }}</p>
+      </div>
+      <div class="flex flex-wrap justify-center items-center gap-4">
+        @for (category of categories; track category.id; let i = $index) {
+          <app-category-checkbox
+            [id]="category.type"
+            [label]="category.name"
+            [icon]="category.icon"
+            [disabled]="maxCategoriesSelected"
+            (checked)="onCategorySelected($event, category.name)"
+          ></app-category-checkbox>
+        }
+      </div>
+    </div>
+
+    <div class="w-full flex gap-4">
+      <div class="w-full rounded-2xl p-4 p6-border">
+        <p class="p3-text font-bold text-2xl mb-4">Rango de precio</p>
+        <div class="w-full flex gap-4 mb-4">
+          <div class="w-full p-4 p3-menu-border rounded-2xl">
+            <label for="">Mínimo</label>
+            <input
+              type="number"
+              min="0"
+              class="w-full outline-none"
+              placeholder="$$$"
+              formControlName="minPrice"
+            >
+          </div>
+          <div class="w-full p-4 p3-menu-border rounded-2xl">
+            <label for="">Máximo</label>
+            <input
+              type="number"
+              min="0"
+              class="w-full outline-none"
+              placeholder="$$$"
+              formControlName="maxPrice"
+            >
+          </div>
+        </div>
+        @if (minPrice?.invalid && (minPrice?.dirty || minPrice?.touched)) {
+          <div class="w-full flex items-center gap-4 invalid-input-message">
+            <div class="w-[24px] flex items-center justify-center">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <span *ngIf="minPrice?.errors?.['required']" class="">El precio mínimo es obligatorio</span>
+            <span *ngIf="minPrice?.errors?.['min']" class="">El precio mínimo debe ser mayor a 0</span>
+          </div>
+        }
+        @if (maxPrice?.invalid && (maxPrice?.dirty || maxPrice?.touched)) {
+          <div class="w-full flex items-center gap-4 invalid-input-message">
+            <div class="w-[24px] flex items-center justify-center">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <span *ngIf="maxPrice?.errors?.['required']" class="">El precio máximo es obligatorio</span>
+            <span *ngIf="minPrice?.errors?.['min']" class="">El precio máximo debe ser mayor a 0</span>
+          </div>
+        }
+      </div>
+
+      <div class="w-full rounded-2xl p-4 p6-border">
+        <p class="p3-text font-bold text-2xl mb-4">Horarios</p>
+        <div class="w-full flex gap-4 mb-4">
+          <div class="w-full p-4 p3-menu-border rounded-2xl">
+            <label for="">Apertura</label>
+            <input
+              type="time"
+              class="w-full outline-none"
+              value="00:00"
+              formControlName="openingTime"
+            >
+          </div>
+          <div class="w-full p-4 p3-menu-border rounded-2xl">
+            <label for="">Cierre</label>
+            <input
+              type="time"
+              class="w-full outline-none"
+              value="23:00"
+              formControlName="closingTime"
+            >
+          </div>
+        </div>
+        @if (openingTime?.invalid && (openingTime?.dirty || openingTime?.touched)) {
+          <div class="w-full flex items-center gap-4 invalid-input-message">
+            <div class="w-[24px] flex items-center justify-center">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <span *ngIf="openingTime?.errors?.['required']" class="">La hora de apertura es obligatoria</span>
+          </div>
+        }
+        @if (closingTime?.invalid && (closingTime?.dirty || closingTime?.touched)) {
+          <div class="w-full flex items-center gap-4 invalid-input-message">
+            <div class="w-[24px] flex items-center justify-center">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <span *ngIf="closingTime?.errors?.['required']" class="">La hora de cierre es obligatoria</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="w-full rounded-2xl p-4 p6-border text-center">
+      <p class="p5-text font-bold text-2xl mb-4">Galería</p>
+      <p class="p3-text font-medium text-2xl mb-4">Puedes subir hasta 5 imágenes</p>
+      <img
+        src="assets/svg/cloud-arrow-up-solid.svg"
+        alt="Ilustracion de subir archivos."
+        class="h-[500px] mx-auto"
+      >
+    </div>
+
+    <div class="w-full rounded-2xl p-4 p6-border">
+      <p class="p3-text font-medium text-2xl mb-4">Descripción del negocio</p>
+      <input
+        type="text"
+        class="w-full p-4 p3-menu-border rounded-2xl mb-4"
+        placeholder="Escribe tu descripción"
+        formControlName="description"
+      />
+      @if (description?.invalid && (description?.dirty || description?.touched)) {
+        <div class="w-full flex items-center gap-4 invalid-input-message">
+          <div class="w-[24px] flex items-center justify-center">
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <span *ngIf="description?.errors?.['required']" class="">La descripcion del comercio es obligatoria</span>
+          <span *ngIf="description?.errors?.['minlength']" class="">La descripcion del comercio debe tener al menos 5 caracteres</span>
+          <span *ngIf="description?.errors?.['maxlength']" class="">La descripcion del comercio debe ser menor a 500 caracteres</span>
+        </div>
+      }
+    </div>
+
+    <button
+      class="button-2 font-bold text-2xl"
+      type="button"
+      (click)="cancel()"
+    >
+      Cancelar
+    </button>
+    <button
+      class="button-1 font-bold text-2xl"
+      type="submit"
+    >
+      Finalizar
+    </button>
+  </form>
+  <div #cancelModalContainer></div>
+</main>
+<app-footer></app-footer>
