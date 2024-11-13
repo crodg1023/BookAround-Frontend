@@ -1,40 +1,53 @@
 @if (isVisible) {
   <div class="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-50" [ngClass]="{'is-active': isOpen}">
     <div
-    class="relative max-w-3xl bg-white rounded-2xl shadow-2xl py-8 px-8 transition ease-in duration-300 transform overflow-x-hidden"
-    [ngClass]="{
-      'opacity-100' : isOpen,
-      'opacity-0': !isOpen
-    }"
-  >
-  <button class="absolute top-2 right-3 text-2xl p3-text"><i class="fa-regular fa-circle-xmark" (click)="onClose()"></i></button>
-    @if (hasHeader) {
-      <h2 class="text-[38px] font-bold p3-text text-center">{{ headerTitle }}</h2>
-      <div class="w-full h-1 p6-bg my-4"></div>
-    }
-    <div class="flex flex-col gap-4 mt-4">
-      <h3 class="text-[28px] font-bold p5-text text-center">
-        <i class="{{ icon }}"></i>
-        {{ title }}
-      </h3>
-      <ng-content></ng-content>
-      @if (hasActionButtons) {
-        <div class="flex gap-4" [ngClass]="{'flex-col': hasSecondaryAction}">
-          @if (hasStepBack && step > 1) {
-            <button class="w-full button-2 text-2xl" (click)="stepBackAction()">Retroceder</button>
-          }
-          @if (hasSecondaryAction) {
-            <button class="w-full button-2 text-2xl" (click)="secondaryAction()">{{ secondaryActionText }}</button>
-          }
-          <button
-            class="w-full p2-bg text-white text-2xl font-bold rounded-lg py-2 px-10 transition-all duration-100 ease-in"
-            [disabled]="buttonActionIsDisabled"
-            [ngClass]="{'button-disabled cursor-not-allowed': buttonActionIsDisabled}"
-            (click)="buttonAction()"
-          >{{ buttonText }}</button>
+      class="relative bg-white rounded-2xl shadow-2xl py-8 px-8 transition ease-in duration-300 transform"
+      [ngClass]="{
+        'opacity-100' : isOpen,
+        'opacity-0': !isOpen,
+        'flex' : hasIlustration
+      }"
+    >
+      @if (hasIlustration) {
+        <div class="h-full px-4 py-8 mr-4">
+          <img
+            [src]="ilustrationPath"
+            class="w-64"
+          >
         </div>
       }
+      <button
+        class="absolute top-2 right-3 text-2xl p3-text"
+      >
+        <i class="fa-regular fa-circle-xmark" (click)="onClose()"></i>
+      </button>
+      @if (hasHeader) {
+        <h2 class="text-[38px] font-bold p3-text text-center">{{ headerTitle }}</h2>
+        <div class="w-full h-1 p6-bg my-4"></div>
+      }
+      <div class="flex flex-col gap-4 mt-4">
+        <h3 class="text-[28px] font-bold p5-text text-center">
+          <i class="{{ icon }}"></i>
+          {{ title }}
+        </h3>
+        <ng-content></ng-content>
+        @if (hasActionButtons) {
+          <div class="flex gap-4" [ngClass]="{'flex-col': hasSecondaryAction}">
+            @if (hasStepBack && step > 1) {
+              <button class="w-full button-2 text-2xl" (click)="stepBackAction()">Retroceder</button>
+            }
+            @if (hasSecondaryAction) {
+              <button class="w-full button-2 text-2xl" (click)="secondaryAction()">{{ secondaryActionText }}</button>
+            }
+            <button
+              class="w-full p2-bg text-white text-2xl font-bold rounded-lg py-2 px-10 transition-all duration-100 ease-in"
+              [disabled]="buttonActionIsDisabled"
+              [ngClass]="{'button-disabled cursor-not-allowed': buttonActionIsDisabled}"
+              (click)="buttonAction()"
+            >{{ buttonText }}</button>
+          </div>
+        }
+      </div>
     </div>
-  </div>
   </div>
 }

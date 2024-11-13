@@ -9,6 +9,7 @@ import { PasswordInputComponent } from '../../Utils/password-input/password-inpu
 import { Category } from '../../../Interfaces/category';
 import { CategoriesService } from '../../../Services/Categories/categories.service';
 import { Router } from '@angular/router';
+import { CompleteProfileService } from '../../../Services/Business/complete-profile.service';
 
 @Component({
   selector: 'app-business-register',
@@ -40,6 +41,7 @@ export class BusinessRegisterComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
+    private completeProfileService: CompleteProfileService,
     private router: Router
   ) {}
 
@@ -114,6 +116,7 @@ export class BusinessRegisterComponent implements OnInit, OnDestroy {
       phone: this.phone?.value
     }
 
+    this.completeProfileService.activateRoute();
     this.router.navigate(['/complete-profile'], { state: { data } });
   }
 

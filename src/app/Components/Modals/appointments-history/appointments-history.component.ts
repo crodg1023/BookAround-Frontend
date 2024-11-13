@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 export class AppointmentsHistoryComponent {
 
   modalTitle = 'Historial de tus citas';
+  modalIlustrationPath = 'assets/images/bookaround-appointment-history.jpg'
   appointments : Appointment[] = [];
   currentDate: DateTime = DateTime.now();
   selectedYear = this.currentDate.year;

@@ -13,6 +13,7 @@ import { DateTime } from 'luxon';
 export class AppointmentCardComponent implements OnInit {
   @Input() status!: string;
   @Input() appointment!: Appointment;
+  @Input() isClickable: boolean = false;
   isClient!: boolean;
 
   ngOnInit(): void {

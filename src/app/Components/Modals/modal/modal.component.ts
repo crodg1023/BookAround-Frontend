@@ -27,6 +27,8 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() hasSecondaryAction: boolean = false;
   @Input() secondaryActionText: string = '';
   @Input() secondaryAction!: () => void;
+  @Input() hasIlustration: boolean = false;
+  @Input() ilustrationPath: string = '';
   isOpen: boolean = false;
   isVisible: boolean = false;
   subscription!: Subscription;

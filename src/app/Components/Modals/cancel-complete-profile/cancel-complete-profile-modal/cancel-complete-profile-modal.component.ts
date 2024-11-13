@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalComponent } from '../../modal/modal.component';
 import { ModalService } from '../../../../Services/modal.service';
 import { Router } from '@angular/router';
+import { CompleteProfileService } from '../../../../Services/Business/complete-profile.service';
 
 @Component({
   selector: 'app-cancel-complete-profile-modal',
@@ -21,6 +22,7 @@ export class CancelCompleteProfileModalComponent {
 
   constructor(
     private modalService: ModalService,
+    private completeProfileService: CompleteProfileService,
     private router: Router
   ) {}
 
@@ -28,8 +30,8 @@ export class CancelCompleteProfileModalComponent {
     this.modalService.closeModal('cancelCompleteProfile');
   }
   goToHome = () => {
-
     this.closeModal();
+    this.completeProfileService.deactivateRoute();
     this.router.navigate(['/']);
   }
 }

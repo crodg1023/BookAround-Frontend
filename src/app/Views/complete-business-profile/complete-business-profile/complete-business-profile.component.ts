@@ -14,6 +14,7 @@ import { forkJoin, switchMap } from 'rxjs';
 import { Business } from '../../../Interfaces/business';
 import { User } from '../../../Interfaces/user';
 import { Router } from '@angular/router';
+import { CompleteProfileService } from '../../../Services/Business/complete-profile.service';
 
 @Component({
   selector: 'app-complete-business-profile',
@@ -44,6 +45,7 @@ export class CompleteBusinessProfileComponent implements OnInit {
     private modalService: ModalService,
     private usersService: UsersService,
     private businessService: BusinessService,
+    private completeProfileService: CompleteProfileService,
     private router: Router
   ) {}
 
@@ -163,7 +165,10 @@ export class CompleteBusinessProfileComponent implements OnInit {
           );
         })
       ).subscribe({
-        next: () => this.router.navigate(['/']),
+        next: () => {
+          this.completeProfileService.deactivateRoute();
+          this.router.navigate(['/']);
+        },
         error: err => console.error(err)
       });
     }
