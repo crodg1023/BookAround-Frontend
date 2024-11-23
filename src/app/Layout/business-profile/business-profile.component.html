@@ -1,17 +1,80 @@
 <main class="w-full flex flex-col gap-4 p-4 items-center">
   <section class="w-full flex flex-col gap-4">
     <h1 class="font-bold text-[28px] p3-text">Datos de tu negocio</h1>
-    <form class="flex flex-col gap-4">
+    <form
+      class="flex flex-col gap-4"
+      [formGroup]="updateBusinessForm"
+      (ngSubmit)="updateInfo()"
+    >
       @if (isLoading) {
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
       } @else {
-        @for (item of getObjectEntries(); track $index) {
-          <app-editable-information-item [type]="item[0]" [itemInformation]="item[1]" [label]="translateLabel(item[0])"></app-editable-information-item>
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+          <i class="fa-regular fa-user text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-medium">Nombre del comercio</label>
+            <input
+              type="text"
+              placeholder="Nombre del comercio"
+              class="w-full p6-text text-lg focus:outline-none"
+              formControlName="name"
+            >
+          </div>
+        </div>
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+          <i class="fa-regular fa-envelope text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-medium">Correo electrónico</label>
+            <input
+              type="email"
+              placeholder="Nombre del comercio"
+              class="w-full p6-text text-lg focus:outline-none"
+              formControlName="email"
+            >
+          </div>
+        </div>
+        @if (email?.invalid && (email?.dirty || email?.touched)) {
+          <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+            <div class="w-[24px] flex items-center justify-center">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <span *ngIf="email?.errors?.['email']">El email debe coincidir con una dirección de correo electrónico real</span>
+          </div>
         }
-        <app-change-password></app-change-password>
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+          <i class="fa-solid fa-phone text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-medium">Teléfono</label>
+            <input
+              type="tel"
+              placeholder="Nombre del comercio"
+              class="w-full p6-text text-lg focus:outline-none"
+              formControlName="phone"
+            >
+          </div>
+        </div>
+        @if (phone?.invalid && (phone?.dirty || phone?.touched)) {
+          <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+            <div class="w-[24px] flex items-center justify-center">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <span *ngIf="phone?.errors?.['pattern']" class="">Introduce un numero de telefono correcto</span>
+          </div>
+        }
+        <div class="w-full p6-border p-4 rounded-2xl">
+          <app-places-input-autocomplete formControlName="address"></app-places-input-autocomplete>
+        </div>
+        <div class="rounded-2xl p-4 p6-border">
+          <app-password-input
+            [labelText]="'Contraseña'"
+            [showIcon]="true"
+            formControlName="password"
+          >
+          </app-password-input>
+        </div>
       }
       <button class="button-1 disabled:opacity-70" [disabled]="isLoading">Guardar cambios</button>
     </form>

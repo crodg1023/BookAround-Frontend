@@ -1,0 +1,19 @@
+<article class="w-[400px]">
+  <header class="w-full flex items-center gap-4 mb-2">
+    <img
+      src=""
+      alt="Reported user profile picture"
+      class="w-16 h-16 p5-border rounded-full"
+    >
+    <div class="flex flex-col gap-2">
+      <p class="p3-text font-bold text-2xl">{{ reportedUser.reportable.name }}</p>
+      <p class="p3-text text-lg">Cantidad de reportes: {{ count }}</p>
+      <span class="p3-text text-lg">{{ parsedDate }}</span>
+    </div>
+  </header>
+  <footer>
+    <button class="w-full r3-bg font-bold text-sm text-white rounded-lg py-2">
+      Eliminar usuario
+    </button>
+  </footer>
+</article>

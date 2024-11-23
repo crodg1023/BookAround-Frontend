@@ -9,8 +9,17 @@
     }
   </div>
   <div class="w-full max-h-[500px] h-full flex flex-col gap-4 overflow-y-scroll">
-    @for (appointment of displayedAppointments; track appointment.id) {
-      <app-appointment-card [status]="'active'" [appointment]="appointment"></app-appointment-card>
+    @if (displayedAppointments.length < 1) {
+      <p class="p3-text font-bold text-center">No hay citas que mostrar</p>
+      <img
+        src="assets/images/bookaround-no-appointments-group.jpg"
+        alt="No appointments image"
+        class="w-[200px] h-[200px] mx-auto"
+      >
+    } @else {
+      @for (appointment of displayedAppointments; track appointment.id) {
+        <app-appointment-card [status]="'active'" [appointment]="appointment" [isClickable]="appointmentsAreClickable"></app-appointment-card>
+      }
     }
   </div>
 </article>

@@ -7,6 +7,9 @@ import { UsersService } from '../../Services/Users/users.service';
 import { Business } from '../../Interfaces/business';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { StarsService } from '../../Services/Stars/stars.service';
+import { AppointmentService } from '../../Services/Appointments/appointment.service';
+import { Appointment } from '../../Interfaces/appointment';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-account-summary',
@@ -18,13 +21,15 @@ import { StarsService } from '../../Services/Stars/stars.service';
 export class AccountSummaryComponent implements OnInit {
 
   isClient!: boolean;
+  appointments: Appointment[] = [];
   businessInfo!: Business;
   isLoading: boolean = false;
 
   constructor(
     private businessService: BusinessService,
     private usersService: UsersService,
-    private starsService: StarsService
+    private starsService: StarsService,
+    private appointmentService: AppointmentService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +54,42 @@ export class AccountSummaryComponent implements OnInit {
     }
   }
 
+  fetchAppointments() {
+    if (this.isClient) {
+      this.appointmentService.getCustomerAppointments(Number(sessionStorage.getItem('client_id'))).subscribe(appointments => {
+        this.appointments = appointments
+        this.isLoading = false;
+      });
+    } else {
+      this.appointmentService.getBusinessAppointments(Number(sessionStorage.getItem('business_id'))).subscribe(appointments => {
+        this.appointments = appointments
+        this.isLoading = false;
+      });
+    }
+  }
+
   getScoreStars() {
     return this.starsService.getScoreStars(this.businessInfo.score || 0);
+  }
+
+  getTodaysAppointments() {
+    return this.appointments.filter(x => {
+      const appointmentISODate = x.dateTime.replace(' ', 'T');
+      const appointmentDate = DateTime.fromISO(appointmentISODate);
+      const startOfDay = DateTime.now().startOf('day');
+      const endOfDay = DateTime.now().endOf('day');
+
+      return appointmentDate >= startOfDay && appointmentDate <= endOfDay;
+    });
+  }
+
+  getWeekAppointments() {
+    return this.appointments.filter(x => {
+      const appointmentISODate = x.dateTime.replace(' ', 'T');
+      const appointmentDate = DateTime.fromISO(appointmentISODate);
+      const startOfWeek = DateTime.now().startOf('week');
+      const endOfWeek = DateTime.now().endOf('week');
+      return appointmentDate >= startOfWeek && appointmentDate <= endOfWeek;
+    });
   }
 }

@@ -15,6 +15,7 @@ export class AppointmentsGroupComponent implements OnInit {
   @Input() appointments!: Appointment[];
   @Input() isHistory!: boolean;
   @Input() isWeekly!: boolean;
+  @Input() appointmentsAreClickable: boolean = false;
   displayedAppointments: Appointment[] = [];
   currentDate = DateTime.now();
   month = DateTime.now().monthLong

@@ -20,17 +20,48 @@
 
   <section class="w-full flex flex-col gap-4">
     <h1 class="font-bold text-[28px] p3-text">Tus datos</h1>
-    <form class="flex flex-col gap-4">
+    <form
+      class="flex flex-col gap-4"
+      [formGroup]="updateForm"
+      (ngSubmit)="updateInformation()"
+    >
       @if (isLoading) {
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
       } @else {
-        @for (item of getObjectEntries(); track $index) {
-          <app-editable-information-item [type]="item[0]" [itemInformation]="item[1]" [label]="translateLabel(item[0])" (itemChange)="getValuesChanged($event)"></app-editable-information-item>
-        }
-        <app-change-password></app-change-password>
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+          <i class="fa-regular fa-user text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-medium">Nombre</label>
+            <input
+              type="text"
+              placeholder="Tu nombre"
+              class="w-full p6-text text-lg focus:outline-none"
+              formControlName="name"
+            >
+          </div>
+        </div>
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+          <i class="fa-regular fa-envelope text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-medium">Correo electrónico</label>
+            <input
+              type="text"
+              placeholder="Tu correo electrónico"
+              class="w-full p6-text text-lg focus:outline-none"
+              formControlName="email"
+            >
+          </div>
+        </div>
+        <div class="rounded-2xl p-4 p6-border">
+          <app-password-input
+            [labelText]="'Contraseña'"
+            [showIcon]="true"
+            formControlName="password"
+          ></app-password-input>
+        </div>
       }
-      <button class="button-1 disabled:opacity-70" [disabled]="isLoading" (click)="saveChanges($event)">Guardar cambios</button>
+      <button class="button-1 disabled:opacity-70" [disabled]="isLoading">Guardar cambios</button>
     </form>
   </section>
 </main>

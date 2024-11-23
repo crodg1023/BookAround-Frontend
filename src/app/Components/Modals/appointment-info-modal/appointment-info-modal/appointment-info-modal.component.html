@@ -1,0 +1,121 @@
+<app-modal
+  [hasHeader]="true"
+  [headerTitle]="headerTitle"
+  [title]="modalSubtitle"
+  [icon]="modalSubtitleIcon"
+  [hasActionButtons]="userRole !== 'company'"
+  [buttonText]="primaryButtonText"
+  [secondaryActionText]="secondaryButtonText"
+  [hasSecondaryAction]="hasSecondaryButton"
+  [buttonActionIsDisabled]="false"
+  [buttonAction]="primaryAction"
+  [secondaryAction]="goToRescheduleAppointment"
+  modalType="appointmentInfo"
+>
+  @switch (currentStep) {
+    @case (1) {
+      <section class="w-full flex items-center border-b-[1px] border-[#2A1F55]">
+        <article class="w-full">
+          <p class="p3-text font-medium">Status</p>
+          <div class="flex gap-4 items-center">
+            <div class="w-4 h-4 rounded bg-green-700"></div>
+            <p class="p3-text">{{ appointment.status }}</p>
+          </div>
+        </article>
+        <img
+          src="assets/images/bookaround-appointment-info.jpg"
+          alt="Bookaround calendar ilustration"
+          class="w-44"
+        >
+      </section>
+
+      <section class="w-full flex flex-col gap-1 mt-4 p3-text">
+        <h2 class="font-bold text-2xl">{{ userRole === 'customer' ? appointment.business?.name : appointment.client?.name }}</h2>
+        <p class="flex gap-1 items-center">
+          <i class="fa-solid fa-calendar-days"></i>
+          {{ date }}
+        </p>
+        <p class="flex gap-1 items-center">
+          <i class="fa-solid fa-clock"></i>
+          {{ hour }}
+        </p>
+        <p class="flex gap-1 items-center">
+          <i class="fa-solid fa-user-group"></i>
+          {{ appointment.people }}
+        </p>
+        <p class="flex gap-1 items-center">
+          <i class="fa-solid fa-city"></i>
+          {{ appointment.business?.address }}
+        </p>
+      </section>
+
+      <h3 *ngIf="userRole !== 'company'" class="p5-text font-bold text-lg text-center">¿Qué deseas hacer con esta cita?</h3>
+    }
+    @case (2) {
+      <section class="w-full">
+        <app-calendar></app-calendar>
+      </section>
+    }
+    @case (3) {
+      <section class="w-full">
+        <div class="grid grid-cols-5 gap-4">
+          @for (hour of dayHours; track $index) {
+            <input
+              type="radio"
+              name="{{ hour }}"
+              id="{{ hour }}"
+              class="hidden"
+              (change)="onHourSelected($index)"
+              [checked]="selectedHourIndex === $index"
+            >
+            <label
+              for="{{ hour }}"
+              class="p-4 p6-border rounded-2xl transition duration-100 ease-in"
+              [ngClass]="[
+                selectedHourIndex === $index ? 'p5-bg text-white' : 'p3-text',
+              ]"
+            >
+              <span class="text-lg font-bold">{{ hour }}</span>
+            </label>
+          }
+        </div>
+      </section>
+    }
+    @case (4) {
+      <section class="w-full">
+        <div class="grid grid-cols-5 gap-4">
+          @for(person of numberOfPeople; track $index) {
+              <input
+                type="radio"
+                name="{{ person }}"
+                id="{{ person }}"
+                class="hidden"
+                (change)="onPeopleSelected($index)"
+                [checked]="selectedPeopleIndex === $index"
+              >
+              <label
+                for="{{ person }}"
+                class="cursor-pointer p-4 p3-menu-border rounded-2xl transition duration-100 ease-in text-center"
+                [ngClass]="selectedPeopleIndex === $index ? 'p5-bg text-white' : 'p3-text'"
+              >
+                <span class="text-lg">{{ person }}</span>
+              </label>
+          }
+        </div>
+      </section>
+    }
+    @case (5) {
+      <img
+        src=""
+        alt="Bookaround appointment canceled successfully!"
+      >
+    }
+    @case (6) {
+      <img
+        src="assets/images/bookaround-appointment-success.jpg"
+        alt="Bookaround appointment rescheduled successfully!"
+        class="h-[420px]"
+      >
+    }
+  }
+</app-modal>

@@ -153,6 +153,8 @@ export class CompleteBusinessProfileComponent implements OnInit {
                 categories: this.selectedCategories?.value,
                 comercio_id: newBusiness.id
               };
+
+              console.log(newBusiness.usuario_id);
               const data = {
                 comercio_id: newBusiness.id
               };

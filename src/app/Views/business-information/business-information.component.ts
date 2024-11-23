@@ -18,6 +18,7 @@ import { LoginModalComponent } from '../../Components/Modals/login-modal/login-m
 import { AuthService } from '../../Services/Auth/auth.service';
 import { EchoService } from '../../Services/WebSockets/echo.service';
 import { ScheduleAppointmentModalComponent } from '../../Components/Modals/schedule-appointment-modal/schedule-appointment-modal.component';
+import { LoginToReviewModalComponent } from '../../Components/Modals/login-to-review-modal/login-to-review-modal.component';
 
 @Component({
   selector: 'app-business-information',
@@ -39,9 +40,10 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
   @ViewChild('reviewContainer', { read: ViewContainerRef, static: true })
   reviewContainer!: ViewContainerRef;
   componentRef!: ComponentRef<ReviewModalComponent>
-  loginComponentRef!: ComponentRef<LoginModalComponent>
+  loginComponentRef!: ComponentRef<LoginToReviewModalComponent>
   scheduleAppointmentComponentRef!: ComponentRef<ScheduleAppointmentModalComponent>
   business!: Business;
+  userRole!: string;
   isTruncated: boolean = false;
   isExpanded: boolean = false;
   isLoading: boolean = false;
@@ -71,6 +73,7 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
     this.listenNewReviews();
     this.titleService.setTitle(`${this.business.name} | Book Around`);
     this.getAddressCoordinates();
+    this.checkUserRole();
   }
 
   ngAfterViewInit(): void {
@@ -87,6 +90,10 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
         this.isLoading = false;
       })
     );
+  }
+
+  checkUserRole() {
+    this.authService.userRole$.subscribe(x => this.userRole = x);
   }
 
   listenNewReviews() {
@@ -162,12 +169,8 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
       if (isLogged) {
         this.createReviewModal();
       } else {
-        this.loginComponentRef = this.reviewContainer.createComponent(LoginModalComponent);
-        this.modalService.openModal('login');
-        this.loginComponentRef.instance.loginSuccess.subscribe(() => {
-          this.modalService.closeModal('login');
-          this.createReviewModal();
-        });
+        this.loginComponentRef = this.reviewContainer.createComponent(LoginToReviewModalComponent);
+        this.modalService.openModal('loginToReview');
       }
     });
   }

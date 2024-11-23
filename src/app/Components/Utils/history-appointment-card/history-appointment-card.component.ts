@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Appointment } from '../../../Interfaces/appointment';
 import { DateTime } from 'luxon';
 import { CommonModule } from '@angular/common';
@@ -12,10 +12,18 @@ import { CommonModule } from '@angular/common';
   templateUrl: './history-appointment-card.component.html',
   styleUrl: './history-appointment-card.component.scss'
 })
-export class HistoryAppointmentCardComponent {
+export class HistoryAppointmentCardComponent implements OnInit {
 
   @Input() appointment!: Appointment;
+  isClient: boolean = false;
 
+  ngOnInit(): void {
+    this.checkUserRole();
+  }
+
+  checkUserRole() {
+    sessionStorage.getItem('role') === 'customer' ? this.isClient = true : this.isClient = false;
+  }
   getDate() {
     return DateTime.fromFormat(this.appointment.dateTime, 'yyyy-MM-dd HH:mm:ss').toFormat('dd/MM/yyyy HH:mm').split(' ')[0];
   }

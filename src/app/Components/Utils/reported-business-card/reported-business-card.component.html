@@ -1,0 +1,19 @@
+<article class="w-[400px]">
+  <header class="w-full flex items-center gap-4 mb-2">
+    <div class="flex flex-col gap-2">
+      <p class="p3-text font-bold text-2xl">{{ reportedBusiness.reportable.name }}</p>
+      <span class="p3-text text-lg">Cantidad de reportes: {{ count }}</span>
+      <div class="flex items-center p5-text text-2xl">
+        @for (star of scoreStars; track $index) {
+          <i [ngClass]="star"></i>
+        }
+      </div>
+      <span class="p3-text text-lg">{{ parsedDate }}</span>
+    </div>
+  </header>
+  <footer>
+    <button class="w-full r3-bg font-bold text-sm text-white rounded-lg py-2">
+      Eliminar comercio
+    </button>
+  </footer>
+</article>

@@ -1,0 +1,66 @@
+<app-modal
+ [hasActionButtons]="false"
+  modalType="loginToReview"
+>
+  <h1 class="p3-text font-bold text-4xl">Para poder dejar tu comentario debes iniciar sesión</h1>
+  <section class="w-full flex items-center justify-center gap-2">
+    <img
+      src=""
+      alt="Login to post a review"
+    >
+    <main class="w-full">
+      <h2 class="p5-text font-bold text-3xl text-center mb-4">Ingresa</h2>
+      <span
+        class="text-lg text-center"
+        [ngClass]="hasError ? 'invalid-input-message' : 'text-green-400'"
+      >
+        {{ loginMessage }}
+      </span>
+      <form
+        class="flex flex-col gap-4"
+        [formGroup]="loginForm"
+        (ngSubmit)="login()"
+      >
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+          <i class="fa-regular fa-envelope text-2xl p6-text"></i>
+          <div class="w-full flex flex-col">
+            <label class="p3-text text-lg font-medium">Correo electrónico</label>
+            <input
+              type="text"
+              placeholder="Tu correo electrónico"
+              class="w-full p6-text text-lg focus:outline-none"
+              formControlName="email"
+            >
+          </div>
+        </div>
+        @if (email?.invalid && (email?.dirty || email?.touched)) {
+          <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+            <div class="w-[24px] flex items-center justify-center">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <span *ngIf="email?.errors?.['required']">El email es obligatorio</span>
+            <span *ngIf="email?.errors?.['email']">El email debe coincidir con una dirección de correo electrónico real</span>
+          </div>
+        }
+        <div class="rounded-2xl p-4 p6-border">
+          <app-password-input
+            [labelText]="'Contraseña'"
+            [showIcon]="true"
+            formControlName="password"
+          ></app-password-input>
+        </div>
+        @if (password?.invalid && (password?.dirty || password?.touched)) {
+          <div class="w-full flex items-center gap-4 px-4 invalid-input-message">
+            <div class="w-[24px] flex items-center justify-center">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <span *ngIf="password?.errors?.['required']">La contraseña es obligatoria</span>
+          </div>
+        }
+        <button class="button-1 font-bold text-2xl">
+          Iniciar sesión
+        </button>
+      </form>
+    </main>
+  </section>
+</app-modal>

@@ -36,11 +36,11 @@
       <div class="w-full flex gap-4">
         <div class="w-full flex flex-col gap-2">
           <h3 class="p3-text text-lg font-medium">Agendadas para hoy</h3>
-          <app-appointments-group></app-appointments-group>
+          <app-appointments-group [appointments]="getTodaysAppointments()"></app-appointments-group>
         </div>
         <div class="w-full flex flex-col gap-2">
           <h3 class="p3-text text-lg font-medium">Agendadas para esta semana</h3>
-          <app-appointments-group></app-appointments-group>
+          <app-appointments-group [appointments]="getWeekAppointments()" [isWeekly]="true"></app-appointments-group>
         </div>
       </div>
       <div class="w-full">

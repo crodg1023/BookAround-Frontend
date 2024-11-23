@@ -13,6 +13,12 @@ import { AccountSummaryComponent } from './Layout/account-summary/account-summar
 import { authGuard } from './Guards/Auth/auth.guard';
 import { CompleteBusinessProfileComponent } from './Views/complete-business-profile/complete-business-profile/complete-business-profile.component';
 import { completeProfileGuard } from './Guards/CompleteProfile/complete-profile.guard';
+import { AdminPanelComponent } from './Views/admin-panel/admin-panel.component';
+import { WelcomeAdminPanelComponent } from './Layout/welcome-admin-panel/welcome-admin-panel.component';
+import { ReportedCustomersComponent } from './Layout/reported-customers/reported-customers.component';
+import { ReportedBusinessComponent } from './Layout/reported-business/reported-business.component';
+import { ReportedReviewsComponent } from './Layout/reported-reviews/reported-reviews.component';
+import { adminGuard } from './Guards/Roles/admin.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Book Around | Home' },
@@ -24,7 +30,13 @@ export const routes: Routes = [
     { path: '', component: AccountSummaryComponent, title: 'Resumen de tu cuenta' },
     { path: 'profile', component: ProfileComponent, title: 'Tu perfil' },
     { path: 'analytics', component: AnalyticsComponent, title: 'Analíticas de tu comercio' },
-    { path: 'appointments', component: AppointmentsComponent, title: 'Tus citas' }
+    { path: 'appointments', component: AppointmentsComponent, title: 'Tus citas' },
+  ] },
+  { path: 'admin', component: AdminPanelComponent, title: 'Admin | Panel de control', canActivate: [authGuard, adminGuard], children: [
+    { path: '', component: WelcomeAdminPanelComponent },
+    { path: 'customers', component: ReportedCustomersComponent, title: 'Usuarios reportados' },
+    { path: 'business', component: ReportedBusinessComponent, title: 'Comercios reportados' },
+    { path: 'reviews', component: ReportedReviewsComponent, title: 'Reseñas reportados' },
   ] },
   { path: 'complete-profile', component: CompleteBusinessProfileComponent, title: 'Completa tu perfil', canActivate: [completeProfileGuard] },
   { path: '**', component: NotFoundComponent, title: 'Ups! | Página no encontrada' }

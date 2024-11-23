@@ -1,6 +1,9 @@
 <section class="w-full flex flex-col items-center justify-center gap-16">
   <div class="w-full max-w-[1300px] flex gap-16">
-    <div class="w-2/3 flex flex-col gap-4">
+    <div
+      class="flex flex-col gap-4"
+      [ngClass]="userRole === 'company' ? 'w-full' : 'w-2/3'"
+    >
       <div
         class="w-full h-[500px] rounded-2xl p3-border"
         [ngStyle]="{'background-image': business.pictures ? 'url(' + business.pictures + ')' : 'none'}"
@@ -42,10 +45,12 @@
         </div>
       </div>
     </div>
-    <div class="w-1/3 h-full flex flex-col gap-4">
-      <app-calendar></app-calendar>
-      <button class="button-1 text-2xl self-center" (click)="openScheduleAppointmentModal()">Agenda tu cita</button>
-    </div>
+    @if (userRole !== 'company') {
+      <div class="w-1/3 h-full flex flex-col gap-4">
+        <app-calendar></app-calendar>
+        <button class="button-1 text-2xl self-center" (click)="openScheduleAppointmentModal()">Agenda tu cita</button>
+      </div>
+    }
   </div>
   <div class="w-full max-w-[1300px] flex items-center justify-center gap-8">
     @if (displayedReviews.length > 0) {

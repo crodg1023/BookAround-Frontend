@@ -25,6 +25,7 @@ export class UserMenuButtonComponent implements OnInit, OnDestroy {
   isOpen: boolean = false;
   isVisible: boolean = false;
   userHasLoggedIn!: boolean;
+  userRole!: string;
 
   constructor(
     private modalService: ModalService,
@@ -34,6 +35,7 @@ export class UserMenuButtonComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.authService.isLogged$.subscribe(value => this.userHasLoggedIn = value);
+    this.checkUserRole();
   }
 
   toggleMenu() {
@@ -41,6 +43,10 @@ export class UserMenuButtonComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.isVisible = !this.isVisible;
     }, 100);
+  }
+
+  checkUserRole() {
+    this.authService.userRole$.subscribe(x => this.userRole = x);
   }
 
   onLoginClick() {
@@ -65,7 +71,11 @@ export class UserMenuButtonComponent implements OnInit, OnDestroy {
     this.isVisible = false;
   }
   onControlPanelClick() {
-    this.router.navigate(['/control-panel']);
+    if (this.userRole === 'admin') {
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/control-panel']);
+    }
   }
   onProfileClick() {
     this.router.navigate(['/control-panel/profile']);

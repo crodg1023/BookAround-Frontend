@@ -11,13 +11,16 @@ export class AuthService {
   constructor(private usersService: UsersService) { }
 
   private isLogged = new BehaviorSubject<boolean>(this.token());
+  private userRole = new BehaviorSubject<string>(this.role() || '');
   isLogged$ = this.isLogged.asObservable();
+  userRole$ = this.userRole.asObservable();
 
   login(credentials: Credentials) {
     return this.usersService.login(credentials).pipe(tap({
       next: (x: any) => {
         console.log(x);
         const { token, role, client_id, business_id, email } = x;
+        this.userRole.next(role);
         this.setUserSession(token, role, client_id, business_id, email);
         this.isLogged.next(true);
       }
@@ -39,5 +42,9 @@ export class AuthService {
 
   private token() {
     return !!sessionStorage.getItem('token');
+  }
+
+  private role() {
+    return sessionStorage.getItem('role');
   }
 }

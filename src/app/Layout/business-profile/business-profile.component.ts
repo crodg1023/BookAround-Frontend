@@ -7,15 +7,19 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CommonModule } from '@angular/common';
 import { PasswordInputComponent } from '../../Components/Utils/password-input/password-input.component';
 import { ChangePasswordComponent } from '../../Components/Utils/change-password/change-password.component';
+import { PlacesInputAutocompleteComponent } from '../../Components/Utils/places-input-autocomplete/places-input-autocomplete.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UsersService } from '../../Services/Users/users.service';
 
 @Component({
   selector: 'app-business-profile',
   standalone: true,
   imports: [
     CommonModule,
-    EditableInformationItemComponent,
-    ChangePasswordComponent,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    PlacesInputAutocompleteComponent,
+    PasswordInputComponent,
+    ReactiveFormsModule
   ],
   templateUrl: './business-profile.component.html',
   styleUrl: './business-profile.component.scss'
@@ -23,50 +27,79 @@ import { ChangePasswordComponent } from '../../Components/Utils/change-password/
 export class BusinessProfileComponent implements OnInit, OnDestroy {
 
   subscription!: Subscription;
+  updateBusinessForm!: FormGroup;
+  business!: Business;
   information!: Object;
   isLoading: boolean = false;
 
-  constructor(private businessService: BusinessService) {}
+  constructor(
+    private businessService: BusinessService,
+    private userService: UsersService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
     this.getBusinessInformation();
   }
 
+  get name() {
+    return this.updateBusinessForm.get('name');
+  }
+  get email() {
+    return this.updateBusinessForm.get('email');
+  }
+  get phone() {
+    return this.updateBusinessForm.get('phone');
+  }
+  get address() {
+    return this.updateBusinessForm.get('address');
+  }
+  get password() {
+    return this.updateBusinessForm.get('password');
+  }
+
   getBusinessInformation() {
     const business_id = sessionStorage.getItem('business_id');
     if (business_id) {
       this.subscription = this.businessService.getBusinessById(+business_id).subscribe(info => {
-        this.simplifyBusinessInformation(info);
+        this.business = info;
+        this.defineForm();
         this.isLoading = false;
       });
     }
   }
 
-  simplifyBusinessInformation(obj: Business) {
-    const { name, address, phone, user } = obj;
-    const email = user?.email;
-    const newObject = { name, address, phone, email };
-    this.information = newObject;
+  defineForm() {
+    this.updateBusinessForm = this.formBuilder.group({
+      name: this.business.name,
+      email: [this.business.user?.email, Validators.email],
+      phone: [this.business.phone, Validators.pattern(/^\d+$/)],
+      address: this.business.address,
+      password: ''
+    });
   }
 
-  getObjectEntries() {
-    if (this.information) return Object.entries(this.information);
-    else return null;
-  }
+  updateInfo() {
+    const businessData = {
+      name: this.name?.value,
+      phone: this.phone?.value,
+      address: this.address?.value,
+    }
 
-  translateLabel(label: string) : string {
-    switch(label) {
-      case 'name':
-        return 'Nombre del negocio';
-      case 'address':
-        return 'Dirección';
-      case 'phone':
-        return 'Teléfono';
-      case 'email':
-        return 'Correo electrónico';
-      default:
-        return '';
+    const userData: any = {
+      eamil: this.email?.value
+    }
+
+    if (this.password?.value) {
+      userData.password = this.password.value;
+    }
+
+    if (this.updateBusinessForm.valid) {
+      this.businessService.updateBusiness(businessData, this.business.id ?? 0).subscribe(x => console.log(x));
+      this.userService.updateUserInformation(userData, this.business.user?.id ?? 0).subscribe(x => console.log(x));
+    } else {
+      console.log('no valido!');
     }
   }
 

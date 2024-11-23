@@ -1,4 +1,8 @@
-<article class="w-full h-14 flex gap-1 rounded-[4px] p6-border">
+<article
+  class="w-full h-14 flex gap-1 rounded-[4px] p6-border"
+  [ngClass]="{ 'cursor-pointer': isClickable }"
+  (click)="openAppointmentInfo()"
+>
   <div
     class="w-2 h-full"
     [ngClass]="{'g1-bg': appointment.status === 'active', 'r2-bg': appointment.status === 'canceled', 'bg-[#548BDF]' : appointment.status === 'fulfilled'}"
@@ -12,3 +16,4 @@
     </div>
   </div>
 </article>
+<div #appointmentInfoContainer></div>
