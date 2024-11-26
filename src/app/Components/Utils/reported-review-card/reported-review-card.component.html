@@ -20,8 +20,11 @@
     <main class="w-full">
       <p class="p3-text">{{ reportedReview.reportable.content }}</p>
     </main>
-    <footer>
-      <button class="w-full r3-bg font-bold text-sm text-white rounded-lg py-2">
+    <footer class="mt-1">
+      <button
+        class="w-full r3-bg font-bold text-sm text-white rounded-lg py-2"
+        (click)="deleteReview()"
+      >
         Eliminar reseña
       </button>
     </footer>

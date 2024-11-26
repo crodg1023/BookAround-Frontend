@@ -1,0 +1,18 @@
+<app-modal
+  [buttonText]="buttonText"
+  [buttonAction]="report"
+  [buttonActionIsDisabled]="false"
+  modalType="report"
+>
+  <p class="text-center p3-text font-bold text-2xl">{{ modalText }}</p>
+  <p>¿Por qué quieres reportar este {{ translateType() }}?</p>
+  <select
+    name="report-select"
+    class="w-full p-2 rounded-xl outline-none p6-border"
+    [(ngModel)]="selectedOption"
+  >
+    @for (option of reportableOptions; track $index) {
+      <option value="{{ option }}">{{ option }}</option>
+    }
+  </select>
+</app-modal>

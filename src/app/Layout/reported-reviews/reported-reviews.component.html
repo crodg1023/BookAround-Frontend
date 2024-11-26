@@ -6,12 +6,17 @@
 
   <p class="flex items-center gap-2 p2-text font-bold mb-4">
     Reseñas reportadas
-    <span class="r1-color">01</span>
+    <span class="r1-color">{{groupReportsByReviews().length }}</span>
   </p>
 
   <div class="w-full grid grid-cols-2 gap-8 p-4 p6-border rounded-2xl">
     @for (mapItem of groupReportsByReviews(); track mapItem.review.id) {
-      <app-reported-review-card [reportedReview]="mapItem.review" [count]="mapItem.count"></app-reported-review-card>
+      <app-reported-review-card
+        [reportedReview]="mapItem.review"
+        [count]="mapItem.count"
+
+      >
+      </app-reported-review-card>
     }
   </div>
 </section>

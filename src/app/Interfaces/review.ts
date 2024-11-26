@@ -4,6 +4,7 @@ export interface Review {
   client?: {
     name: string;
     picture: string;
+    id: number;
   };
   cliente_id: number;
   score: number;

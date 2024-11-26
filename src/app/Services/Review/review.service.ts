@@ -24,6 +24,10 @@ export class ReviewService {
     return this.http.get<Review[]>(`http://bookaround-backend.lo/api/reviews/companies/${id}`).pipe(retry(2), catchError(this.error));
   }
 
+  deleteReview(id: number) {
+    return this.http.delete(`${this.URL}/${id}`).pipe(catchError(this.error));
+  }
+
   private error(error: HttpErrorResponse) {
     if (error.status === 0) return throwError(() => new Error('No ha sido posible establecer conexion'));
     else return throwError(() => new Error(error.error.message));

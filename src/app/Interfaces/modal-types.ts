@@ -8,5 +8,6 @@ export enum ModalTypes {
   AppointmentSchedule = 'appointmentSchedule',
   AppointmentsHistory = 'appointmentsHistory',
   CancelCompleteProfile = 'cancelCompleteProfile',
-  AppointmentInfo = 'appointmentInfo'
+  AppointmentInfo = 'appointmentInfo',
+  Report = 'report'
 }

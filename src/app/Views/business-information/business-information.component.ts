@@ -19,6 +19,7 @@ import { AuthService } from '../../Services/Auth/auth.service';
 import { EchoService } from '../../Services/WebSockets/echo.service';
 import { ScheduleAppointmentModalComponent } from '../../Components/Modals/schedule-appointment-modal/schedule-appointment-modal.component';
 import { LoginToReviewModalComponent } from '../../Components/Modals/login-to-review-modal/login-to-review-modal.component';
+import { ReportModalComponent } from '../../Components/Modals/report-modal/report-modal.component';
 
 @Component({
   selector: 'app-business-information',
@@ -29,6 +30,7 @@ import { LoginToReviewModalComponent } from '../../Components/Modals/login-to-re
     CalendarComponent,
     ReviewModalComponent,
     ScheduleAppointmentModalComponent,
+    ReportModalComponent,
     GoogleMapsModule
   ],
   templateUrl: './business-information.component.html',
@@ -42,6 +44,7 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
   componentRef!: ComponentRef<ReviewModalComponent>
   loginComponentRef!: ComponentRef<LoginToReviewModalComponent>
   scheduleAppointmentComponentRef!: ComponentRef<ScheduleAppointmentModalComponent>
+  reportComponentRef!: ComponentRef<ReportModalComponent>
   business!: Business;
   userRole!: string;
   isTruncated: boolean = false;
@@ -163,6 +166,13 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
     this.modalService.openModal('appointmentSchedule');
   }
 
+  createReportModal() {
+    this.reportComponentRef = this.reviewContainer.createComponent(ReportModalComponent);
+    this.reportComponentRef.instance.type = 'business';
+    this.reportComponentRef.instance.reportableID = this.business.id ?? 0;
+    this.modalService.openModal('report');
+  }
+
   openReviewModal() {
     this.reviewContainer.clear();
     this.authService.isLogged$.subscribe(isLogged => {
@@ -173,6 +183,11 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
         this.modalService.openModal('loginToReview');
       }
     });
+  }
+
+  openReportModal() {
+    this.reviewContainer.clear();
+    this.createReportModal();
   }
 
   openScheduleAppointmentModal() {

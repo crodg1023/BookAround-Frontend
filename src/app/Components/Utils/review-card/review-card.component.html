@@ -1,5 +1,4 @@
-<article class="w-[400px]">
-  <div class="flex flex-col gap-2 items-start">
+<article class="w-[400px] flex flex-col gap-2 items-start">
     <div class="flex gap-4 items-center">
       @if (isLoading) {
         <ngx-skeleton-loader appearance="circle" [theme]="{ height: '64px', width: '64px', borderRadius: '100%' }"></ngx-skeleton-loader>
@@ -43,5 +42,17 @@
         <i class="fa-solid fa-arrow-right"></i>
       </button>
     }
-  </div>
+    <button
+      class="w-full button-1"
+      (click)="openReportModal('customer')"
+    >
+      Reportar usuario
+    </button>
+    <button
+    class="w-full button-2"
+    (click)="openReportModal('review')"
+  >
+    Reportar reseña
+  </button>
 </article>
+<div #reportContainer></div>

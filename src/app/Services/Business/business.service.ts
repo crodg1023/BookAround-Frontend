@@ -32,6 +32,10 @@ export class BusinessService {
     return this.http.put(`${this.URL}/${id}`, info).pipe(catchError(this.error));
   }
 
+  deleteBusiness(id: number) {
+    return this.http.delete(`${this.URL}/${id}`).pipe(catchError(this.error));
+  }
+
   private error(error: HttpErrorResponse) {
     if (error.status === 0) return throwError(() => new Error('No ha sido posible establecer conexion'));
     else return throwError(() => new Error(JSON.stringify(error.error, null, 2)));

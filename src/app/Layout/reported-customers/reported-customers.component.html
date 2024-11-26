@@ -6,12 +6,17 @@
 
   <p class="flex items-center gap-2 p2-text font-bold mb-4">
     Usuarios reportados
-    <span class="r1-color">01</span>
+    <span class="r1-color">{{ groupedReportedCustomers.length }}</span>
   </p>
 
   <div class="w-full grid grid-cols-2 gap-8 p-4 p6-border rounded-2xl">
-    @for (mapItem of groupReportsByUser(); track mapItem.customer.id) {
-      <app-reported-user-card [reportedUser]="mapItem.customer" [count]="mapItem.count"></app-reported-user-card>
+    @for (mapItem of groupedReportedCustomers; track mapItem.customer.id) {
+      <app-reported-user-card
+        [reportedUser]="mapItem.customer"
+        [count]="mapItem.count"
+        (deletedUser)="handleDeletedUser($event)"
+      >
+      </app-reported-user-card>
     }
   </div>
 </section>

@@ -15,7 +15,7 @@ import { count } from 'rxjs';
 export class ReportedBusinessComponent implements OnInit {
 
   reportedBusiness: any[] = [];
-  groupedReportedBusiness = [];
+  groupedReportedBusiness: any = [];
 
   constructor(
     private reportsService: ReportsService
@@ -26,7 +26,10 @@ export class ReportedBusinessComponent implements OnInit {
   }
 
   fetchReportedBusiness() {
-    this.reportsService.getReportedBusiness().subscribe(x => this.reportedBusiness = x);
+    this.reportsService.getReportedBusiness().subscribe(x => {
+      this.reportedBusiness = x;
+      this.groupedReportedBusiness = this.groupReportsByBusiness();
+    });
   }
 
   groupReportsByBusiness() {
@@ -43,5 +46,9 @@ export class ReportedBusinessComponent implements OnInit {
     });
 
     return [...reportedBusinessMap.values()];
+  }
+
+  handleDeletedBusiness(id: number) {
+    this.groupedReportedBusiness = this.groupedReportedBusiness.filter((x: any) => x.business.reportable.id !== id);
   }
 }

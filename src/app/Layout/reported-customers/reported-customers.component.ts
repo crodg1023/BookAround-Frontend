@@ -16,6 +16,7 @@ import { AuthService } from '../../Services/Auth/auth.service';
 export class ReportedCustomersComponent implements OnInit {
 
   reportedCustomers: any[] = [];
+  groupedReportedCustomers: any[] = [];
 
   constructor(
     private reportsService: ReportsService,
@@ -30,6 +31,7 @@ export class ReportedCustomersComponent implements OnInit {
   fetchReportedCustomers() {
     this.reportsService.getReportedCustomers().subscribe(x => {
       this.reportedCustomers = x;
+      this.groupedReportedCustomers = this.groupReportsByUser();
     });
   }
 
@@ -47,6 +49,10 @@ export class ReportedCustomersComponent implements OnInit {
     });
 
     return [...reportsMap.values()];
+  }
+
+  handleDeletedUser(id: number) {
+    this.groupedReportedCustomers = this.groupedReportedCustomers.filter((x: any) => x.customer.reportable.id !== id);
   }
 
 }

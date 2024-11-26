@@ -19,9 +19,9 @@ export class AuthService {
     return this.usersService.login(credentials).pipe(tap({
       next: (x: any) => {
         console.log(x);
-        const { token, role, client_id, business_id, email } = x;
+        const { token, role, client_id, business_id, email, id } = x;
         this.userRole.next(role);
-        this.setUserSession(token, role, client_id, business_id, email);
+        this.setUserSession(token, role, client_id, business_id, email, id);
         this.isLogged.next(true);
       }
     }));
@@ -32,10 +32,11 @@ export class AuthService {
     this.isLogged.next(false);
   }
 
-  private setUserSession(token: string, role: string, client_id: string, business_id: string, email: string) {
+  private setUserSession(token: string, role: string, client_id: string, business_id: string, email: string, id: string) {
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('role', role);
     sessionStorage.setItem('email', email);
+    sessionStorage.setItem('id', id);
     if (client_id) sessionStorage.setItem('client_id', client_id);
     if (business_id) sessionStorage.setItem('business_id', business_id);
   }

@@ -24,7 +24,9 @@ export class ReportedReviewsComponent implements OnInit {
   }
 
   fetchReportedReviews() {
-    this.reportsService.getReportedReviews().subscribe(x => this.reportedReviews = x);
+    this.reportsService.getReportedReviews().subscribe(x => {
+      this.reportedReviews = x;
+    });
   }
 
   groupReportsByReviews() {

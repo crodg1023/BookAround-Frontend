@@ -6,12 +6,17 @@
 
   <p class="flex items-center gap-2 p2-text font-bold mb-4">
     Comercios reportados
-    <span class="r1-color">01</span>
+    <span class="r1-color">{{ groupedReportedBusiness.length }}</span>
   </p>
 
   <div class="w-full grid grid-cols-2 gap-8 p-4 p6-border rounded-2xl">
-    @for (mapItem of groupReportsByBusiness(); track mapItem.business.id) {
-      <app-reported-business-card [reportedBusiness]="mapItem.business" [count]="mapItem.count"></app-reported-business-card>
+    @for (mapItem of groupedReportedBusiness; track mapItem.business.id) {
+      <app-reported-business-card
+        [reportedBusiness]="mapItem.business"
+        [count]="mapItem.count"
+        (reportedBusinessDeleted)="handleDeletedBusiness($event)"
+      >
+      </app-reported-business-card>
     }
   </div>
 </section>

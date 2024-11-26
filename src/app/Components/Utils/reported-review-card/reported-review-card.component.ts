@@ -4,6 +4,7 @@ import { StarsService } from '../../../Services/Stars/stars.service';
 import { CommonModule } from '@angular/common';
 import { ClientService } from '../../../Services/Client/client.service';
 import { Client } from '../../../Interfaces/client';
+import { ReviewService } from '../../../Services/Review/review.service';
 
 @Component({
   selector: 'app-reported-review-card',
@@ -23,7 +24,8 @@ export class ReportedReviewCardComponent implements OnInit {
 
   constructor(
     private starsService: StarsService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private reviewService: ReviewService
   ) {}
 
   ngOnInit(): void {
@@ -43,5 +45,9 @@ export class ReportedReviewCardComponent implements OnInit {
       this.reportedReviewAuthor = x;
       this.isLoading = false;
     });
+  }
+
+  deleteReview() {
+
   }
 }

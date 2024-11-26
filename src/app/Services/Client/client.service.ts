@@ -27,6 +27,10 @@ export class ClientService {
     return this.http.put(`${this.BASE_URL}/${id}`, clientInfo).pipe(catchError(this.error));
   }
 
+  deleteClient(id: number) {
+    return this.http.delete(`${this.BASE_URL}/${id}`).pipe(catchError(this.error));
+  }
+
   private error(error: HttpErrorResponse) {
     if (error.status === 0) return throwError(() => new Error('No ha sido posible establecer conexion'));
     else return throwError(() => new Error(error.error.errors));
