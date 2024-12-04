@@ -8,11 +8,19 @@ import { RatingStarsComponent } from '../../Utils/rating-stars/rating-stars.comp
 import { FiltersService } from '../../../Services/Filters/filters.service';
 import { Filters } from '../../../Interfaces/filters';
 import { Router } from '@angular/router';
+import { PlacesInputAutocompleteComponent } from '../../Utils/places-input-autocomplete/places-input-autocomplete.component';
 
 @Component({
   selector: 'app-filters-modal',
   standalone: true,
-  imports: [ModalComponent, CommonModule, ReactiveFormsModule, NgxSliderModule, RatingStarsComponent],
+  imports: [
+    ModalComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    NgxSliderModule,
+    RatingStarsComponent,
+    PlacesInputAutocompleteComponent
+  ],
   templateUrl: './filters-modal.component.html',
   styleUrl: './filters-modal.component.scss'
 })
@@ -28,11 +36,21 @@ export class FiltersModalComponent implements OnInit {
   }
   filters!: Filters;
 
-  constructor(private formBuilder: FormBuilder, private modalService: ModalService, private FiltersService: FiltersService, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private modalService: ModalService,
+    private FiltersService: FiltersService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.filtersForm = this.formBuilder.group({
+      location: ''
     });
+  }
+
+  get location() {
+    return this.filtersForm.get('location');
   }
 
   handleRating(rating: number) {
@@ -41,8 +59,7 @@ export class FiltersModalComponent implements OnInit {
 
   filter = () => {
     this.filters = {
-      country: '',
-      city: '',
+      location: this.location?.value,
       rating: this.rating,
       minPrice: this.from,
       maxPrice: this.to

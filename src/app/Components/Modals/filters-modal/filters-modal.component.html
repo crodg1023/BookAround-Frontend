@@ -5,17 +5,15 @@
   [buttonActionIsDisabled]="false"
   modalType="filters"
 >
-  <form class="flex flex-col gap-8" [formGroup]="filtersForm">
+  <form class="w-[600px] flex flex-col gap-8" [formGroup]="filtersForm">
     <div class="p-4 flex flex-col gap-4 p6-border rounded-2xl">
       <h3 class="p3-text font-bold text-lg">Ubicación</h3>
-      <div class="flex items-center gap-4">
-        <select name="" id="" class="px-4 py-2 p3-text font-medium text-lg p3-menu-border rounded-[4px]">
-          <option value="">Selecciona tu país</option>
-        </select>
-        <select name="" id="" class="px-4 py-2 p3-text font-medium text-lg p3-menu-border rounded-[4px]">
-          <option value="">Selecciona tu ciudad</option>
-        </select>
-      </div>
+      <app-places-input-autocomplete
+        [showLabel]="false"
+        [placeholder]="'Escribe una ubicación'"
+        formControlName="location"
+      >
+      </app-places-input-autocomplete>
     </div>
     <div class="p-4 flex flex-col gap-4 p6-border rounded-2xl">
       <h3 class="p3-text font-bold text-lg">Puntuación</h3>

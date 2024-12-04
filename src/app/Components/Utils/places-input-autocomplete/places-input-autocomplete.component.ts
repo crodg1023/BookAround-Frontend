@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-places-input-autocomplete',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule
+  ],
   templateUrl: './places-input-autocomplete.component.html',
   styleUrl: './places-input-autocomplete.component.scss',
   providers: [
@@ -18,6 +21,8 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 })
 export class PlacesInputAutocompleteComponent implements AfterViewInit, ControlValueAccessor {
   @ViewChild('inputField') inputField!: ElementRef;
+  @Input() showLabel: boolean = true;
+  @Input() placeholder: string = 'Dirección de tu comercio';
   autocomplete!: google.maps.places.Autocomplete;
   input!: string;
   onChange: any = () => {};

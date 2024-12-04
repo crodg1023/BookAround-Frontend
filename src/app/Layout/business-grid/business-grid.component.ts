@@ -86,6 +86,7 @@ export class BusinessGridComponent implements OnInit, OnDestroy {
   }
 
   showAll() {
+    console.log(this.currentIndex())
     this.displayed = this.business.slice(0, this.count);
     this.showing = this.displayed.length;
     this.currentIndex.set(this.count);
@@ -98,11 +99,13 @@ export class BusinessGridComponent implements OnInit, OnDestroy {
         const matchesName = !filters.name || this.removeAccent(business.name).toLocaleLowerCase().includes(this.removeAccent(filters.name).toLocaleLowerCase());
         const matchesRating = !filters.rating || ((business.score ?? 0) >= filters.rating && (business.score ?? 0) < filters.rating + 1);
         const matchesPrice = (!filters.minPrice || (business.price ?? 0) >= filters.minPrice) && (!filters.maxPrice || (business.price ?? 0) <= filters.maxPrice);
+        const matchesLocation = !filters.location || business.address.toLocaleLowerCase().includes(filters.location.toLocaleLowerCase());
 
-        return matchesName && matchesRating && matchesPrice;
-      }).sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+        return matchesName && matchesRating && matchesPrice && matchesLocation;
+      }).sort((a, b) => (b.score ?? 0) + (a.score ?? 0));
     this.showing = this.displayed.length;
     this.hasFiltered = true;
+    console.log(this.currentIndex);
   }
 
   removeAccent(string: string) {

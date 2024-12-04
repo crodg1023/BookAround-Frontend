@@ -1,6 +1,5 @@
 export interface Filters {
-  country?: string,
-  city?: string,
+  location?: string,
   rating?: number,
   minPrice?: number,
   maxPrice?: number,
