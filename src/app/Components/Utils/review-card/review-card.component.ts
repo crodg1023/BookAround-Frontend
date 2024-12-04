@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ComponentRef, ElementRef, Input, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ComponentRef, ElementRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Review } from '../../../Interfaces/review';
 import { StarsService } from '../../../Services/Stars/stars.service';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ReportModalComponent } from '../../Modals/report-modal/report-modal.component';
 import { ModalService } from '../../../Services/modal.service';
+import { AuthService } from '../../../Services/Auth/auth.service';
 
 @Component({
   selector: 'app-review-card',
@@ -17,7 +18,7 @@ import { ModalService } from '../../../Services/modal.service';
   templateUrl: './review-card.component.html',
   styleUrl: './review-card.component.scss'
 })
-export class ReviewCardComponent implements AfterViewInit {
+export class ReviewCardComponent implements AfterViewInit, OnInit {
 
   @ViewChild('reviewContent') reviewContent!: ElementRef;
   @ViewChild('reportContainer', { read: ViewContainerRef, static: true })
@@ -27,14 +28,24 @@ export class ReviewCardComponent implements AfterViewInit {
   @Input() isLoading!: boolean;
   isTruncated: boolean = false;
   isExpanded: boolean = false;
+  userRole: string = '';
 
   constructor(
     private starsService: StarsService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private authService: AuthService
   ) {}
+
+  ngOnInit(): void {
+
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => this.checkIfTruncated());
+  }
+
+  checkUserRole() {
+    this.authService.userRole$.subscribe(x => this.userRole = x);
   }
 
   openReportModal(type: 'customer' | 'review') {

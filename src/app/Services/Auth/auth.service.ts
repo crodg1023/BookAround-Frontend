@@ -30,6 +30,7 @@ export class AuthService {
   logout() {
     sessionStorage.clear();
     this.isLogged.next(false);
+    this.userRole.next('');
   }
 
   private setUserSession(token: string, role: string, client_id: string, business_id: string, email: string, id: string) {

@@ -42,17 +42,19 @@
         <i class="fa-solid fa-arrow-right"></i>
       </button>
     }
-    <button
-      class="w-full button-1"
-      (click)="openReportModal('customer')"
-    >
-      Reportar usuario
-    </button>
-    <button
-    class="w-full button-2"
-    (click)="openReportModal('review')"
-  >
-    Reportar reseña
-  </button>
+    @if (userRole) {
+      <button
+        class="w-full button-1"
+        (click)="openReportModal('customer')"
+      >
+        Reportar usuario
+      </button>
+      <button
+        class="w-full button-2"
+        (click)="openReportModal('review')"
+      >
+        Reportar reseña
+      </button>
+    }
 </article>
 <div #reportContainer></div>

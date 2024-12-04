@@ -18,26 +18,105 @@ import { WelcomeAdminPanelComponent } from './Layout/welcome-admin-panel/welcome
 import { ReportedCustomersComponent } from './Layout/reported-customers/reported-customers.component';
 import { ReportedBusinessComponent } from './Layout/reported-business/reported-business.component';
 import { ReportedReviewsComponent } from './Layout/reported-reviews/reported-reviews.component';
-import { adminGuard } from './Guards/Roles/admin.guard';
+import { roleGuard } from './Guards/Roles/role.guard';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, title: 'Book Around | Home' },
-  { path: 'business', component: DashboardComponent, title: 'Comercios locales', resolve: { business: businessResolver }, children: [
-    { path: '', component: BusinessGridComponent },
-    { path: 'find/:id', component: BusinessInformationComponent, resolve: { businessInformation: businessInformationResolver } }
-  ] },
-  { path: 'control-panel', component: ControlPanelComponent, title: 'Panel de control', canActivate: [authGuard], canActivateChild: [authGuard], children: [
-    { path: '', component: AccountSummaryComponent, title: 'Resumen de tu cuenta' },
-    { path: 'profile', component: ProfileComponent, title: 'Tu perfil' },
-    { path: 'analytics', component: AnalyticsComponent, title: 'Analíticas de tu comercio' },
-    { path: 'appointments', component: AppointmentsComponent, title: 'Tus citas' },
-  ] },
-  { path: 'admin', component: AdminPanelComponent, title: 'Admin | Panel de control', canActivate: [authGuard, adminGuard], children: [
-    { path: '', component: WelcomeAdminPanelComponent },
-    { path: 'customers', component: ReportedCustomersComponent, title: 'Usuarios reportados' },
-    { path: 'business', component: ReportedBusinessComponent, title: 'Comercios reportados' },
-    { path: 'reviews', component: ReportedReviewsComponent, title: 'Reseñas reportados' },
-  ] },
-  { path: 'complete-profile', component: CompleteBusinessProfileComponent, title: 'Completa tu perfil', canActivate: [completeProfileGuard] },
-  { path: '**', component: NotFoundComponent, title: 'Ups! | Página no encontrada' }
+  {
+    path: '',
+    component: HomeComponent,
+    title: 'Book Around | Home'
+  },
+  {
+    path: 'business',
+    component: DashboardComponent,
+    title: 'Comercios locales',
+    resolve: { business: businessResolver },
+    children: [
+      {
+        path: '',
+        component: BusinessGridComponent
+      },
+      {
+        path: 'find/:id',
+        component: BusinessInformationComponent,
+        resolve: {
+          businessInformation: businessInformationResolver
+        }
+      }
+    ]
+  },
+  {
+    path: 'control-panel',
+    component: ControlPanelComponent,
+    title: 'Panel de control',
+    canActivate: [authGuard],
+    canActivateChild: [authGuard],
+    children: [
+      {
+        path: '',
+        component: AccountSummaryComponent,
+        title: 'Resumen de tu cuenta'
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        title: 'Tu perfil'
+      },
+      {
+        path: 'analytics',
+        component: AnalyticsComponent,
+        title: 'Analíticas de tu comercio',
+        data: {
+          role: ['company']
+        },
+        canActivate: [roleGuard]
+      },
+      {
+        path: 'appointments',
+        component: AppointmentsComponent,
+        title: 'Tus citas'
+      },
+    ]
+  },
+  {
+    path: 'admin',
+    component: AdminPanelComponent,
+    title: 'Admin | Panel de control',
+    data: {
+      role: ['admin']
+    },
+    canActivate: [authGuard, roleGuard],
+    children: [
+      {
+        path: '',
+        component: WelcomeAdminPanelComponent
+      },
+      {
+        path: 'customers',
+        component: ReportedCustomersComponent,
+        title: 'Usuarios reportados'
+      },
+      {
+        path: 'business',
+        component: ReportedBusinessComponent,
+        title: 'Comercios reportados'
+      },
+      {
+        path: 'reviews',
+        component: ReportedReviewsComponent,
+        title: 'Reseñas reportados'
+      },
+    ]
+  },
+  {
+    path: 'complete-profile',
+    component: CompleteBusinessProfileComponent,
+    title: 'Completa tu perfil',
+    canActivate: [completeProfileGuard]
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+    title: 'Ups! | Página no encontrada'
+  }
 ];

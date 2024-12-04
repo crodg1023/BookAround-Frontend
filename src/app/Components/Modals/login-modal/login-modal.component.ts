@@ -66,7 +66,8 @@ export class LoginModalComponent implements OnInit {
         },
         error: error => {
           this.hasError = true;
-          this.loginMessage = error;
+          this.loginMessage = '¡Las credenciales de acceso no son correctas!';
+          console.log(error);
         }
       });
     }
