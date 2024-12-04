@@ -29,9 +29,8 @@ export class AppointmentsGroupComponent implements OnInit {
   getAppointments() {
     if (this.isHistory) {
       this.displayedAppointments = this.appointments.filter(x => {
-        const isoDate = x.dateTime.replace(' ', 'T');
-        const date = DateTime.fromISO(isoDate);
-        return date.year === this.currentDate.year && date.month === this.currentDate.month && date.startOf('day') < this.currentDate.startOf('day');
+        const appointmentDate = DateTime.fromFormat(x.dateTime, 'yyyy-MM-dd HH:mm:ss');
+        return appointmentDate.year === this.currentDate.year && appointmentDate.month === this.currentDate.month
       }).slice(0, 5);
     } else {
       this.displayedAppointments = this.appointments;

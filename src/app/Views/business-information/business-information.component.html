@@ -89,7 +89,7 @@
   </div>
   <div class="w-full flex gap-16 justify-center">
     <button
-      *ngIf="userRole && userRole !== 'company'"
+      *ngIf="hasReviews && userRole !== 'company'"
       class="button-1 text-lg"
       (click)="openReviewModal()"
     >

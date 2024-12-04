@@ -4,6 +4,7 @@ import { Appointment } from '../../../Interfaces/appointment';
 import { DateTime } from 'luxon';
 import { AppointmentInfoModalComponent } from '../../Modals/appointment-info-modal/appointment-info-modal/appointment-info-modal.component';
 import { ModalService } from '../../../Services/modal.service';
+import { AuthService } from '../../../Services/Auth/auth.service';
 
 @Component({
   selector: 'app-appointment-card',
@@ -22,10 +23,11 @@ export class AppointmentCardComponent implements OnInit {
   @Input() status!: string;
   @Input() appointment!: Appointment;
   @Input() isClickable: boolean = false;
-  isClient!: boolean;
+  userRole: string = '';
 
   constructor(
-    private modalService: ModalService
+    private modalService: ModalService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -33,10 +35,17 @@ export class AppointmentCardComponent implements OnInit {
   }
 
   checkUserRole() {
-    this.isClient = sessionStorage.getItem('role') === 'customer';
+    this.authService.userRole$.subscribe(x => this.userRole = x);
   }
   getAppointmentDateTime() {
     return DateTime.fromFormat(this.appointment.dateTime, 'yyyy-MM-dd HH:mm:ss').toFormat('dd/MM/yyyy HH:mm');
+  }
+  getAppointmentTitle() {
+    if (this.userRole === 'customer') {
+      return this.appointment.business?.name
+    } else {
+      return this.appointment.client?.name || this.appointment.reservation_email
+    }
   }
 
   openAppointmentInfo() {

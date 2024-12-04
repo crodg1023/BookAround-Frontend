@@ -9,7 +9,7 @@
   >
   </div>
   <div class="px-1 py-2 flex flex-col gap-1">
-    <span class="p3-text text-sm">{{ isClient ? appointment.business?.name : appointment.client?.name }}</span>
+    <span class="p3-text text-sm">{{ getAppointmentTitle() }}</span>
     <div class="flex gap-1 items-center">
       <i class="fa-regular fa-clock"></i>
       <span class="p3-text text-sm">{{ getAppointmentDateTime() }}</span>

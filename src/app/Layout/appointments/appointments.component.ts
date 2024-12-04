@@ -70,9 +70,13 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
   }
   getWeekAppointments() {
     return this.appointments.filter(x => {
+      const appointmentDate = DateTime.fromFormat(x.dateTime, 'yyyy-MM-dd HH:mm:ss');
+      return appointmentDate >= this.startOfWeek && appointmentDate <= this.endOfWeek;
+      /*
       const appointmentISODate = x.dateTime.replace(' ', 'T');
       const appointmentDate = DateTime.fromISO(appointmentISODate);
       return appointmentDate >= this.startOfWeek && appointmentDate <= this.endOfWeek;
+      */
     });
   }
   getTodaysAppointments() {
