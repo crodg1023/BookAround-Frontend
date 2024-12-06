@@ -156,6 +156,7 @@ export class AnalyticsComponent implements OnInit {
             data: Object.values(this.getReviewsScores()),
             backgroundColor: [
               'rgb(214, 32, 66)',
+              'rgb(204, 90, 60)',
               'rgb(194, 148, 54)',
               'rgb(54, 194, 127)',
               'rgb(110, 80, 221)',

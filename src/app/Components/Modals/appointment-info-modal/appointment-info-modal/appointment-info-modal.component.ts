@@ -164,6 +164,7 @@ export class AppointmentInfoModalComponent implements OnInit {
         this.modalSubtitle = '';
         this.modalSubtitleIcon = '';
         this.headerTitle = 'Tu cita ha sido cancelada';
+        this.hasSecondaryButton = false;
         this.primaryButtonText = 'Cerrar';
         break;
       case 6:
