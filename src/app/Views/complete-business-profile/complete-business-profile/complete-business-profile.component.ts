@@ -1,4 +1,4 @@
-import { Component, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NavbarComponent } from '../../../Layout/navbar/navbar.component';
 import { FooterComponent } from '../../../Layout/footer/footer.component';
 import { Category } from '../../../Interfaces/category';
@@ -15,6 +15,7 @@ import { Business } from '../../../Interfaces/business';
 import { User } from '../../../Interfaces/user';
 import { Router } from '@angular/router';
 import { CompleteProfileService } from '../../../Services/Business/complete-profile.service';
+import { ImageService } from '../../../Services/Images/image.service';
 
 @Component({
   selector: 'app-complete-business-profile',
@@ -32,11 +33,14 @@ import { CompleteProfileService } from '../../../Services/Business/complete-prof
 export class CompleteBusinessProfileComponent implements OnInit {
 
   @ViewChild('cancelModalContainer', { read: ViewContainerRef, static: true }) cancelModalContainer!: ViewContainerRef;
+  @ViewChild('fileInput') fileInput!: ElementRef;
   componentRef!: ComponentRef<CancelCompleteProfileModalComponent>;
   businessRegisterForm!: FormGroup;
+  files!: File[];
   categories: Category[] = [];
   maxCategories: number = 3;
   maxCategoriesSelected: boolean = false;
+  buttonDisabled = false;
   data: any;
 
   constructor(
@@ -46,7 +50,8 @@ export class CompleteBusinessProfileComponent implements OnInit {
     private usersService: UsersService,
     private businessService: BusinessService,
     private completeProfileService: CompleteProfileService,
-    private router: Router
+    private router: Router,
+    private imageService: ImageService
   ) {}
 
   get minPrice() {
@@ -123,6 +128,7 @@ export class CompleteBusinessProfileComponent implements OnInit {
   }
 
   submit() {
+    this.buttonDisabled = true;
     if (this.businessRegisterForm.valid) {
       console.log(this.businessRegisterForm.getRawValue());
 
@@ -159,9 +165,11 @@ export class CompleteBusinessProfileComponent implements OnInit {
                 comercio_id: newBusiness.id
               };
 
+              this.uploadImages(newBusiness.id?.toString() ?? '');
+
               return forkJoin([
                 this.businessService.postBusinessCategories(categories),
-                this.usersService.updateUserInformation(data, newBusiness.usuario_id || 0)
+                this.usersService.updateUserInformation(data, newBusiness.usuario_id || 0),
               ]);
             })
           );
@@ -178,6 +186,26 @@ export class CompleteBusinessProfileComponent implements OnInit {
 
   cancel() {
     this.openCancelModal();
+  }
+
+  uploadImages(id: string) {
+    const formData = new FormData();
+    formData.append('comercio_id', id);
+    this.files.forEach(file => formData.append('images[]', file));
+    this.imageService.postImage(formData).subscribe(response => {
+      console.log(response);
+    });
+  }
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.files = Array.from(input.files);
+    }
+  }
+
+  triggerFileInput() {
+    this.fileInput.nativeElement.click();
   }
 
 }

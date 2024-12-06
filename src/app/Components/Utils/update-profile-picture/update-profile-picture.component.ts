@@ -13,6 +13,7 @@ export class UpdateProfilePictureComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   imageUrl: string = '/assets/images/profile-placeholder.jpg';
   loading = false;
+  hasDefaultPicture = true;
 
   constructor(
     private imageService: ImageService
@@ -25,9 +26,15 @@ export class UpdateProfilePictureComponent implements OnInit {
 
   getUserImage() {
     const id = Number(sessionStorage.getItem('client_id') ?? -1);
-    this.imageService.getCustomerImage(id).subscribe(x => {
-      this.imageUrl = URL.createObjectURL(x);
-      this.loading = false;
+    this.imageService.getCustomerImage(id).subscribe({
+      next: (x) => {
+        this.imageUrl = URL.createObjectURL(x);
+        this.loading = false;
+        this.hasDefaultPicture = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
     });
   }
 
@@ -43,13 +50,24 @@ export class UpdateProfilePictureComponent implements OnInit {
     }
   }
 
+
   uploadProfilePicture(files: File[]) {
     const formData = new FormData();
     const id = sessionStorage.getItem('client_id');
     formData.append('cliente_id', id || '');
     files.forEach(file => formData.append('images[]', file));
-    this.imageService.postImage(formData).subscribe(response => {
-      console.log(response);
-    });
+
+    if (this.hasDefaultPicture) {
+      this.imageService.postImage(formData).subscribe(response => {
+        console.log(response);
+      });
+    } else {
+      this.imageService.updateCustomerImage(Number(id), formData).subscribe(response => console.log(response));
+    }
+  }
+
+  deleteImage() {
+    const id = Number(sessionStorage.getItem('client_id') ?? -1);
+    this.imageService.deleteCustomerImage(id).subscribe(x => console.log(x));
   }
 }

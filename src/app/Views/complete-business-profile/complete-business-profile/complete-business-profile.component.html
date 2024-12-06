@@ -126,10 +126,18 @@
     <div class="w-full rounded-2xl p-4 p6-border text-center">
       <p class="p5-text font-bold text-2xl mb-4">Galería</p>
       <p class="p3-text font-medium text-2xl mb-4">Puedes subir hasta 5 imágenes</p>
+      <input
+        #fileInput
+        type="file"
+        multiple
+        (change)="onFileChange($event)"
+        class="hidden"
+    >
       <img
         src="assets/svg/cloud-arrow-up-solid.svg"
         alt="Ilustracion de subir archivos."
-        class="h-[500px] mx-auto"
+        class="h-[500px] mx-auto cursor-pointer"
+        (click)="triggerFileInput()"
       >
     </div>
 
@@ -163,6 +171,7 @@
     <button
       class="button-1 font-bold text-2xl"
       type="submit"
+      [disabled]="buttonDisabled"
     >
       Finalizar
     </button>

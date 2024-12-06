@@ -10,6 +10,7 @@ import { ChangePasswordComponent } from '../../Components/Utils/change-password/
 import { PlacesInputAutocompleteComponent } from '../../Components/Utils/places-input-autocomplete/places-input-autocomplete.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../Services/Users/users.service';
+import { ImageService } from '../../Services/Images/image.service';
 
 @Component({
   selector: 'app-business-profile',
@@ -31,16 +32,19 @@ export class BusinessProfileComponent implements OnInit, OnDestroy {
   business!: Business;
   information!: Object;
   isLoading: boolean = false;
+  images: string[] = [];
 
   constructor(
     private businessService: BusinessService,
     private userService: UsersService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private imageService: ImageService,
   ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
     this.getBusinessInformation();
+    this.getBusinessImages();
   }
 
   get name() {
@@ -101,6 +105,13 @@ export class BusinessProfileComponent implements OnInit, OnDestroy {
     } else {
       console.log('no valido!');
     }
+  }
+
+  getBusinessImages() {
+    const business_id = Number(sessionStorage.getItem('business_id'));
+    this.imageService.getBusinessImages(business_id).subscribe(x => {
+      this.images = x.images
+    });
   }
 
   ngOnDestroy(): void {

@@ -7,7 +7,6 @@
   <input
     #fileInput
     type="file"
-    multiple
     (change)="onFileChange($event)"
     class="hidden"
   >
@@ -15,7 +14,10 @@
     <i class="fa-solid fa-image text-2xl"></i>
     <span class="text-lg">Cambiar foto de perfil</span>
   </button>
-  <button class="button-2 flex justify-center items-center gap-2 w-full">
+  <button
+    class="button-2 flex justify-center items-center gap-2 w-full"
+    (click)="deleteImage()"
+  >
     <i class="fa-solid fa-trash text-2xl"></i>
     <span class="text-lg">Eliminar foto de perfil</span>
   </button>
