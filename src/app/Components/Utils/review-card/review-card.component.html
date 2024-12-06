@@ -3,7 +3,7 @@
       @if (isLoading) {
         <ngx-skeleton-loader appearance="circle" [theme]="{ height: '64px', width: '64px', borderRadius: '100%' }"></ngx-skeleton-loader>
       } @else {
-        <img src="{{ review.client?.picture }}" alt="" class="w-16 h-16 rounded-full p5-border">
+        <img [src]="imageSrc" alt="" class="w-16 h-16 rounded-full p5-border object-cover">
       }
       <div class="flex flex-col gap-2">
         @if (isLoading) {

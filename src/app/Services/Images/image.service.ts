@@ -7,7 +7,7 @@ import { catchError, Observable, retry, throwError } from 'rxjs';
 })
 export class ImageService {
 
-  private URL: string = 'http://bookaround-backend.lo/api/images'
+  private URL: string = 'http://bookaround-backend.lo/api/images';
 
   constructor(private http: HttpClient) { }
 
@@ -19,8 +19,12 @@ export class ImageService {
     return this.http.post<any>(this.URL, data).pipe(retry(2), catchError(this.error));
   }
 
+  getCustomerImage(id: number) {
+    return this.http.get<Blob>(`http://bookaround-backend.lo/api/customers/${id}/image`, { responseType: 'blob' as 'json' }).pipe(catchError(this.error));
+  }
+
   private error(error: HttpErrorResponse) {
     if (error.status === 0) return throwError(() => new Error('No ha sido posible establecer conexion'));
-    else return throwError(() => new Error(error.error.message));
+    else return throwError(() => new Error(JSON.stringify(error.error, null, 2)));
   }
 }

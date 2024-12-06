@@ -1,5 +1,9 @@
 <div class="flex flex-col gap-3">
-  <img src="{{ imageUrl }}" alt="" class="w-[300px] h-[300px] rounded-full border-white border-[1px] user-profile-pic object-cover">
+  @if (loading) {
+    <p>Cargando imagen no jodaaaaa</p>
+  } @else {
+    <img src="{{ imageUrl }}" alt="" class="w-[300px] h-[300px] rounded-full border-white border-[1px] user-profile-pic object-cover">
+  }
   <input
     #fileInput
     type="file"

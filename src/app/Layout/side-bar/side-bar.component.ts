@@ -7,6 +7,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { Client } from '../../Interfaces/client';
 import { Business } from '../../Interfaces/business';
 import { BusinessService } from '../../Services/Business/business.service';
+import { ImageService } from '../../Services/Images/image.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -24,11 +25,13 @@ export class SideBarComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   clientInfo!: Client;
   businessInfo!: Business;
+  src: string = 'assets/images/profile-placeholder.jpg';
 
   constructor(
     private router: Router,
     private clientService: ClientService,
-    private businessService: BusinessService
+    private businessService: BusinessService,
+    private imageService: ImageService
   ) {}
 
   ngOnInit(): void {
@@ -52,13 +55,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   getUserInformation() {
     if (this.isClient) {
-      const client_id = sessionStorage.getItem('client_id');
-      if (client_id) {
-        this.clientService.getClientById(+client_id).subscribe(info => {
-          this.clientInfo = info;
-          this.isLoading = false;
-        });
-      }
+      this.getCustomerInfo();
     } else {
       const business_id = sessionStorage.getItem('business_id');
       if (business_id) {
@@ -67,6 +64,19 @@ export class SideBarComponent implements OnInit, OnDestroy {
           this.isLoading = false;
         });
       }
+    }
+  }
+
+  getCustomerInfo() {
+    const client_id = sessionStorage.getItem('client_id');
+    if (client_id) {
+      this.clientService.getClientById(+client_id).subscribe(info => {
+        this.clientInfo = info;
+        this.isLoading = false;
+      });
+      this.imageService.getCustomerImage(+client_id).subscribe(blob => {
+        this.src = URL.createObjectURL(blob);
+      });
     }
   }
 
