@@ -10,20 +10,27 @@ import { StarsService } from '../../Services/Stars/stars.service';
 import { AppointmentService } from '../../Services/Appointments/appointment.service';
 import { Appointment } from '../../Interfaces/appointment';
 import { DateTime } from 'luxon';
+import { SummaryChartComponent } from '../../Components/Utils/summary-chart/summary-chart.component';
 
 @Component({
   selector: 'app-account-summary',
   standalone: true,
-  imports: [CommonModule, AppointmentsGroupComponent, NgxSkeletonLoaderModule],
+  imports: [
+    CommonModule,
+    AppointmentsGroupComponent,
+    NgxSkeletonLoaderModule,
+    SummaryChartComponent
+  ],
   templateUrl: './account-summary.component.html',
   styleUrl: './account-summary.component.scss'
 })
 export class AccountSummaryComponent implements OnInit {
 
   isClient!: boolean;
-  appointments: Appointment[] = [];
+  appointments!: Appointment[];
   businessInfo!: Business;
   isLoading: boolean = false;
+  loadingAppointments: boolean = false;
 
   constructor(
     private businessService: BusinessService,
@@ -34,8 +41,10 @@ export class AccountSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.loadingAppointments = true;
     this.checkUserRole();
     this.getUserInformation();
+    this.fetchAppointments();
   }
 
   checkUserRole() {
@@ -58,12 +67,12 @@ export class AccountSummaryComponent implements OnInit {
     if (this.isClient) {
       this.appointmentService.getCustomerAppointments(Number(sessionStorage.getItem('client_id'))).subscribe(appointments => {
         this.appointments = appointments
-        this.isLoading = false;
+        this.loadingAppointments = false;
       });
     } else {
       this.appointmentService.getBusinessAppointments(Number(sessionStorage.getItem('business_id'))).subscribe(appointments => {
         this.appointments = appointments
-        this.isLoading = false;
+        this.loadingAppointments = false;
       });
     }
   }
@@ -74,8 +83,7 @@ export class AccountSummaryComponent implements OnInit {
 
   getTodaysAppointments() {
     return this.appointments.filter(x => {
-      const appointmentISODate = x.dateTime.replace(' ', 'T');
-      const appointmentDate = DateTime.fromISO(appointmentISODate);
+      const appointmentDate = DateTime.fromFormat(x.dateTime, 'yyyy-MM-dd HH:mm:ss');
       const startOfDay = DateTime.now().startOf('day');
       const endOfDay = DateTime.now().endOf('day');
 
@@ -85,11 +93,8 @@ export class AccountSummaryComponent implements OnInit {
 
   getWeekAppointments() {
     return this.appointments.filter(x => {
-      const appointmentISODate = x.dateTime.replace(' ', 'T');
-      const appointmentDate = DateTime.fromISO(appointmentISODate);
-      const startOfWeek = DateTime.now().startOf('week');
-      const endOfWeek = DateTime.now().endOf('week');
-      return appointmentDate >= startOfWeek && appointmentDate <= endOfWeek;
+      const appointmentDate = DateTime.fromFormat(x.dateTime, 'yyyy-MM-dd HH:mm:ss');
+      return appointmentDate >= DateTime.now().startOf('week') && appointmentDate <= DateTime.now().endOf('week');
     });
   }
 }
