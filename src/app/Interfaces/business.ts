@@ -22,4 +22,5 @@ export interface Business {
   score?: number;
   categories?: Category[];
   usuario_id?: number;
+  images?: string[];
 }

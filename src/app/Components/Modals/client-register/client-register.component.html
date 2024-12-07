@@ -12,14 +12,14 @@
     [formGroup]="clientRegtisterForm"
     (ngSubmit)="submit()"
   >
-    <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+    <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
       <i class="fa-regular fa-user text-2xl p6-text"></i>
       <div class="w-full flex flex-col">
         <label class="p3-text text-lg font-medium">Nombre</label>
         <input
           type="text"
           placeholder="Tu nombre"
-          class="w-full p6-text text-lg focus:outline-none"
+          class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
           formControlName="name"
         >
       </div>
@@ -33,14 +33,14 @@
         <span *ngIf="name?.errors?.['minlength']">El nombre debe tener una longitud de al menos 3 caracteres</span>
       </div>
     }
-    <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+    <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
       <i class="fa-regular fa-envelope text-2xl p6-text"></i>
       <div class="w-full flex flex-col">
         <label class="p3-text text-lg font-medium">Correo electrónico</label>
         <input
           type="text"
           placeholder="Tu correo electrónico"
-          class="w-full p6-text text-lg focus:outline-none"
+          class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
           formControlName="email"
         >
       </div>
@@ -54,7 +54,7 @@
         <span *ngIf="email?.errors?.['email']">El email debe coincidir con una dirección de correo electrónico real</span>
       </div>
     }
-    <div class="rounded-2xl p-4 p6-border">
+    <div class="rounded-2xl p-4 p6-border dark:bg-dark-input-bg">
       <app-password-input
         [labelText]="'Contraseña'"
         [showIcon]="true"

@@ -11,16 +11,16 @@
       [formGroup]="reviewForm"
       (ngSubmit)="submit()"
     >
-      <h3 class="p3-text text-lg font-bold">Califica este negocio</h3>
+      <h3 class="p3-text text-lg font-bold dark:text-white">Califica este negocio</h3>
       <div class="flex items-center gap-4">
         <app-rating-stars (rate)="handleRating($event)"></app-rating-stars>
         <span class="p3-text font-medium text-lg">{{ rating }}</span>
       </div>
-      <h3 class="p3-text text-lg font-bold">Escribe tu reseña</h3>
+      <h3 class="p3-text text-lg font-bold dark:text-white">Escribe tu reseña</h3>
       <textarea
         name="review-content"
         id="review-content"
-        class="w-full h-36 rounded-2xl p6-border text-lg p3-text p-4"
+        class="w-full h-36 rounded-2xl p6-border text-lg p3-text p-4 dark:bg-dark-input-bg"
         formControlName="content"
       ></textarea>
       @if (content?.invalid && (content?.dirty || content?.touched)) {

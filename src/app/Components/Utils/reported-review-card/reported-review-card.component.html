@@ -2,14 +2,14 @@
   <article class="w-[400px]">
     <header class="w-full flex items-center gap-4 mb-2">
       <img
-        src=""
+        [src]="src"
         alt="Reported user profile picture"
         class="w-16 h-16 p5-border rounded-full"
       >
       <div class="flex flex-col gap-2">
-        <p class="p3-text font-bold text-2xl">{{ reportedReviewAuthor.name }}</p>
-        <p class="p3-text text-lg">Cantidad de reportes: {{ count }}</p>
-        <span class="p3-text text-lg">{{ parsedDate }}</span>
+        <p class="p3-text font-bold text-2xl dark:text-white">{{ reportedReviewAuthor.name }}</p>
+        <p class="p3-text text-lg dark:text-white">Cantidad de reportes: {{ count }}</p>
+        <span class="p3-text text-lg dark:text-white">{{ parsedDate }}</span>
         <div class="flex items-center p5-text text-2xl">
           @for (star of scoreStars; track $index) {
             <i [ngClass]="star"></i>
@@ -18,7 +18,7 @@
       </div>
     </header>
     <main class="w-full">
-      <p class="p3-text">{{ reportedReview.reportable.content }}</p>
+      <p class="p3-text dark:text-white">{{ reportedReview.reportable.content }}</p>
     </main>
     <footer class="mt-1">
       <button

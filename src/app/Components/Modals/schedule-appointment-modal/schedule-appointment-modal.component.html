@@ -24,7 +24,7 @@
           for="{{ hour }}"
           class="p-4 p6-border rounded-2xl transition duration-100 ease-in"
           [ngClass]="[
-            selectedHourIndex === $index ? 'p5-bg text-white' : 'p3-text',
+            selectedHourIndex === $index ? 'p5-bg text-white' : 'p3-text dark:text-white',
             checkDisabledHour(hour) ? 'cursor-not-allowed button-disabled' : 'cursor-pointer'
           ]"
         >
@@ -45,8 +45,8 @@
           >
           <label
             for="{{ person }}"
-            class="cursor-pointer p-4 p3-menu-border rounded-2xl transition duration-100 ease-in text-center"
-            [ngClass]="selectedPeopleIndex === $index ? 'p5-bg text-white' : 'p3-text'"
+            class="cursor-pointer p-4 p3-menu-border rounded-2xl transition duration-100 ease-in text-center dark:border-white"
+            [ngClass]="selectedPeopleIndex === $index ? 'p5-bg text-white' : 'p3-text dark:text-white'"
           >
             <span class="text-lg">{{ person }}</span>
           </label>
@@ -55,14 +55,14 @@
   } @else if (currentStep === 3) {
     <form [formGroup]="scheduleAppointmentForm">
       <div class="w-full flex flex-col gap-8">
-        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
           <i class="fa-regular fa-envelope text-2xl p6-text"></i>
           <div class="w-full flex flex-col">
             <label class="p3-text text-lg font-medium">Correo electrónico</label>
             <input
               type="text"
               placeholder="Tu correo electrónico"
-              class="w-full p6-text text-lg focus:outline-none"
+              class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
               formControlName="loginEmail"
             >
           </div>
@@ -75,7 +75,7 @@
             <span *ngIf="loginEmail?.errors?.['email']">El email debe coincidir con una dirección de correo electrónico real</span>
           </div>
         }
-        <div class="rounded-2xl p-4 p6-border">
+        <div class="rounded-2xl p-4 p6-border dark:bg-dark-input-bg">
           <app-password-input
             [labelText]="'Contraseña'"
             [showIcon]="true"
@@ -83,15 +83,15 @@
           ></app-password-input>
         </div>
         <button class="button-2" (click)="onLoginToSchedule()">Iniciar sesión</button>
-        <h3 class="p3-text font-medium text-2xl text-center">Si aún no estás registrado vamos a pedirte un correo para completar tu solicitud.</h3>
-        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <h3 class="p3-text font-medium text-2xl text-center dark:text-white">Si aún no estás registrado vamos a pedirte un correo para completar tu solicitud.</h3>
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
           <i class="fa-regular fa-envelope text-2xl p6-text"></i>
           <div class="w-full flex flex-col">
             <label class="p3-text text-lg font-medium">Correo electrónico</label>
             <input
               type="text"
               placeholder="Tu correo electrónico"
-              class="w-full p6-text text-lg focus:outline-none"
+              class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
               formControlName="replacementEmail"
             >
           </div>
@@ -111,13 +111,13 @@
       *ngIf="!appointmentBookingFailure"
       src="assets/images/bookaround-appointment-success.jpg"
       alt="Ilustración de una chica usando una tablet"
-      class="h-[420px]"
+      class="h-[420px] dark:rounded-2xl"
     >
     <img
       *ngIf="appointmentBookingFailure"
       src="assets/images/bookaround-error.jpg"
       alt="Ilustración de una chica preguntandose que salio mal"
-      class="h-[420px]"
+      class="h-[420px] dark:rounded-2xl"
     >
   }
 </app-modal>

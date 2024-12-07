@@ -1,4 +1,4 @@
-<main class="w-full flex flex-col gap-4 p-4 items-center">
+<main class="w-full flex flex-col gap-4 p-4 mb-4 items-center dark:bg-dark-secondary dark:rounded-2xl">
   <section class="flex flex-col gap-4">
     @if (isLoading) {
       <ngx-skeleton-loader
@@ -19,7 +19,7 @@
   </section>
 
   <section class="w-full flex flex-col gap-4">
-    <h1 class="font-bold text-[28px] p3-text">Tus datos</h1>
+    <h1 class="font-bold text-[28px] p3-text dark:text-white">Tus datos</h1>
     <form
       class="flex flex-col gap-4"
       [formGroup]="updateForm"
@@ -29,31 +29,31 @@
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
       } @else {
-        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
           <i class="fa-regular fa-user text-2xl p6-text"></i>
           <div class="w-full flex flex-col">
             <label class="p3-text text-lg font-medium">Nombre</label>
             <input
               type="text"
               placeholder="Tu nombre"
-              class="w-full p6-text text-lg focus:outline-none"
+              class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
               formControlName="name"
             >
           </div>
         </div>
-        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
           <i class="fa-regular fa-envelope text-2xl p6-text"></i>
           <div class="w-full flex flex-col">
             <label class="p3-text text-lg font-medium">Correo electrónico</label>
             <input
               type="text"
               placeholder="Tu correo electrónico"
-              class="w-full p6-text text-lg focus:outline-none"
+              class="w-full p6-text text-lg focus:outline-none dark:bg-inherit"
               formControlName="email"
             >
           </div>
         </div>
-        <div class="rounded-2xl p-4 p6-border">
+        <div class="rounded-2xl p-4 p6-border dark:bg-dark-input-bg">
           <app-password-input
             [labelText]="'Contraseña'"
             [showIcon]="true"

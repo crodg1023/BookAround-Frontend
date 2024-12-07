@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Business } from '../../../Interfaces/business';
 import { CategoryIconsService } from '../../../Services/Icons/category-icons.service';
@@ -14,9 +14,22 @@ import { CategoryIconsService } from '../../../Services/Icons/category-icons.ser
 export class BusinessCardComponent {
   @Input() business!: Business
   @Input() isFeatured: boolean = false;
+  images!: string[];
+  src!: string;
+
+  constructor(
+    private router: Router,
+    private categoriesService: CategoryIconsService,
+  ) {}
 
 
-  constructor(private router: Router, private categoriesService: CategoryIconsService) {}
+  getSrc(): string {
+    if (this.business.images?.length) {
+      return this.business.images[0];
+    }
+
+    return this.business.pictures ?? 'assets/images/profile-placeholder.jpg';
+  }
 
   onCardClick() {
     this.router.navigate(['/business/find', this.business.id]);

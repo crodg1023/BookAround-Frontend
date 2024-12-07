@@ -10,8 +10,8 @@
   >
   <label
     for="{{ id }}"
-    class="flex items-center cursor-pointer gap-2 p-4 p6-border rounded-lg transition duration-100 ease-in"
-    [ngClass]="{'p3-bg': isChecked}"
+    class="flex items-center cursor-pointer gap-2 p-4 p6-border rounded-lg transition duration-100 ease-in dark:bg-white"
+    [ngClass]="{'p3-bg dark:bg-p4': isChecked}"
   >
     <i class="{{ icon + ' text-2xl' }}"></i>
     <span class="text-lg font-bold">{{ label }}</span>

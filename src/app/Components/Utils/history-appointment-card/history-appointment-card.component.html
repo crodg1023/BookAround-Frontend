@@ -1,7 +1,7 @@
 <article class="w-full flex p6-border rounded">
   <section class="w-full flex justify-between">
     <aside class="h-full w-2" [ngClass]="getStatusColor()"></aside>
-    <div class="w-1/3 p3-text px-4">
+    <div class="w-1/3 p3-text px-4 dark:text-dark-text">
       <p class="font-medium text-lg">{{ isClient ? appointment.business?.name : appointment.client?.name }}</p>
       <p class="flex gap-1 items-center">
         <i class="fa-solid fa-calendar-days"></i>
@@ -12,7 +12,7 @@
         {{ getHour() }}
       </p>
     </div>
-    <div class="w-2/3 flex flex-col justify-center p3-text px-4">
+    <div class="w-2/3 flex flex-col justify-center p3-text px-4 dark:text-dark-text">
       <p class="flex gap-1 items-center">
         <i class="fa-solid fa-user-group"></i>
         {{ appointment.people }}

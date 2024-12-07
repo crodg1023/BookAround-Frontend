@@ -29,9 +29,9 @@
   <div class="w-full h-[58px] p3-bg p-2 flex items-center text-center justify-center" [ngClass]="{'rounded-b-2xl' : isFeatured}">
     <h2 class="text-white text-lg font-medium drop-shadow-xl leading-8">{{ business.name }}</h2>
   </div>
-  <div
+  <img
     class="w-full h-full rounded-t-2xl"
-    [ngStyle]="{'background-image': business.pictures ? 'url(' + business.pictures + ')' : 'none'}"
+    [src]="getSrc()"
     id="card-img"
-  ></div>
+  >
 </article>

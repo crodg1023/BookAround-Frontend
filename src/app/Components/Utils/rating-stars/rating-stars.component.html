@@ -1,7 +1,7 @@
 <div>
   @for (star of stars; track $index; let i = $index) {
     <input type="radio" name="rating" id="star{{i}}" [value]="i + 1" class="hidden">
-    <label for="star{{i}}" class="text-2xl cursor-pointer" (click)="setRate(i + 1)" (mouseover)="setHoverRating(i + 1)" (mouseleave)="resetHover()" [ngClass]="colorClassName">
+    <label for="star{{i}}" class="text-2xl cursor-pointer dark:text-white" (click)="setRate(i + 1)" (mouseover)="setHoverRating(i + 1)" (mouseleave)="resetHover()" [ngClass]="colorClassName">
       <i class="{{ i < (rating || hoverRating) ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"></i>
     </label>
   }

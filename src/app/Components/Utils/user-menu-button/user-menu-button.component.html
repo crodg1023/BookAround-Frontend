@@ -1,7 +1,7 @@
 <div class="relative inline-block text-left">
   <div>
     <button
-      class="inline-flex items-center justify-center gap-2 px-2 py-4 rounded-[40px] w-20 h-10 p3-menu-border p5-hover p3-text ease-in duration-300"
+      class="inline-flex items-center justify-center gap-2 px-2 py-4 rounded-[40px] w-20 h-10 p3-menu-border p5-hover p3-text ease-in duration-300 dark:text-dark-text dark:border-dark-text"
       (click)="toggleMenu()"
     >
       <p class="text-2xl"><i class="fa-solid fa-bars"></i></p>
@@ -11,7 +11,7 @@
 
   @if (isVisible) {
   <div
-    class="absolute right-0 z-10 w-60 bg-white py-4 px-4 rounded-b-2xl shadow-2xl"
+    class="absolute right-0 z-10 w-60 bg-white py-4 px-4 rounded-b-2xl shadow-2xl dark:bg-dark-secondary"
     [ngClass]="{
       'transtion ease-out duration-100 transform opacity-100 scale-100': isOpen,
       'transition ease-in duration-75 transform opacity-0 scale-95': !isOpen
@@ -20,13 +20,13 @@
     @if (!userHasLoggedIn) {
       <ul>
         <li
-          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover dark:text-dark-text"
           (click)="onLoginClick()"
         >
           <span class="w-full">Inicia sesión</span>
         </li>
         <li
-          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover dark:text-dark-text"
           (click)="onClientRegisterClick()"
         >
           <span class="w-full">Regístrate</span>
@@ -35,7 +35,7 @@
           <div class="w-full h-[2px] rounded-2xl p6-bg"></div>
         </li>
         <li
-          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover dark:text-dark-text"
           (click)="onBusinessRegisterClick()"
         >
           <span class="w-full">Inscribe tu negocio</span>
@@ -44,14 +44,14 @@
     } @else {
       <ul>
         <li
-          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover dark:text-dark-text"
           (click)="onControlPanelClick()"
         >
           <span class="w-full">Panel de control</span>
         </li>
         @if (userRole !== 'admin') {
           <li
-            class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+            class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover dark:text-dark-text"
             (click)="onProfileClick()"
           >
             <span class="w-full">Tu perfil</span>
@@ -59,7 +59,7 @@
         }
         @if (userRole !== 'admin') {
           <li
-            class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+            class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover dark:text-dark-text"
             (click)="onAppointmentsClick()"
           >
             <span class="w-full">Administra tus citas</span>
@@ -69,7 +69,7 @@
           <div class="w-full h-[2px] rounded-2xl p6-bg"></div>
         </li>
         <li
-          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover"
+          class="w-full py-2 px-4 text-center text-lg font-medium p3-text p5-menu-hover dark:text-dark-text"
           (click)="onLogoutClick()"
         >
           <span class="w-full">Cerrar sesión</span>

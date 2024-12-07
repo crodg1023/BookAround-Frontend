@@ -1,20 +1,20 @@
 <article class="p-2 flex gap-2 p6-border rounded-[4px] items-center">
   <div class="h-full flex flex-col gap-1 items-center rounded-[4px] p-2">
     @if (isHistory) {
-      <p class="p3-text text-lg font-medium">{{ capitalizeFirstLetter(month) }}</p>
+      <p class="p3-text text-lg font-medium dark:text-white">{{ capitalizeFirstLetter(month) }}</p>
     } @else if(!isWeekly) {
-      <span class="p3-text font-bold text-[38px]">{{ day }}</span>
-      <span class="p3-text text-sm font-medium">{{ capitalizeFirstLetter(month) }}</span>
-      <span class="p3-text text-lg">{{ capitalizeFirstLetter(dayString) }}</span>
+      <span class="p3-text font-bold text-[38px] dark:text-white">{{ day }}</span>
+      <span class="p3-text text-sm font-medium dark:text-white">{{ capitalizeFirstLetter(month) }}</span>
+      <span class="p3-text text-lg dark:text-white">{{ capitalizeFirstLetter(dayString) }}</span>
     }
   </div>
   <div class="w-full max-h-[500px] h-full flex flex-col gap-4 overflow-y-scroll">
     @if (displayedAppointments.length < 1) {
-      <p class="p3-text font-bold text-center">No hay citas que mostrar</p>
+      <p class="p3-text font-bold text-center dark:text-white">No hay citas que mostrar</p>
       <img
         src="assets/images/bookaround-no-appointments-group.jpg"
         alt="No appointments image"
-        class="w-[200px] h-[200px] mx-auto"
+        class="w-[200px] h-[200px] mx-auto dark:rounded-2xl"
       >
     } @else {
       @for (appointment of displayedAppointments; track appointment.id) {

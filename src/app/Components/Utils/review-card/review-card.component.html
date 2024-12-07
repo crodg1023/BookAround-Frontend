@@ -3,15 +3,15 @@
       @if (isLoading) {
         <ngx-skeleton-loader appearance="circle" [theme]="{ height: '64px', width: '64px', borderRadius: '100%' }"></ngx-skeleton-loader>
       } @else {
-        <img [src]="imageSrc" alt="" class="w-16 h-16 rounded-full p5-border object-cover">
+        <img [src]="imageSrc" alt="" class="w-16 h-16 rounded-full p5-border object-cover dark:border-white">
       }
       <div class="flex flex-col gap-2">
         @if (isLoading) {
           <ngx-skeleton-loader appearance="line" [theme]="{ height: '32px', width: '200px' }"></ngx-skeleton-loader>
         } @else {
-          <h3 class="text-2xl font-bold p3-text">{{ review.client?.name }}</h3>
+          <h3 class="text-2xl font-bold p3-text dark:text-white">{{ review.client?.name }}</h3>
         }
-        <div class="flex gap-1 p5-text">
+        <div class="flex gap-1 p5-text dark:text-p4">
           @for (star of getScoreStars(); track $index) {
             @if (isLoading) {
               <ngx-skeleton-loader appearance="line" [theme]="{ height: '16px', width: '16px' }"></ngx-skeleton-loader>
@@ -24,7 +24,7 @@
         @if (isLoading) {
           <ngx-skeleton-loader appearance="line" [theme]="{ height: '28px', width: '200px' }"></ngx-skeleton-loader>
         } @else {
-          <span class="text-lg p3-text">{{ getFormattedDate() }}</span>
+          <span class="text-lg p3-text dark:text-white">{{ getFormattedDate() }}</span>
         }
       </div>
     </div>
@@ -32,12 +32,12 @@
     @if (isLoading) {
       <ngx-skeleton-loader appearance="line" [theme]="{ height: '20px', width: '400px' }"></ngx-skeleton-loader>
     } @else {
-      <p class="text-sm p3-text" #reviewContent [ngClass]="{'truncated' : !isExpanded, 'expanded' : isExpanded}">
+      <p class="text-sm p3-text dark:text-white" #reviewContent [ngClass]="{'truncated' : !isExpanded, 'expanded' : isExpanded}">
         {{ review.content }}
       </p>
     }
     @if (isTruncated) {
-      <button class="flex gap-2 items-center text-lg font-medium p5-text" (click)="toggleReadMore()">
+      <button class="flex gap-2 items-center text-lg font-medium p5-text dark:text-dark-text" (click)="toggleReadMore()">
         <span>Leer más</span>
         <i class="fa-solid fa-arrow-right"></i>
       </button>

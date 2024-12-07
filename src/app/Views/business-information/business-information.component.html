@@ -4,40 +4,39 @@
       class="flex flex-col gap-4"
       [ngClass]="userRole === 'company' ? 'w-full' : 'w-2/3'"
     >
-      <div
-        class="w-full h-[500px] rounded-2xl p3-border"
-        [ngStyle]="{'background-image': business.pictures ? 'url(' + business.pictures + ')' : 'none'}"
+      <img
+        class="w-full h-[500px] rounded-2xl p3-border dark:border-dark-text object-cover"
+        src="{{ src ? src : this.business.pictures }}"
         id="business-img"
       >
-      </div>
       <div class="w-full flex flex-col gap-4">
-        <h1 class="text-[38px] font-bold p3-text">{{ business.name }}</h1>
+        <h1 class="text-[38px] font-bold p3-text dark:text-white">{{ business.name }}</h1>
         <div class="flex gap-8">
-          <div class="flex items-center p5-text text-2xl">
+          <div class="flex items-center p5-text text-2xl dark:text-p4">
             @for (star of getScoreStars(); track $index) {
               <i [ngClass]="star"></i>
             }
           </div>
-          <div class="flex items-center p3-text text-2xl gap-2">
+          <div class="flex items-center p3-text text-2xl gap-2 dark:text-white">
             @for (cat of business.categories; track $index) {
               <i [ngClass]="cat.icon"></i>
             }
           </div>
         </div>
         <div class="flex gap-8 items-center">
-          <div class="flex items-center p3-text gap-2">
+          <div class="flex items-center p3-text gap-2 dark:text-dark-text">
             <i class="fa-regular fa-clock"></i>
             <span class="text-lg font-medium">Horarios: {{ getFormattedHour(business.workingHours?.opening ?? 0) }} - {{ getFormattedHour(business.workingHours?.closing ?? 0) }}</span>
           </div>
-          <div class="flex items-center p3-text gap-2">
+          <div class="flex items-center p3-text gap-2 dark:text-dark-text">
             <i class="fa-solid fa-location-dot"></i>
             <span class="text-lg font-medium">{{ business.address }}</span>
           </div>
         </div>
         <div class="flex flex-col gap-4 items-start">
-          <p class="p3-text text-lg" [ngClass]="{'truncated' : !isExpanded, 'expanded' : isExpanded}" #description>{{ business.description }}</p>
+          <p class="p3-text text-lg dark:text-white" [ngClass]="{'truncated' : !isExpanded, 'expanded' : isExpanded}" #description>{{ business.description }}</p>
           @if (isTruncated) {
-            <button (click)="toggleReadMore()" class="flex gap-2 items-center p5-text">
+            <button (click)="toggleReadMore()" class="flex gap-2 items-center p5-text dark:text-dark-text">
               <span class="text-lg font-medium">Leer {{ isExpanded ? 'menos' : 'más' }}</span>
               <i class="fa-solid fa-arrow-right text-2xl"></i>
             </button>
@@ -69,13 +68,17 @@
         </div>
       </div>
       <div class="w-1/3 h-full">
-        <img src="assets/images/bookaround-reviews.jpg" alt="">
+        <img
+          src="assets/images/bookaround-reviews.jpg"
+          alt=""
+          class="dark:rounded-2xl"
+        >
       </div>
     } @else {
       <div class="flex flex-col gap-8 items-center">
         <div class="flex gap-16 items-center justify-center w-[970px]">
-          <h2 class="p3-text text-[38px] font-bold">Sé el primero en dejar una reseña para este local</h2>
-          <img src="assets/images/bookaround-no-reviews.jpg" alt="" class="w-[450px] h-[450px]">
+          <h2 class="p3-text text-[38px] font-bold dark:text-white">Sé el primero en dejar una reseña para este local</h2>
+          <img src="assets/images/bookaround-no-reviews.jpg" alt="" class="w-[450px] h-[450px] dark:rounded-2xl">
         </div>
         <button
           *ngIf="userRole !== 'company'"

@@ -1,8 +1,12 @@
 <section class="w-full px-[120px] py-16 flex justify-center">
   <div class="max-w-[1300px] w-full flex items-center gap-16">
-    <img src="../../../assets/images/bookaround-hero.jpg" alt="BookAround hero image" class="w-1/2">
+    <img
+      src="assets/images/bookaround-hero.jpg"
+      alt="BookAround hero image"
+      class="w-1/2 dark:rounded-2xl"
+    >
     <div class="flex flex-col gap-16">
-      <h1 class="font-bold text-5xl p1-text drop-shadow-xl w-full">Conectamos diversos comercios locales contigo para que hagas tus reservas fácilmente.</h1>
+      <h1 class="font-bold text-5xl p1-text drop-shadow-xl w-full dark:text-white">Conectamos diversos comercios locales contigo para que hagas tus reservas fácilmente.</h1>
       <div class="flex gap-8">
         <button class="button-1 text-2xl" (click)="scrollTo('client-section')">Soy cliente</button>
         <button class="button-2 text-2xl" (click)="scrollTo('business-section')">Tengo un negocio</button>
@@ -15,10 +19,14 @@
   <div class="max-w-[1300px] w-full leading-8">
     <article class="w-full flex items-center gap-8">
       <div class="w-1/2 flex flex-col items-center justify-center gap-8">
-        <h2 class="text-[28px] p1-text">Encuentra los mejores comercios de tu zona y empieza a vivir nuevas experiencias.</h2>
+        <h2 class="text-[28px] p1-text dark:text-white">Encuentra los mejores comercios de tu zona y empieza a vivir nuevas experiencias.</h2>
         <button class="button-1 text-2xl" (click)="onGoToBusinessClick()">Ver los negocios</button>
       </div>
-      <img src="../../../assets/images/bookaround-client-cta.jpg" alt="" class="w-1/2">
+      <img
+        src="assets/images/bookaround-client-cta.jpg"
+        alt="Customer cta"
+        class="w-1/2 dark:rounded-2xl"
+      >
     </article>
   </div>
 </section>
@@ -26,9 +34,13 @@
 <section class="w-full px-[70px] my-16 flex flex-col gap-16 justify-center items-center" id="business-section">
   <div class="max-w-[1300px] w-full leading-8">
     <article class="w-full flex items-center gap-8">
-      <img src="../../../assets/images/bookaround-business-cta.jpg" alt="" class="w-1/2">
+      <img
+        src="assets/images/bookaround-business-cta.jpg"
+        alt=""
+        class="w-1/2 dark:rounded-2xl"
+      >
       <div class="w-1/2 flex flex-col items-center justify-center gap-8">
-        <h2 class="text-[28px] p1-text">Registra tu comercio con nosotros y obtén un sistema mejorado de gestión para las reservas de tus clientes.</h2>
+        <h2 class="text-[28px] p1-text dark:text-white">Registra tu comercio con nosotros y obtén un sistema mejorado de gestión para las reservas de tus clientes.</h2>
         <button class="button-2 text-2xl" (click)="onRegisterMyBusinessClick()">Registrar mi negocio</button>
       </div>
     </article>

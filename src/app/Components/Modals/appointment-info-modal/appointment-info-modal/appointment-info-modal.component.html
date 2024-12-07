@@ -14,23 +14,23 @@
 >
   @switch (currentStep) {
     @case (1) {
-      <section class="w-full flex items-center border-b-[1px] border-[#2A1F55]">
+      <section class="w-full flex items-center border-b-[1px] border-[#2A1F55] dark:border-white">
         <article class="w-full">
-          <p class="p3-text font-medium">Status</p>
+          <p class="p3-text font-medium dark:text-white">Status</p>
           <div class="flex gap-4 items-center">
             <div class="w-4 h-4 rounded bg-green-700"></div>
-            <p class="p3-text">{{ appointment.status }}</p>
+            <p class="p3-text dark:text-white">{{ appointment.status }}</p>
           </div>
         </article>
         <img
           src="assets/images/bookaround-appointment-info.jpg"
           alt="Bookaround calendar ilustration"
-          class="w-44"
+          class="w-44 dark:rounded-2xl"
         >
       </section>
 
-      <section class="w-full flex flex-col gap-1 mt-4 p3-text">
-        <h2 class="font-bold text-2xl">{{ userRole === 'customer' ? appointment.business?.name : appointment.client?.name }}</h2>
+      <section class="w-full flex flex-col gap-1 mt-4 p3-text dark:text-white">
+        <h2 class="font-bold text-2xl ">{{ userRole === 'customer' ? appointment.business?.name : appointment.client?.name }}</h2>
         <p class="flex gap-1 items-center">
           <i class="fa-solid fa-calendar-days"></i>
           {{ date }}
@@ -49,7 +49,7 @@
         </p>
       </section>
 
-      <h3 *ngIf="userRole !== 'company'" class="p5-text font-bold text-lg text-center">¿Qué deseas hacer con esta cita?</h3>
+      <h3 *ngIf="userRole !== 'company'" class="p5-text font-bold text-lg text-center dark:text-dark-text">¿Qué deseas hacer con esta cita?</h3>
     }
     @case (2) {
       <section class="w-full">
@@ -70,7 +70,7 @@
             >
             <label
               for="{{ hour }}"
-              class="p-4 p6-border rounded-2xl transition duration-100 ease-in"
+              class="p-4 p6-border rounded-2xl transition duration-100 ease-in dark:text-white"
               [ngClass]="[
                 selectedHourIndex === $index ? 'p5-bg text-white' : 'p3-text',
               ]"
@@ -95,7 +95,7 @@
               >
               <label
                 for="{{ person }}"
-                class="cursor-pointer p-4 p3-menu-border rounded-2xl transition duration-100 ease-in text-center"
+                class="cursor-pointer p-4 p3-menu-border rounded-2xl transition duration-100 ease-in text-center dark:text-white dark:border-white"
                 [ngClass]="selectedPeopleIndex === $index ? 'p5-bg text-white' : 'p3-text'"
               >
                 <span class="text-lg">{{ person }}</span>
@@ -108,7 +108,7 @@
       <img
         src="assets/images/bookaround-cancelation.jpg"
         alt="Bookaround appointment canceled successfully!"
-        class="h-[420px]"
+        class="h-[420px] dark:rounded-2xl"
       >
     }
     @case (6) {

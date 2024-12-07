@@ -1,6 +1,6 @@
 <main class="w-full flex flex-col gap-4 p-4 items-center">
   <section class="w-full flex flex-col gap-4">
-    <h1 class="font-bold text-[28px] p3-text">Datos de tu negocio</h1>
+    <h1 class="font-bold text-[28px] p3-text dark:text-white">Datos de tu negocio</h1>
     <form
       class="flex flex-col gap-4"
       [formGroup]="updateBusinessForm"
@@ -12,26 +12,26 @@
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '70px', width: '100%', borderRadius: '16px' }"></ngx-skeleton-loader>
       } @else {
-        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
           <i class="fa-regular fa-user text-2xl p6-text"></i>
           <div class="w-full flex flex-col">
             <label class="p3-text text-lg font-medium">Nombre del comercio</label>
             <input
               type="text"
               placeholder="Nombre del comercio"
-              class="w-full p6-text text-lg focus:outline-none"
+              class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
               formControlName="name"
             >
           </div>
         </div>
-        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
           <i class="fa-regular fa-envelope text-2xl p6-text"></i>
           <div class="w-full flex flex-col">
             <label class="p3-text text-lg font-medium">Correo electrónico</label>
             <input
               type="email"
               placeholder="Nombre del comercio"
-              class="w-full p6-text text-lg focus:outline-none"
+              class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
               formControlName="email"
             >
           </div>
@@ -44,14 +44,14 @@
             <span *ngIf="email?.errors?.['email']">El email debe coincidir con una dirección de correo electrónico real</span>
           </div>
         }
-        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
           <i class="fa-solid fa-phone text-2xl p6-text"></i>
           <div class="w-full flex flex-col">
             <label class="p3-text text-lg font-medium">Teléfono</label>
             <input
               type="tel"
               placeholder="Nombre del comercio"
-              class="w-full p6-text text-lg focus:outline-none"
+              class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
               formControlName="phone"
             >
           </div>
@@ -64,10 +64,10 @@
             <span *ngIf="phone?.errors?.['pattern']" class="">Introduce un numero de telefono correcto</span>
           </div>
         }
-        <div class="w-full p6-border p-4 rounded-2xl">
+        <div class="w-full p6-border p-4 rounded-2xl dark:bg-dark-input-bg">
           <app-places-input-autocomplete formControlName="address"></app-places-input-autocomplete>
         </div>
-        <div class="rounded-2xl p-4 p6-border">
+        <div class="rounded-2xl p-4 p6-border dark:bg-dark-input-bg">
           <app-password-input
             [labelText]="'Contraseña'"
             [showIcon]="true"
@@ -81,7 +81,7 @@
   </section>
 
   <section class="w-full py-4">
-    <h2 class="p3-text font-bold text-2xl mb-4">Galería de tu negocio</h2>
+    <h2 class="p3-text font-bold text-2xl mb-4 dark:text-white">Galería de tu negocio</h2>
     <div class="w-full h-[500px] flex gap-4 items-center">
       @if (images.length > 0) {
         <img

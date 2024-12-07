@@ -12,14 +12,14 @@
   <div>
       <form class="flex flex-col gap-4" [formGroup]="businessRegisterForm" (ngSubmit)="submit()">
         @if (currentStep === 1) {
-          <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+          <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
             <i class="fa-regular fa-envelope text-2xl p6-text"></i>
             <div class="w-full flex flex-col relative">
               <label class="p3-text text-lg font-medium">Correo electrónico</label>
               <input
                 type="text"
                 placeholder="Tu correo electrónico"
-                class="w-full p6-text text-lg focus:outline-none"
+                class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
                 formControlName="email"
               >
             </div>
@@ -33,7 +33,7 @@
               <span *ngIf="email?.errors?.['email']">El email debe coincidir con una dirección de correo electrónico real</span>
             </div>
           }
-          <div class="rounded-2xl p-4 p6-border">
+          <div class="rounded-2xl p-4 p6-border dark:bg-dark-input-bg">
             <app-password-input
               [labelText]="'Contraseña'"
               [showIcon]="true"
@@ -51,14 +51,14 @@
         }
 
         @if (currentStep === 2) {
-          <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+          <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
             <i class="fa-solid fa-user-tie text-2xl p6-text"></i>
             <div class="w-full flex flex-col">
               <label class="p3-text text-lg font-medium">¿Cómo se llama tu comercio?</label>
               <input
                 type="text"
                 placeholder="Nombre del comercio"
-                class="w-full p6-text text-lg focus:outline-none"
+                class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
                 formControlName="name"
               >
             </div>
@@ -72,8 +72,8 @@
               <span *ngIf="name?.errors?.['minlength']" class="">El nombre del comercio debe tener una longitud de al menos 5 caracteres</span>
             </div>
           }
-          <h3 class="p3-text text-center text-2xl font-bold">Ubicación de tu comercio</h3>
-          <div class="w-full p6-border p-4 rounded-2xl">
+          <h3 class="p3-text text-center text-2xl font-bold dark:text-white">Ubicación de tu comercio</h3>
+          <div class="w-full p6-border p-4 rounded-2xl dark:bg-dark-input-bg">
             <app-places-input-autocomplete formControlName="address"></app-places-input-autocomplete>
           </div>
           @if (address?.invalid && (address?.dirty || address?.touched)) {
@@ -84,15 +84,15 @@
               <span *ngIf="address?.errors?.['required']" class="">La dirección del comercio es obligatoria</span>
             </div>
           }
-          <h3 class="p3-text text-center text-2xl font-bold">Contacto de tu comercio</h3>
-          <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+          <h3 class="p3-text text-center text-2xl font-bold dark:text-white">Contacto de tu comercio</h3>
+          <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
             <i class="fa-solid fa-phone text-2xl p6-text"></i>
             <div class="w-full flex flex-col">
               <label class="p3-text text-lg font-medium">Teléfono </label>
               <input
                 type="text"
                 placeholder="Número de teléfono"
-                class="w-full p6-text text-lg focus:outline-none"
+                class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
                 formControlName="phone"
               >
             </div>

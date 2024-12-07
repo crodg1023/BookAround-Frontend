@@ -21,6 +21,7 @@ export class ReportedReviewCardComponent implements OnInit {
   @Input() count: number = 0;
   isLoading = false;
   reportedReviewAuthor!: Client;
+  src: string = 'assets/images/profile-placeholder.jpg'
 
   constructor(
     private starsService: StarsService,

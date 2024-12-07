@@ -2,11 +2,12 @@
  [hasActionButtons]="false"
   modalType="loginToReview"
 >
-  <h1 class="p3-text font-bold text-4xl">Para poder dejar tu comentario debes iniciar sesión</h1>
+  <h1 class="p3-text font-bold text-4xl dark:text-white">Para poder dejar tu comentario debes iniciar sesión</h1>
   <section class="w-full flex items-center justify-center gap-2">
     <img
       src="assets/images/bookaround-login-to-review.jpg"
       alt="Login to post a review"
+      class="h-[430px] dark:rounded-2xl"
     >
     <main class="w-full">
       <h2 class="p5-text font-bold text-3xl text-center mb-4">Ingresa</h2>
@@ -21,14 +22,14 @@
         [formGroup]="loginForm"
         (ngSubmit)="login()"
       >
-        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border">
+        <div class="w-full flex items-center rounded-2xl p-4 gap-4 p6-border dark:bg-dark-input-bg">
           <i class="fa-regular fa-envelope text-2xl p6-text"></i>
           <div class="w-full flex flex-col">
             <label class="p3-text text-lg font-medium">Correo electrónico</label>
             <input
               type="text"
               placeholder="Tu correo electrónico"
-              class="w-full p6-text text-lg focus:outline-none"
+              class="w-full p6-text text-lg focus:outline-none dark:bg-dark-input-bg"
               formControlName="email"
             >
           </div>
@@ -42,7 +43,7 @@
             <span *ngIf="email?.errors?.['email']">El email debe coincidir con una dirección de correo electrónico real</span>
           </div>
         }
-        <div class="rounded-2xl p-4 p6-border">
+        <div class="rounded-2xl p-4 p6-border dark:bg-dark-input-bg">
           <app-password-input
             [labelText]="'Contraseña'"
             [showIcon]="true"

@@ -20,6 +20,7 @@ import { EchoService } from '../../Services/WebSockets/echo.service';
 import { ScheduleAppointmentModalComponent } from '../../Components/Modals/schedule-appointment-modal/schedule-appointment-modal.component';
 import { LoginToReviewModalComponent } from '../../Components/Modals/login-to-review-modal/login-to-review-modal.component';
 import { ReportModalComponent } from '../../Components/Modals/report-modal/report-modal.component';
+import { ImageService } from '../../Services/Images/image.service';
 
 @Component({
   selector: 'app-business-information',
@@ -58,6 +59,9 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
   displayedReviews: Review[] = [];
   count: number = 4;
   currentIndex = signal(0);
+  images!: string[];
+  src: string = '';
+  currentImgIndex: number = 0;
 
   constructor (
     private route: ActivatedRoute,
@@ -67,7 +71,8 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
     private reviewsService: ReviewService,
     private starsService: StarsService,
     private authService: AuthService,
-    private echoService: EchoService
+    private echoService: EchoService,
+    private imageService: ImageService
   ) {}
 
   ngOnInit(): void {
@@ -85,7 +90,10 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
 
   fetchReviews() {
     this. subscriptions.push(
-      this.route.data.subscribe(({ businessInformation }) => this.business = businessInformation),
+      this.route.data.subscribe(({ businessInformation }) => {
+        this.business = businessInformation;
+        this.changeImg();
+      }),
       this.reviewsService.getAllReviews().subscribe(reviews => {
         this.reviews = reviews.filter(x => x.comercio_id === this.business.id);
         this.hasReviews = this.reviews.length > 0;
@@ -183,6 +191,20 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
         this.modalService.openModal('loginToReview');
       }
     });
+  }
+
+  changeImg() {
+    if (this.business.images?.length) {
+      setInterval(() => {
+        this.currentImgIndex++;
+        if (this.currentImgIndex >= (this.business?.images?.length || 0)) {
+          this.currentImgIndex = 0;
+        }
+        if (this.business.images) {
+          this.src = this.business?.images[this.currentImgIndex];
+        }
+      }, 5000);
+    }
   }
 
   openReportModal() {

@@ -1,14 +1,14 @@
 
 <div class="w-full flex flex-col gap-4 items-center">
   <div class="max-w-sm w-full rounded-2xl p6-border">
-      <div class="md:p-8 p-5 rounded-2xl bg-white">
+      <div class="md:p-8 p-5 rounded-2xl bg-white dark:bg-dark-secondary">
           <div class="px-4 flex items-center justify-between border-b-2 pb-3">
-              <span  tabindex="0" class="focus:outline-none  text-base font-bold p3-text">{{ firstDayOfMonth().monthLong }} {{ firstDayOfMonth().year }}</span>
+              <span  tabindex="0" class="focus:outline-none  text-base font-bold p3-text dark:text-white">{{ firstDayOfMonth().monthLong }} {{ firstDayOfMonth().year }}</span>
               <div class="flex items-center">
                 <button aria-label="calendar backward" (click)="previousMonth()" [disabled]="!isNotPreviousMonth(firstDayOfMonth())" [ngClass]="!isNotPreviousMonth(firstDayOfMonth()) ? 'p7-text cursor-not-allowed' : 'p3-text' ">
                   <i class="fa-solid fa-chevron-left"></i>
                 </button>
-              <button aria-label="calendar forward" class="ml-3 p3-text" (click)="nextMonth()">
+              <button aria-label="calendar forward" class="ml-3 p3-text dark:text-white" (click)="nextMonth()">
                 <i class="fa-solid fa-chevron-right"></i>
               </button>
 
@@ -21,7 +21,7 @@
                         @for (weekDay of weekDays(); track $index) {
                           <th>
                             <div class="w-full flex justify-center">
-                                <p class="text-base font-medium text-center p3-text">{{ weekDay }}</p>
+                                <p class="text-base font-medium text-center p3-text dark:text-white">{{ weekDay }}</p>
                             </div>
                           </th>
                         }
@@ -33,10 +33,10 @@
                         @for (day of week; track $index) {
                           <td class="pt-6">
                             <div
-                              class="px-2 py-2 flex w-full justify-center rounded-full"
+                              class="px-2 py-2 flex w-full justify-center rounded-full dark:text-white"
                               [ngClass]="[
                                 activeDay().toISODate() === day.toISODate() ? 'p5-bg text-white' : 'p3-text',
-                                checkDaysOutOfDate(day) ? 'cursor-pointer font-medium' : 'p7-bg rounded-md cursor-not-allowed text-white font-light'
+                                checkDaysOutOfDate(day) ? 'cursor-pointer font-medium' : 'p7-bg dark:bg-dark-third rounded-md cursor-not-allowed text-white font-light dark:text-dark-primary'
                               ]"
                               (click)="setActiveDay(day)"
                             >

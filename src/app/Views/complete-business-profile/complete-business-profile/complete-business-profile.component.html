@@ -2,27 +2,27 @@
 <main class="w-full flex flex-col justify-center items-center mt-16">
   <section class="w-full max-w-[1300px] flex items-center gap-16">
     <div class="w-full flex flex-col gap-8 text-center">
-      <h1 class="p3-text font-bold text-5xl">Te damos la bienvenida a Book Around</h1>
-      <h2 class="p5-text font-bold text-4xl">Completa tu perfil</h2>
+      <h1 class="p3-text font-bold text-5xl dark:text-white">Te damos la bienvenida a Book Around</h1>
+      <h2 class="p5-text font-bold text-4xl dark:text-white">Completa tu perfil</h2>
     </div>
 
     <img
       src="assets/images/bookaround-complete-profile.jpg"
       alt="Persona utilizando un telefono para hacer login"
-      class="w-80 h-80"
+      class="w-80 h-80 dark:rounded-2xl"
     >
   </section>
 
   <form
-    class="w-full max-w-[1300px] flex flex-col gap-8 p-8"
+    class="w-full max-w-[1300px] flex flex-col gap-8 p-8 mt-4 dark:bg-dark-secondary dark:rounded-2xl"
     [formGroup]="businessRegisterForm"
     (ngSubmit)="submit()"
   >
     <div class="w-full flex flex-col gap-8 rounded-2xl p-4 p6-border">
       <div class="flex flex-col gap-2 text-center">
-        <h3 class="p5-text text-center font-bold text-2xl">Selecciona las categorías de tu comercio</h3>
-        <p class="p3-text font-medium text-2xl">Pueden ser hasta 3</p>
-        <p class="p3-text font-medium text-2xl">{{ selectedCategories.length }}/{{ maxCategories }}</p>
+        <h3 class="p5-text text-center font-bold text-2xl dark:text-white">Selecciona las categorías de tu comercio</h3>
+        <p class="p3-text font-medium text-2xl dark:text-white">Pueden ser hasta 3</p>
+        <p class="p3-text font-medium text-2xl dark:text-white">{{ selectedCategories.length }}/{{ maxCategories }}</p>
       </div>
       <div class="flex flex-wrap justify-center items-center gap-4">
         @for (category of categories; track category.id; let i = $index) {
@@ -39,24 +39,24 @@
 
     <div class="w-full flex gap-4">
       <div class="w-full rounded-2xl p-4 p6-border">
-        <p class="p3-text font-bold text-2xl mb-4">Rango de precio</p>
+        <p class="p3-text font-bold text-2xl mb-4 dark:text-white">Rango de precio</p>
         <div class="w-full flex gap-4 mb-4">
-          <div class="w-full p-4 p3-menu-border rounded-2xl">
-            <label for="">Mínimo</label>
+          <div class="w-full p-4 p3-menu-border rounded-2xl dark:border-white">
+            <label class="dark:text-white">Mínimo</label>
             <input
               type="number"
               min="0"
-              class="w-full outline-none"
+              class="w-full outline-none dark:bg-dark-secondary dark:text-white"
               placeholder="$$$"
               formControlName="minPrice"
             >
           </div>
-          <div class="w-full p-4 p3-menu-border rounded-2xl">
-            <label for="">Máximo</label>
+          <div class="w-full p-4 p3-menu-border rounded-2xl dark:border-white">
+            <label class="dark:text-white">Máximo</label>
             <input
               type="number"
               min="0"
-              class="w-full outline-none"
+              class="w-full outline-none dark:bg-dark-secondary dark:text-white"
               placeholder="$$$"
               formControlName="maxPrice"
             >
@@ -83,22 +83,22 @@
       </div>
 
       <div class="w-full rounded-2xl p-4 p6-border">
-        <p class="p3-text font-bold text-2xl mb-4">Horarios</p>
+        <p class="p3-text font-bold text-2xl mb-4 dark:text-white">Horarios</p>
         <div class="w-full flex gap-4 mb-4">
-          <div class="w-full p-4 p3-menu-border rounded-2xl">
-            <label for="">Apertura</label>
+          <div class="w-full p-4 p3-menu-border rounded-2xl dark:border-white">
+            <label class="dark:text-white">Apertura</label>
             <input
               type="time"
-              class="w-full outline-none"
+              class="w-full outline-none dark:bg-dark-secondary dark:text-white"
               value="00:00"
               formControlName="openingTime"
             >
           </div>
-          <div class="w-full p-4 p3-menu-border rounded-2xl">
-            <label for="">Cierre</label>
+          <div class="w-full p-4 p3-menu-border rounded-2xl dark:border-white">
+            <label class="dark:text-white">Cierre</label>
             <input
               type="time"
-              class="w-full outline-none"
+              class="w-full outline-none dark:bg-dark-secondary dark:text-white"
               value="23:00"
               formControlName="closingTime"
             >
@@ -124,8 +124,8 @@
     </div>
 
     <div class="w-full rounded-2xl p-4 p6-border text-center">
-      <p class="p5-text font-bold text-2xl mb-4">Galería</p>
-      <p class="p3-text font-medium text-2xl mb-4">Puedes subir hasta 5 imágenes</p>
+      <p class="p5-text font-bold text-2xl mb-4 dark:text-white">Galería</p>
+      <p class="p3-text font-medium text-2xl mb-4 dark:text-white">Puedes subir hasta 5 imágenes</p>
       <input
         #fileInput
         type="file"
@@ -142,10 +142,10 @@
     </div>
 
     <div class="w-full rounded-2xl p-4 p6-border">
-      <p class="p3-text font-medium text-2xl mb-4">Descripción del negocio</p>
+      <p class="p3-text font-medium text-2xl mb-4 dark:text-white">Descripción del negocio</p>
       <input
         type="text"
-        class="w-full p-4 p3-menu-border rounded-2xl mb-4"
+        class="w-full p-4 p3-menu-border rounded-2xl mb-4 dark:bg-dark-secondary dark:text-white"
         placeholder="Escribe tu descripción"
         formControlName="description"
       />

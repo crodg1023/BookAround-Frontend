@@ -1,26 +1,26 @@
-<main class="w-full px-8 py-4 flex flex-col gap-4">
+<main class="w-full px-8 py-4 flex flex-col gap-4 mb-4 dark:bg-dark-secondary dark:rounded-2xl">
   <section class="w-full flex flex-col gap-2">
-    <span class="p3-text font-medium text-sm">Status</span>
+    <span class="p3-text font-medium text-sm dark:text-white">Status</span>
     <article class="w-full flex gap-4">
       <div class="flex gap-2">
         <div class="w-4 h-4 rounded-[4px] g1-bg"></div>
-        <span class="p3-text text-sm">Activas</span>
+        <span class="p3-text text-sm dark:text-white">Activas</span>
       </div>
       <div class="flex gap-2">
         <div class="w-4 h-4 rounded-[4px] r1-bg"></div>
-        <span class="p3-text text-sm">Canceladas</span>
+        <span class="p3-text text-sm dark:text-white">Canceladas</span>
       </div>
       <div class="flex gap-2">
         <div class="w-4 h-4 rounded-[4px] bg-[#548BDF]"></div>
-        <span class="p3-text text-sm">Cumplidas</span>
+        <span class="p3-text text-sm dark:text-white">Cumplidas</span>
       </div>
     </article>
   </section>
 
   <section class="w-full flex gap-8">
     <div class="w-full flex flex-col gap-2">
-      <h2 class="p3-text text-lg font-medium">Agendadas para hoy</h2>
-      <span class="p3-text text-sm">{{ today.toFormat('dd/MM/yyyy') }}</span>
+      <h2 class="p3-text text-lg font-medium dark:text-white">Agendadas para hoy</h2>
+      <span class="p3-text text-sm dark:text-white">{{ today.toFormat('dd/MM/yyyy') }}</span>
       @if (isLoading) {
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '300px', width: '100%' }"></ngx-skeleton-loader>
       } @else {
@@ -33,8 +33,8 @@
 
     </div>
     <div class="w-full flex flex-col gap-2">
-      <h2 class="p3-text text-lg font-medium">Agendadas para esta semana</h2>
-      <span class="p3-text text-sm">{{ startOfWeek.toFormat('dd/MM/yyyy') }} - {{ endOfWeek.toFormat('dd/MM/yyyy') }}</span>
+      <h2 class="p3-text text-lg font-medium dark:text-white">Agendadas para esta semana</h2>
+      <span class="p3-text text-sm dark:text-white">{{ startOfWeek.toFormat('dd/MM/yyyy') }} - {{ endOfWeek.toFormat('dd/MM/yyyy') }}</span>
       @if (isLoading) {
         <ngx-skeleton-loader appearance="line" [theme]="{ height: '300px', width: '100%' }"></ngx-skeleton-loader>
       } @else {
@@ -49,8 +49,8 @@
   </section>
 
   <section class="w-full flex flex-col gap-2">
-    <h2 class="p3-text font-medium text-lg">Historial</h2>
-    <span class="p3-text text-sm">2024</span>
+    <h2 class="p3-text font-medium text-lg dark:text-white">Historial</h2>
+    <span class="p3-text text-sm dark:text-white">{{ this.today.year }}</span>
     @if (isLoading) {
       <ngx-skeleton-loader appearance="line" [theme]="{ height: '300px', width: '100%' }"></ngx-skeleton-loader>
     } @else {
