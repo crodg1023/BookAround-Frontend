@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BusinessService } from '../../Services/Business/business.service';
 import { Subscription } from 'rxjs';
 import { Business } from '../../Interfaces/business';
@@ -27,12 +27,13 @@ import { ImageService } from '../../Services/Images/image.service';
 })
 export class BusinessProfileComponent implements OnInit, OnDestroy {
 
+  @ViewChild('fileInput') fileInput!: ElementRef;
   subscription!: Subscription;
   updateBusinessForm!: FormGroup;
   business!: Business;
   information!: Object;
   isLoading: boolean = false;
-  images: string[] = [];
+  files!: File[];
 
   constructor(
     private businessService: BusinessService,
@@ -44,7 +45,6 @@ export class BusinessProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoading = true;
     this.getBusinessInformation();
-    this.getBusinessImages();
   }
 
   get name() {
@@ -67,6 +67,7 @@ export class BusinessProfileComponent implements OnInit, OnDestroy {
     const business_id = sessionStorage.getItem('business_id');
     if (business_id) {
       this.subscription = this.businessService.getBusinessById(+business_id).subscribe(info => {
+        console.log(info.images);
         this.business = info;
         this.defineForm();
         this.isLoading = false;
@@ -107,10 +108,25 @@ export class BusinessProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  getBusinessImages() {
-    const business_id = Number(sessionStorage.getItem('business_id'));
-    this.imageService.getBusinessImages(business_id).subscribe(x => {
-      this.images = x.images
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.files = Array.from(input.files);
+      this.uploadProfilePicture(this.files);
+    }
+  }
+
+  triggerFileInput() {
+    this.fileInput.nativeElement.click();
+  }
+
+  uploadProfilePicture(files: File[]) {
+    const formData = new FormData();
+    const id = sessionStorage.getItem('business_id');
+    formData.append('comercio_id', id || '');
+    files.forEach(file => formData.append('images[]', file));
+    this.imageService.postImage(formData).subscribe(response => {
+      console.log(response);
     });
   }
 

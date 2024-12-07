@@ -72,6 +72,9 @@ export class CompleteBusinessProfileComponent implements OnInit {
   get selectedCategories() {
     return this.businessRegisterForm.get('categories') as FormArray;
   }
+  get images() {
+    return this.businessRegisterForm.get('images');
+  }
 
   ngOnInit(): void {
     this.fetchCategories();
@@ -102,7 +105,8 @@ export class CompleteBusinessProfileComponent implements OnInit {
           Validators.maxLength(500)
         ]
       ],
-      categories: this.formBuilder.array([])
+      categories: this.formBuilder.array([]),
+      images: ['', Validators.required]
     });
   }
 
@@ -181,6 +185,9 @@ export class CompleteBusinessProfileComponent implements OnInit {
         },
         error: err => console.error(err)
       });
+    } else {
+      this.buttonDisabled = false;
+      console.log('no valido');
     }
   }
 
@@ -201,6 +208,11 @@ export class CompleteBusinessProfileComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.files = Array.from(input.files);
+      this.businessRegisterForm.patchValue({ images: input.files });
+      this.businessRegisterForm.get('images')?.updateValueAndValidity();
+    } else {
+      this.businessRegisterForm.patchValue({ images: '' });
+      this.businessRegisterForm.get('images')?.updateValueAndValidity();
     }
   }
 

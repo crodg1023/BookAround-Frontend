@@ -203,8 +203,12 @@ export class BusinessInformationComponent implements OnInit, AfterViewInit, OnDe
         if (this.business.images) {
           this.src = this.business?.images[this.currentImgIndex];
         }
-      }, 5000);
+      }, 3000);
     }
+  }
+
+  altImg() {
+    return this.business.pictures || 'assets/images/profile-placeholder.jpg';
   }
 
   openReportModal() {

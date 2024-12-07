@@ -132,13 +132,22 @@
         multiple
         (change)="onFileChange($event)"
         class="hidden"
-    >
+        formControlName="images"
+      >
       <img
         src="assets/svg/cloud-arrow-up-solid.svg"
         alt="Ilustracion de subir archivos."
         class="h-[500px] mx-auto cursor-pointer"
         (click)="triggerFileInput()"
       >
+      @if (images?.invalid && (images?.dirty || images?.touched)) {
+        <div class="w-full flex items-center gap-4 invalid-input-message">
+          <div class="w-[24px] flex items-center justify-center">
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <span *ngIf="description?.errors?.['required']" class="">Las fotos del comercio son obligatorias</span>
+        </div>
+      }
     </div>
 
     <div class="w-full rounded-2xl p-4 p6-border">
