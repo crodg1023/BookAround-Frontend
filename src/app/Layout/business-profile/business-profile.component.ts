@@ -34,6 +34,7 @@ export class BusinessProfileComponent implements OnInit, OnDestroy {
   information!: Object;
   isLoading: boolean = false;
   files!: File[];
+  images: string[] = [];
 
   constructor(
     private businessService: BusinessService,
@@ -67,8 +68,8 @@ export class BusinessProfileComponent implements OnInit, OnDestroy {
     const business_id = sessionStorage.getItem('business_id');
     if (business_id) {
       this.subscription = this.businessService.getBusinessById(+business_id).subscribe(info => {
-        console.log(info.images);
         this.business = info;
+        this.images = this.business.images || [];
         this.defineForm();
         this.isLoading = false;
       });
@@ -127,7 +128,31 @@ export class BusinessProfileComponent implements OnInit, OnDestroy {
     files.forEach(file => formData.append('images[]', file));
     this.imageService.postImage(formData).subscribe(response => {
       console.log(response);
+      this.updateUIWithNewImages(files);
     });
+  }
+
+  updateUIWithNewImages(files: File[]) {
+    files.forEach(file => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        this.images.push(fileReader.result as string);
+      }
+      fileReader.readAsDataURL(file);
+      console.log(this.images);
+    });
+  }
+
+  deleteImg(index: number) {
+    if (this.business.images) {
+      const prefix = 'http://bookaround-backend.lo/uploads/';
+      const imgName = this.business.images[index].slice(prefix.length);
+      const id = Number(sessionStorage.getItem('business_id'));
+      this.imageService.deleteBusinessImage(id, imgName).subscribe(x => {
+        console.log(x);
+        this.images.splice(index, 1);
+      });
+    }
   }
 
   ngOnDestroy(): void {

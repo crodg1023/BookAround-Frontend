@@ -34,6 +34,10 @@ export class ImageService {
     return this.http.delete<any>(`http://bookaround-backend.lo/api/delete-image/${id}`).pipe(catchError(this.error));
   }
 
+  deleteBusinessImage(id: number, name: string) {
+    return this.http.delete<any>(`http://bookaround-backend.lo/api/delete-company-image/${id}/${name}`, ).pipe(catchError(this.error));
+  }
+
   updateCustomerImage(id: number, image: FormData) {
     return this.http.post(`http://bookaround-backend.lo/api/update-image/${id}`, image).pipe(catchError(this.error));
   }
