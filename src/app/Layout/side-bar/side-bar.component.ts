@@ -39,6 +39,11 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.subscription = this.router.events.subscribe(() => this.hiddenProfilePicture());
     this.checkUserRole();
     this.getUserInformation();
+    this.loadImg();
+  }
+
+  loadImg() {
+    this.imageService.imageUrl$.subscribe(x => this.src = x);
   }
 
   hiddenProfilePicture() {
@@ -78,24 +83,6 @@ export class SideBarComponent implements OnInit, OnDestroy {
         this.src = URL.createObjectURL(blob);
       });
     }
-  }
-
-  triggerFileInput() {
-    this.fileInput.nativeElement.click();
-  }
-
-  onFileChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      this.uploadProfilePicture(file);
-    }
-  }
-
-  uploadProfilePicture(file: File) {
-    const formData = new FormData();
-    formData.append('picture', file);
-    console.log(formData.get('picture'));
   }
 
   ngOnDestroy(): void {

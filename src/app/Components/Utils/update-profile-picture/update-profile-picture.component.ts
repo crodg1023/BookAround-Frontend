@@ -22,6 +22,7 @@ export class UpdateProfilePictureComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.getUserImage();
+    this.imageService.imageUrl$.subscribe(x => this.imageUrl = x);
   }
 
   getUserImage() {
@@ -46,6 +47,7 @@ export class UpdateProfilePictureComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const files: File[] = Array.from(input.files);
+      this.imageService.updateUIWithNewImg(input.files[0]);
       this.uploadProfilePicture(files);
     }
   }
@@ -69,5 +71,6 @@ export class UpdateProfilePictureComponent implements OnInit {
   deleteImage() {
     const id = Number(sessionStorage.getItem('client_id') ?? -1);
     this.imageService.deleteCustomerImage(id).subscribe(x => console.log(x));
+    this.imageService.updateUIDeleteImg();
   }
 }

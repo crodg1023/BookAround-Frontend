@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, retry, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, retry, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,9 @@ import { catchError, Observable, retry, throwError } from 'rxjs';
 export class ImageService {
 
   private URL: string = 'http://bookaround-backend.lo/api/images';
+
+  private imageUrl = new BehaviorSubject<string>('/assets/images/profile-placeholder.jpg');
+  imageUrl$ = this.imageUrl.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +36,19 @@ export class ImageService {
 
   updateCustomerImage(id: number, image: FormData) {
     return this.http.post(`http://bookaround-backend.lo/api/update-image/${id}`, image).pipe(catchError(this.error));
+  }
+
+  updateUIWithNewImg(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageUrl.next(reader.result as string)
+    }
+
+    reader.readAsDataURL(file);
+  }
+
+  updateUIDeleteImg() {
+    this.imageUrl.next('/assets/images/profile-placeholder.jpg');
   }
 
   private error(error: HttpErrorResponse) {
