@@ -1,8 +1,8 @@
 <section class="w-full flex flex-col items-center justify-center gap-16">
-  <div class="w-full max-w-[1300px] flex gap-16">
+  <div class="w-full max-w-[1300px] flex flex-col lg:flex-row gap-16">
     <div
       class="flex flex-col gap-4"
-      [ngClass]="userRole === 'company' ? 'w-full' : 'w-2/3'"
+      [ngClass]="userRole === 'company' ? 'w-full' : 'md:w-full lg:w-2/3'"
     >
       <img
         class="w-full h-[500px] rounded-2xl p3-border dark:border-dark-text object-cover"
@@ -52,22 +52,22 @@
       </div>
     </div>
     @if (userRole !== 'company') {
-      <div class="w-1/3 h-full flex flex-col gap-4">
+      <div class="w-full lg:w-1/3 h-full flex flex-col gap-4">
         <app-calendar></app-calendar>
         <button class="button-1 text-2xl self-center" (click)="openScheduleAppointmentModal()">Agenda tu cita</button>
       </div>
     }
   </div>
-  <div class="w-full max-w-[1300px] flex items-center justify-center gap-8">
+  <div class="w-full max-w-[1300px] flex flex-col-reverse lg:flex-row items-center justify-center gap-16 lg:gap-8">
     @if (displayedReviews.length > 0) {
-      <div class="w-2/3 flex flex-col gap-4">
-        <div class="grid grid-cols-2 gap-4">
+      <div class="w-full lg:w-2/3 flex flex-col gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-4">
           @for (review of displayedReviews; track review.id) {
             <app-review-card [review]="review" [isLoading]="isLoading"></app-review-card>
           }
         </div>
       </div>
-      <div class="w-1/3 h-full">
+      <div class="w-full lg:w-1/3 h-full">
         <img
           src="assets/images/bookaround-reviews.jpg"
           alt=""
@@ -75,10 +75,10 @@
         >
       </div>
     } @else {
-      <div class="flex flex-col gap-8 items-center">
-        <div class="flex gap-16 items-center justify-center w-[970px]">
-          <h2 class="p3-text text-[38px] font-bold dark:text-white">Sé el primero en dejar una reseña para este local</h2>
-          <img src="assets/images/bookaround-no-reviews.jpg" alt="" class="w-[450px] h-[450px] dark:rounded-2xl">
+      <div class="w-full flex flex-col gap-8 items-center">
+        <div class="flex flex-row gap-8 xl:gap-16 items-center justify-center w-full xl:w-[970px]">
+          <h2 class="w-full p3-text text-[38px] font-bold dark:text-white">Sé el primero en dejar una reseña para este local</h2>
+          <img src="assets/images/bookaround-no-reviews.jpg" alt="" class="w-1/2 xl:w-[450px] dark:rounded-2xl">
         </div>
         <button
           *ngIf="userRole !== 'company'"
