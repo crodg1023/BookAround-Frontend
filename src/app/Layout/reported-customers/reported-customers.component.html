@@ -9,7 +9,7 @@
     <span class="r1-color">{{ groupedReportedCustomers.length }}</span>
   </p>
 
-  <div class="w-full grid grid-cols-2 gap-8 p-4 p6-border rounded-2xl">
+  <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-4 p6-border rounded-2xl">
     @for (mapItem of groupedReportedCustomers; track mapItem.customer.id) {
       <app-reported-user-card
         [reportedUser]="mapItem.customer"

@@ -9,7 +9,7 @@
   modalType="appointmentSchedule"
 >
   @if (currentStep === 1) {
-    <div class="grid grid-cols-6 gap-4">
+    <div class="grid grid-cols-4 md:grid-cols-6 gap-4">
       @for (hour of dayHours; track $index) {
         <input
           type="radio"
@@ -22,7 +22,7 @@
         >
         <label
           for="{{ hour }}"
-          class="p-4 p6-border rounded-2xl transition duration-100 ease-in"
+          class="p-2 md:p-4 p6-border rounded-2xl transition duration-100 ease-in"
           [ngClass]="[
             selectedHourIndex === $index ? 'p5-bg text-white' : 'p3-text dark:text-white',
             checkDisabledHour(hour) ? 'cursor-not-allowed button-disabled' : 'cursor-pointer'
@@ -45,7 +45,7 @@
           >
           <label
             for="{{ person }}"
-            class="cursor-pointer p-4 p3-menu-border rounded-2xl transition duration-100 ease-in text-center dark:border-white"
+            class="cursor-pointer p-2 md:p-4 p3-menu-border rounded-2xl transition duration-100 ease-in text-center dark:border-white"
             [ngClass]="selectedPeopleIndex === $index ? 'p5-bg text-white' : 'p3-text dark:text-white'"
           >
             <span class="text-lg">{{ person }}</span>
@@ -111,13 +111,13 @@
       *ngIf="!appointmentBookingFailure"
       src="assets/images/bookaround-appointment-success.jpg"
       alt="Ilustración de una chica usando una tablet"
-      class="h-[420px] dark:rounded-2xl"
+      class="w-full md:h-[420px] dark:rounded-2xl"
     >
     <img
       *ngIf="appointmentBookingFailure"
       src="assets/images/bookaround-error.jpg"
       alt="Ilustración de una chica preguntandose que salio mal"
-      class="h-[420px] dark:rounded-2xl"
+      class="w-full md:h-[420px] dark:rounded-2xl"
     >
   }
 </app-modal>

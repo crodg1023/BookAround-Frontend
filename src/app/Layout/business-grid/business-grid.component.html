@@ -2,27 +2,27 @@
   <header class="w-full max-w-[1300px] flex items-center justify-between">
     <button class="flex items-center gap-2 p3-text dark:text-white" (click)="openFiltersModal()">
       <span class="text-2xl p3-text px-4 py-2 rounded-[32px] p3-filter-border p5-hover transition duration-100 ease-in dark:text-white"><i class="fa-solid fa-sliders"></i></span>
-      <span class="text-lg font-medium">Filtros</span>
+      <span class="hidden md:block text-lg font-medium">Filtros</span>
     </button>
     @if (category || hasFiltered) {
       <button (click)="showAll()" class="flex items-center gap-2 p3-text dark:text-white">
         <span class="text-2xl-text"><i class="fa-solid fa-arrow-left"></i></span>
-        <span class="text-lg font-medium">Volver a la selección general</span>
+        <span class="hidden md:block text-lg font-medium">Volver a la selección general</span>
       </button>
     }
     <p
-      class="p3-text text-lg font-medium dark:text-white"
+      class="p3-text text-sm md:text-lg font-medium dark:text-white"
     >
       Mostrando <span class="px-2 py-1 p5-text p5-border dark:text-dark-text dark:border-dark-text">{{ showing }}</span> de {{ (category || hasFiltered) ? displayed.length : business.length }}
     </p>
   </header>
   <main class="w-full max-w-[1300px] flex flex-wrap gap-4 justify-center">
     @if (displayed.length === 0) {
-      <h1 class="p3-text font-bold text-4xl text-center lg:text-left dark:text-white">Parece que no hay comercios que coincidan con tu búsqueda</h1>
+      <h1 class="p3-text font-bold text-2xl md:text-4xl text-center lg:text-left dark:text-white">Parece que no hay comercios que coincidan con tu búsqueda</h1>
       <img
         src="assets/images/bookaround-no-results.jpg"
         alt="There are no results for the selected filters"
-        class="h-[700px] dark:rounded-2xl"
+        class="h-full max-h-[700px] dark:rounded-2xl"
       >
     } @else {
       @for (b of displayed; track b.id) {
@@ -39,7 +39,7 @@
     }
   </main>
   @if (displayed.length >= count) {
-    <button class="button-2 text-2xl" (click)="currentIndex() >= business.length ? showLess() : showMore()">
+    <button class="button-2 text-lg md:text-2xl" (click)="currentIndex() >= business.length ? showLess() : showMore()">
       <span class="drop-shadow-xl">Mostrar {{ currentIndex() >= business.length ? 'menos' : 'más' }}</span>
     </button>
   }

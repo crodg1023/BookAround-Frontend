@@ -1,9 +1,9 @@
 <main class="w-full flex flex-col gap-8 mb-8">
-  <section class="w-full flex flex-col lg:flex-row gap-8">
+  <section class="w-full flex flex-col xl:flex-row gap-8">
     @if (!isClient) {
-      <div class="w-full lg:w-1/3 px-8 flex lg:flex-col gap-8 justify-center">
+      <div class="w-full xl:w-1/3 px-8 flex xl:flex-col gap-8 justify-center">
         <div class="flex flex-col gap-4 items-center lg:items-start">
-          <h3 class="p3-text font-bold text-lg dark:text-white">Calificación actual</h3>
+          <h3 class="p3-text font-bold text-lg text-center md:text-left dark:text-white">Calificación actual</h3>
           @if (isLoading) {
             <ngx-skeleton-loader appearance="line" [theme]="{ height: '25px', width: '100%' }"></ngx-skeleton-loader>
           } @else {
@@ -15,7 +15,7 @@
           }
         </div>
         <div class="flex flex-col items-center lg:items-start gap-4">
-          <h3 class="p3-text font-bold text-lg dark:text-white">Categorías de tu negocio</h3>
+          <h3 class="p3-text font-bold text-center md:text-left text-lg dark:text-white">Categorías de tu negocio</h3>
           <div class="flex gap-2 items-center">
             @if (isLoading) {
               <ngx-skeleton-loader appearance="line" [theme]="{ height: '25px', width: '100px' }"></ngx-skeleton-loader>
@@ -30,7 +30,7 @@
     }
     <div
       class="flex flex-col gap-4"
-      [ngClass]="isClient ? 'w-full' : 'w-full lg:w-2/3'"
+      [ngClass]="isClient ? 'w-full' : 'w-full xl:w-2/3'"
     >
       <h2 class="p3-text text-[24px] font-bold dark:text-white">Citas</h2>
       <div class="w-full">
@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <div class="w-full flex gap-4">
+      <div class="w-full flex flex-col md:flex-row gap-4">
         @if (loadingAppointments) {
           <p class="dark:text-white">Cargando citas...</p>
         } @else {

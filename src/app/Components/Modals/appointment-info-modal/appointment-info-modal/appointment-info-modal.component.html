@@ -58,7 +58,7 @@
     }
     @case (3) {
       <section class="w-full">
-        <div class="grid grid-cols-5 gap-4">
+        <div class="grid grid-cols-4 md:grid-cols-5 gap-4">
           @for (hour of dayHours; track $index) {
             <input
               type="radio"
@@ -70,7 +70,7 @@
             >
             <label
               for="{{ hour }}"
-              class="p-4 p6-border rounded-2xl transition duration-100 ease-in dark:text-white"
+              class="p-2 md:p-4 p6-border rounded-2xl transition duration-100 ease-in dark:text-white"
               [ngClass]="[
                 selectedHourIndex === $index ? 'p5-bg text-white' : 'p3-text',
               ]"
@@ -108,14 +108,14 @@
       <img
         src="assets/images/bookaround-cancelation.jpg"
         alt="Bookaround appointment canceled successfully!"
-        class="h-[420px] dark:rounded-2xl"
+        class="w-full md:h-[420px] dark:rounded-2xl"
       >
     }
     @case (6) {
       <img
         src="assets/images/bookaround-appointment-success.jpg"
         alt="Bookaround appointment rescheduled successfully!"
-        class="h-[420px]"
+        class="w-full md:h-[420px]"
       >
     }
   }

@@ -9,7 +9,7 @@
     <span class="r1-color">{{groupReportsByReviews().length }}</span>
   </p>
 
-  <div class="w-full grid grid-cols-2 gap-8 p-4 p6-border rounded-2xl">
+  <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 p-4 p6-border rounded-2xl">
     @for (mapItem of groupReportsByReviews(); track mapItem.review.id) {
       <app-reported-review-card
         [reportedReview]="mapItem.review"

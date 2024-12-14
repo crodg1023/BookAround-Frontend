@@ -1,13 +1,13 @@
-<section class="w-full px-[120px] py-16 flex justify-center">
-  <div class="max-w-[1300px] w-full flex items-center gap-16 md:flex-col lg:flex-row">
+<section class="w-full px-4 xl:px-[120px] py-16 flex justify-center">
+  <div class="max-w-[1300px] w-full flex items-center gap-16 flex-col lg:flex-row">
     <img
       src="assets/images/bookaround-hero.jpg"
       alt="BookAround hero image"
       class="w-full lg:w-1/2 dark:rounded-2xl"
     >
-    <div class="flex flex-col gap-16">
-      <h1 class="font-bold text-5xl p1-text drop-shadow-xl w-full dark:text-white">Conectamos diversos comercios locales contigo para que hagas tus reservas fácilmente.</h1>
-      <div class="flex gap-8 justify-center">
+    <div class="flex flex-col gap-8 lg:gap-16">
+      <h1 class="font-bold text-4xl lg:text-5xl p1-text drop-shadow-xl w-full text-center lg:text-left dark:text-white">Conectamos diversos comercios locales contigo para que hagas tus reservas fácilmente.</h1>
+      <div class="flex gap-4 lg:gap-8 justify-center">
         <button class="button-1 md:text-xl lg:text-2xl" (click)="scrollTo('client-section')">Soy cliente</button>
         <button class="button-2 md:text-xl lg:text-2xl" (click)="scrollTo('business-section')">Tengo un negocio</button>
       </div>
@@ -15,12 +15,12 @@
   </div>
 </section>
 
-<section class="w-full px-[70px] my-20 flex flex-col gap-16 justify-center items-center" id="client-section">
+<section class="w-full px-4 xl:px-[70px] my-20 flex flex-col gap-16 justify-center items-center" id="client-section">
   <div class="max-w-[1300px] w-full leading-8">
-    <article class="w-full flex items-center gap-8 md:flex-col-reverse lg:flex-row">
+    <article class="w-full flex items-center gap-8 flex-col-reverse lg:flex-row">
       <div class="w-full lg:w-1/2 flex flex-col items-center justify-center gap-8">
-        <h2 class="text-[28px] p1-text dark:text-white font-medium text-center lg:text-left">Encuentra los mejores comercios de tu zona y empieza a vivir nuevas experiencias.</h2>
-        <button class="button-1 text-2xl" (click)="onGoToBusinessClick()">Ver los negocios</button>
+        <h2 class="text-2xl md:text-[28px] p1-text dark:text-white font-medium text-center lg:text-left">Encuentra los mejores comercios de tu zona y empieza a vivir nuevas experiencias.</h2>
+        <button class="button-1 text-lg md:text-2xl" (click)="onGoToBusinessClick()">Ver los negocios</button>
       </div>
       <img
         src="assets/images/bookaround-client-cta.jpg"
@@ -31,17 +31,17 @@
   </div>
 </section>
 
-<section class="w-full px-[70px] my-16 flex flex-col gap-16 justify-center items-center" id="business-section">
+<section class="w-full px-4 xl:px-[70px] my-16 flex flex-col gap-16 justify-center items-center" id="business-section">
   <div class="max-w-[1300px] w-full leading-8">
-    <article class="w-full flex items-center gap-8 md:flex-col lg:flex-row">
+    <article class="w-full flex items-center gap-8 flex-col lg:flex-row">
       <img
         src="assets/images/bookaround-business-cta.jpg"
         alt=""
         class="w-full lg:w-1/2 dark:rounded-2xl"
       >
       <div class="w-full lg:w-1/2 flex flex-col items-center justify-center gap-8">
-        <h2 class="text-[28px] p1-text font-medium text-center lg:text-left dark:text-white">Registra tu comercio con nosotros y obtén un sistema mejorado de gestión para las reservas de tus clientes.</h2>
-        <button class="button-2 text-2xl" (click)="onRegisterMyBusinessClick()">Registrar mi negocio</button>
+        <h2 class="text-2xl md:text-[28px] p1-text font-medium text-center lg:text-left dark:text-white">Registra tu comercio con nosotros y obtén un sistema mejorado de gestión para las reservas de tus clientes.</h2>
+        <button class="button-2 text-lg md:text-2xl" (click)="onRegisterMyBusinessClick()">Registrar mi negocio</button>
       </div>
     </article>
   </div>

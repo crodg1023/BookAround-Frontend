@@ -1,15 +1,15 @@
 <app-navbar [isAtHome]="true"></app-navbar>
 <main class="w-full flex flex-col justify-center items-center mt-16">
-  <section class="w-full max-w-[1300px] flex items-center gap-16">
-    <div class="w-full flex flex-col gap-8 text-center">
-      <h1 class="p3-text font-bold text-5xl dark:text-white">Te damos la bienvenida a Book Around</h1>
-      <h2 class="p5-text font-bold text-4xl dark:text-white">Completa tu perfil</h2>
+  <section class="w-full max-w-[1300px] flex flex-col-reverse md:flex-row items-center gap-16">
+    <div class="w-full flex flex-col gap-4 md:gap-8 text-center">
+      <h1 class="p3-text font-bold text-4xl md:text-5xl dark:text-white">Te damos la bienvenida a Book Around</h1>
+      <h2 class="p5-text font-bold text-3xl md:text-4xl dark:text-white">Completa tu perfil</h2>
     </div>
 
     <img
       src="assets/images/bookaround-complete-profile.jpg"
       alt="Persona utilizando un telefono para hacer login"
-      class="w-80 h-80 dark:rounded-2xl"
+      class="w-full md:w-80 dark:rounded-2xl"
     >
   </section>
 
@@ -18,13 +18,13 @@
     [formGroup]="businessRegisterForm"
     (ngSubmit)="submit()"
   >
-    <div class="w-full flex flex-col gap-8 rounded-2xl p-4 p6-border">
+    <div class="w-full flex flex-col gap-4 md:gap-8 rounded-2xl p-4 p6-border">
       <div class="flex flex-col gap-2 text-center">
         <h3 class="p5-text text-center font-bold text-2xl dark:text-white">Selecciona las categorías de tu comercio</h3>
         <p class="p3-text font-medium text-2xl dark:text-white">Pueden ser hasta 3</p>
         <p class="p3-text font-medium text-2xl dark:text-white">{{ selectedCategories.length }}/{{ maxCategories }}</p>
       </div>
-      <div class="flex flex-wrap justify-center items-center gap-4">
+      <div class="grid grid-cols-1 md:flex md:flex-wrap justify-center items-center gap-2 md:gap-4">
         @for (category of categories; track category.id; let i = $index) {
           <app-category-checkbox
             [id]="category.type"
@@ -37,10 +37,10 @@
       </div>
     </div>
 
-    <div class="w-full flex gap-4">
+    <div class="w-full flex flex-col md:flex-row gap-4">
       <div class="w-full rounded-2xl p-4 p6-border">
         <p class="p3-text font-bold text-2xl mb-4 dark:text-white">Rango de precio</p>
-        <div class="w-full flex gap-4 mb-4">
+        <div class="w-full flex flex-col md:flex-row gap-4 mb-4">
           <div class="w-full p-4 p3-menu-border rounded-2xl dark:border-white">
             <label class="dark:text-white">Mínimo</label>
             <input
@@ -84,7 +84,7 @@
 
       <div class="w-full rounded-2xl p-4 p6-border">
         <p class="p3-text font-bold text-2xl mb-4 dark:text-white">Horarios</p>
-        <div class="w-full flex gap-4 mb-4">
+        <div class="w-full flex flex-col md:flex-row gap-4 mb-4">
           <div class="w-full p-4 p3-menu-border rounded-2xl dark:border-white">
             <label class="dark:text-white">Apertura</label>
             <input
@@ -120,6 +120,11 @@
             <span *ngIf="closingTime?.errors?.['required']" class="">La hora de cierre es obligatoria</span>
           </div>
         }
+        @if (businessRegisterForm.get('closingTime')?.hasError('invalidTime')) {
+          <div class="w-full flex items-center gap-4 invalid-input-message">
+            <span>La hora de cierre no puede ser anterior a la hora de apertura</span>
+          </div>
+        }
       </div>
     </div>
 
@@ -137,7 +142,7 @@
       <img
         src="assets/svg/cloud-arrow-up-solid.svg"
         alt="Ilustracion de subir archivos."
-        class="h-[500px] mx-auto cursor-pointer"
+        class="h-full max-h-[500px] mx-auto cursor-pointer"
         (click)="triggerFileInput()"
       >
       @if (images?.invalid && (images?.dirty || images?.touched)) {

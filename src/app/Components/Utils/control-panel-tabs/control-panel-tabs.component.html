@@ -1,18 +1,18 @@
-<div class="w-full flex text-base lg:text-lg font-bold">
+<div class="w-full flex flex-col md:flex-row text-base lg:text-lg font-bold">
   <span
-    class="px-8 py-4 rounded-tr-2xl cursor-pointer p5-menu-hover bg-white p3-text shadow-sm z-30"
+    class="px-8 py-4 rounded-t-2xl md:rounded-tr-2xl border-[1px] border-purple-700 md:border-0 cursor-pointer p5-menu-hover bg-white p3-text shadow-sm z-30"
     (click)="onAccountSummaryClick()"
   >
     Resumen de tu cuenta
   </span>
   <span
-    class="px-8 py-4 rounded-tr-2xl cursor-pointer p5-menu-hover p8-bg text-white z-20 -translate-x-[20%]"
+    class="px-8 py-4 md:rounded-tr-2xl cursor-pointer p5-menu-hover p8-bg text-white z-20 md:-translate-x-[20%]"
     (click)="onProfileClick()"
   >
     {{ isClient ? 'Editar perfil' : 'Perfil de tu negocio' }}
   </span>
   <span
-    class="px-8 py-4 rounded-tr-2xl cursor-pointer p5-menu-hover p6-bg text-white -translate-x-[35%] z-10"
+    class="px-8 py-4 md:rounded-tr-2xl cursor-pointer p5-menu-hover p6-bg text-white md:-translate-x-[35%] z-10"
     (click)="onAppointmentsClick()"
   >
     Administra tus citas
@@ -20,7 +20,7 @@
 
   @if (!isClient) {
     <span
-      class="px-8 py-4 rounded-tr-2xl cursor-pointer p5-menu-hover p7-bg text-white z-0 -translate-x-[85%]"
+      class="px-8 py-4 rounded-b-2xl md:rounded-tr-2xl cursor-pointer p5-menu-hover p7-bg text-white z-0 md:-translate-x-[85%]"
       (click)="onAnalyticsClick()"
     >
       Analíticas

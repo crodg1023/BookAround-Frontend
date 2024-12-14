@@ -108,6 +108,18 @@ export class CompleteBusinessProfileComponent implements OnInit {
       categories: this.formBuilder.array([]),
       images: ['', Validators.required]
     });
+
+    this.businessRegisterForm.get('openingTime')?.valueChanges.subscribe(time => {
+      const closingTime = this.businessRegisterForm.get('closingTime');
+      if (closingTime && time) {
+        closingTime.setValidators([
+          (control) => {
+            return control.value && control.value < time ? { invalidTime: true } : null
+          },
+        ]);
+        closingTime.updateValueAndValidity();
+      }
+    });
   }
 
   openCancelModal() {

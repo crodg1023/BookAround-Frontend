@@ -2,7 +2,8 @@
   <div class="w-full max-w-[1300px] dark:bg-dark-primary">
     <nav class="w-full flex justify-between items-center gap-4 py-4 dark:bg-dark-primary">
       <button (click)="goToHome()">
-        <img src="/assets/images/Logo bookaround color-03.svg" alt="Book Around Logo" class="h-[120px]">
+        <img src="/assets/images/Logo bookaround color-03.svg" alt="Book Around Logo" class="h-[120px] hidden md:block">
+        <img src="/assets/images/bookaround-sm-logo.jpg" alt="Book Around Logo" class="w-16 md:hidden">
       </button>
       @if (!isAtHome) {
         <div class="w-1/2">

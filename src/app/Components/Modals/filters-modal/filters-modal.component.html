@@ -5,7 +5,7 @@
   [buttonActionIsDisabled]="false"
   modalType="filters"
 >
-  <form class="w-[600px] flex flex-col gap-8" [formGroup]="filtersForm">
+  <form class="w-full md:w-[600px] flex flex-col gap-8" [formGroup]="filtersForm">
     <div class="p-4 flex flex-col gap-4 p6-border rounded-2xl dark:bg-dark-input-bg">
       <h3 class="p3-text font-bold text-lg">Ubicación</h3>
       <app-places-input-autocomplete
@@ -27,7 +27,7 @@
       <div>
         <ngx-slider [(value)]="from" [(highValue)]="to" [options]="options"></ngx-slider>
       </div>
-      <div class="w-full flex gap-4 items-center p3-text">
+      <div class="w-full flex flex-col md:flex-row gap-4 items-center p3-text">
         <div class="w-full rounded-2xl p3-menu-border p-4 flex flex-col gap-2 dark:border-white">
           <span class="text-sm dark:text-white">Mínimo</span>
           <span class="font-medium text-lg dark:text-white">${{ from }}</span>
